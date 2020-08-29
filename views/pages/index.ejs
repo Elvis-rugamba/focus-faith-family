@@ -140,18 +140,6 @@
                   <div class="card-body">
                     <h2>Category</h2>
                     <ul class="vertical-menu" id="categories">
-                      <!-- <li><a href="#">Politics</a></li>
-                      <li><a href="#">International</a></li>
-                      <li><a href="#">Finance</a></li>
-                      <li><a href="#">Health care</a></li>
-                      <li><a href="#">Technology</a></li>
-                      <li><a href="#">Jobs</a></li>
-                      <li><a href="#">Media</a></li>
-                      <li><a href="#">Administration</a></li>
-                      <li><a href="#">Sports</a></li>
-                      <li><a href="#">Game</a></li>
-                      <li><a href="#">Art</a></li>
-                      <li><a href="#">Kids</a></li> -->
                     </ul>
                   </div>
                 </div>
@@ -159,7 +147,7 @@
               <div class="col-lg-9 stretch-card grid-margin">
                 <div class="card">
                   <div class="d-flex justify-content-end">
-                    <div class="w-20 p-2"><a href="./pages/magazines.html">See all</a></div>
+                    <div class="w-20 p-2"><a href="/">See all</a></div>
                   </div>
                   <div class="card-body" id="card-body">
                     <!-- <div class="row">
@@ -737,7 +725,7 @@
           const allArticles = await response.json();
           console.log('eeeee', allArticles.data);
           const cardBody = document.querySelector('#card-body');
-          allArticles.data.slice(0,2).map(article => {
+          allArticles.data.map(article => {
             const row = document.createElement('div')
             row.classList.add('row');
             // image elements
