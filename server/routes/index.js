@@ -35,4 +35,7 @@ module.exports = function(app) {
       app.get('/about', (req, res) => {
         res.render('pages/aboutus');
       });
+      app.get('/selectedtv', (req, res) => {
+        res.render('pages/selected-tvShow');
+      });
 };
