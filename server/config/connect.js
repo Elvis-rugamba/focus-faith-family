@@ -3,18 +3,19 @@ var cloudinary = require('cloudinary').v2;
 const {config} = require('dotenv');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const logger = require('./logger');
 
 config();
 
 const pool = new Pool({connectionString: process.env.DATABASE_URL})
 pool.on('connect', () => {
-  console.log('connected');
+  logger.info('connected');
 }); 
 
 
 const createArticle = async (req, res) => {
   const {title, subtitle, body, author, category, image, bodyhtml} = req.body;
-  console.log('here', req.body);
+  
   try {
   const results = await pool.query(`INSERT INTO news(title,subtitle,body,author,category,image,bodyhtml) VALUES ($1,$2,$3,$4,$5,$6,$7) RETURNING *`, [title, subtitle, body, author, category, image, bodyhtml]);
   return res.status(201).json(results.rows);
@@ -25,13 +26,13 @@ const createArticle = async (req, res) => {
 }
 const createUser = async (req, res) => {
   const {firstName, lastName, email, phone, password, profileImage, role} = req.body;
-  console.log('here', req.bo);
+  
   try {
     const isUser = await pool.query('SELECT * FROM users WHERE email=$1', [email]);
     if(isUser.rowCount > 0) return res.status(409).json({status: 409, message: 'User already exists'})
     const hashPassword = bcrypt.hashSync(password, 11);
     const results = await pool.query(`INSERT INTO users(firstName, lastName, email, phone, password, profileImage,role) VALUES ($1,$2,$3,$4,$5,$6,$7) RETURNING *`, [firstName, lastName, email, phone, hashPassword, profileImage, role]);
-    console.log('yoooo', results.rows);
+    
     return res.status(201).json(results.rows);
   } catch (error) {
     return res.status(500).json({message: error.message});
@@ -41,12 +42,12 @@ const createUser = async (req, res) => {
 
 const signinUser = async (req, res) => {
   const {email, password} = req.body;
-  // console.log('------', req.body);
+  
   try {
     const emailFound = await pool.query('SELECT * FROM users WHERE email=$1', [email]);
-    if (!emailFound) return res.status(404).json({ message: 'This account is not created yet' });
+  
+    if (emailFound.rowCount === 0) return res.status(404).json({ message: 'Incorrect email or password' });
     
-    console.log('password', emailFound.rows[0].password);
     const isPassword = bcrypt.compareSync(password, emailFound.rows[0].password);
     if (!isPassword) return res.status(401).json({ message: 'Incorrect email or password' });
     
@@ -73,7 +74,7 @@ const changeRole = async (req, res) => {
   if (user.rowCount === 0) return res.status(404).json({ status: 404, message: 'User not found' });
   //change role
   const updateRole = await pool.query('UPDATE users SET role=$1 WHERE user_id=$2 RETURNING *', [role, userId]);
-  console.log('whaaat', updateRole.rows[0]);
+  
   return res.status(200).json({ status: 200, data: updateRole.rows[0] });
 }
 
@@ -94,7 +95,7 @@ const editArticle = async (req, res) => {
   const {title, subtitle, category, body, status} = req.body;
   try {
     const { rows } = await pool.query('SELECT * FROM users WHERE user_id=$1', [user_id]);
-    console.log('savage', user_id);
+    
     if (rows.length < 0) return res.status(404).json({ status: 404, message: 'User not found' });
     
     // check if the user is an admin or editor
@@ -107,7 +108,6 @@ const editArticle = async (req, res) => {
     // edit the article
     // change the status of the article to posted
     const updatedArticle = await pool.query(`UPDATE news SET title=$1, subtitle=$2, body=$3, category=$4, status='edited' WHERE news_id=$5 RETURNING *`, [title, subtitle, body, category, articleId]);
-    console.log('savage', updatedArticle.rows[0]);
 
     // if (updatedArticle.rows[0].news_id === articleId && updatedArticle.rows[0].status === 'posted') return res.status(400).json({ status: 400, message: 'The article was not edited successfully' });
     
@@ -139,11 +139,10 @@ const getAllUsers = async (req, res) => {
 const getArticle = async (req, res) => {
   // get from params
   const {newsId} = req.params;
-  console.log('ari');
+  
   try {
     const isArticle = await pool.query('SELECT * FROM news WHERE news_id=$1', [newsId]);
     // check if the article exists
-    console.log('ari', isArticle.rowCount <= 0);
     if (isArticle.rowCount <= 0) return res.status(404).json({ status: 404, message: 'Article not found' });
     // return article
     return res.status(200).json({ status: 200, data: isArticle.rows[0] });
