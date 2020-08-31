@@ -3,8 +3,9 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const db = require('./config/connect');
-const {verifyToken} = require('./middleware/verifyToken');
+const { verifyToken } = require('./middleware/verifyToken');
 const routes = require('./routes');
+const nms = require('./nms')
 const port = 3000
 
 app.use(cors());
@@ -36,3 +37,5 @@ app.patch('/api/edit-article/:articleId', verifyToken, db.editArticle);
 app.listen(port, () => {
   console.log(`App running on port ${port}.`)
 });
+
+nms.run();
