@@ -3,12 +3,13 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const db = require('./config/connect');
-const {verifyToken} = require('./middleware/verifyToken');
+const { verifyToken } = require('./middleware/verifyToken');
 const routes = require('./routes');
+const init = require('./nms')
 const port = 3000
 
 app.use(cors());
-app.use(bodyParser.json())
+app.use(bodyParser.json({extended: true}))
 app.use(
   bodyParser.urlencoded({
     extended: true,
@@ -36,3 +37,5 @@ app.patch('/api/edit-article/:articleId', verifyToken, db.editArticle);
 app.listen(port, () => {
   console.log(`App running on port ${port}.`)
 });
+
+init();
