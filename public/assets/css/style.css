@@ -10791,6 +10791,22 @@ footer .footer-bottom {
   background: #032a63;
 }
 
+footer .footer-logo {
+  width: 300px;
+}
+
+@media (max-width: 999px) {
+  footer .footer-logo {
+    width: 170px;
+  }
+}
+
+@media (max-width: 1024px) {
+  footer .footer-logo {
+    width: 130px;
+  }
+}
+
 .error-wrap {
   width: 394px;
   margin: 240px auto;
