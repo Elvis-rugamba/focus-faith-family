@@ -21,61 +21,47 @@
     <!-- endinject -->
   </head>
 
-  <body onload="getAllArticles()">
+  <body>
     <div class="container-scroller">
       <div class="main-panel">
-        <!-- partial:partials/_navbar.html -->
+        <!-- partial:partials/_navbar -->
         <%- include('../partials/_navbar') %>
         <!-- partial -->
-        <div class="flash-news-banner">
-          <div class="container">
-            <div class="d-lg-flex align-items-center justify-content-between">
-              <div class="d-flex align-items-center">
-                <span class="badge badge-dark mr-3">Verse of the day</span>
-                <p class="mb-0">
-                  Lorem Ipsum has been the industry's standard dummy text ever
-                  since the 1500s.
-                </p>
-              </div>
-
-              <div class="d-flex">
-                <span class="mr-3 text-danger">Tue, July 28, 2020</span>
-                <span class="text-danger">30°C,Kigali</span>
-              </div>
-            </div>
-          </div>
-        </div>
+        <!-- partial:partials/_banner -->
+        <%- include('../partials/_banner') %>
+        <!-- partial -->
         <div class="content-wrapper">
           <div class="container">
             <div class="row" data-aos="fade-up">
+              <% if (news && news.length > 0) { %>
               <div class="col-xl-8 stretch-card grid-margin">
-                <a href="./selected-post.html">
+                <a href="article?slug=<%- news[0].news_id %>">
                 <div class="position-relative">
                   <img
-                    src="assets/images/dashboard/images1.jpg"
+                    src="<%- news[0].image %>"
                     alt="banner"
                     class="img-fluid"
                   />
                   <div class="banner-content">
                     <div class="badge badge-danger fs-12 font-weight-bold mb-3">
-                      global news
+                      <%- news[0].category %>
                     </div>
-                    <h1 class="mb-0">GLOBAL PANDEMIC</h1>
                     <h1 class="mb-2">
-                      Coronavirus Outbreak in Rwanda LIVE Updates: Schools, Concerts and so many suspended  
+                      <%- news[0].title %>
                     </h1>
                     <div class="fs-12">
-                      <span class="mr-2">Photo </span>10 Minutes ago
+                      <span class="mr-2">10 Minutes ago</span>
                     </div>
                   </div>
                 </div>
                 </a>
               </div>
+              <% } %>
               <div class="col-xl-4 stretch-card grid-margin">
                 <div class="card bg-dark text-white">
                   <div class="card-body">
-                    <h2>Latest news</h2>
-                    <a href="./selected-post.html">
+                    <h2>Advertisement</h2>
+                    <!-- <a href="./selected-post.html">
                     <div
                       class="d-flex border-bottom-blue pt-3 pb-4 align-items-center justify-content-between"
                     >
@@ -129,7 +115,7 @@
                           class="img-fluid img-lg"
                         />
                       </div>
-                    </div>
+                    </div> -->
                   </div>
                 </div>
               </div>
@@ -140,6 +126,19 @@
                   <div class="card-body">
                     <h2>Category</h2>
                     <ul class="vertical-menu" id="categories">
+                      <% if (categories && categories.length > 0) { %>
+                        <% for( let i = 0; i < categories.length; i++ ) { %>
+                      <li>
+                        <a href="/news?category=<%- categories[i].category_name %>">
+                          <%- categories[i].category_name %>
+                        </a>
+                      </li>
+                      <% } %>
+                      <% } else { %>
+                      <li>
+                        No data found
+                      </li>
+                      <% } %>
                     </ul>
                   </div>
                 </div>
@@ -147,103 +146,48 @@
               <div class="col-lg-9 stretch-card grid-margin">
                 <div class="card">
                   <div class="d-flex justify-content-end">
-                    <div class="w-20 p-2"><a href="/">See all</a></div>
+                    <div class="w-20 p-2"><a href="/news">See all</a></div>
                   </div>
                   <div class="card-body" id="card-body">
-                    <!-- <div class="row">
+                    <% if (news && news.splice(0, 1).length > 0) { %>
+                      <% for( let i = 0; i < news.length; i++ ) { %>
+                    <div class="row">
                       <div class="col-sm-4 grid-margin">
                         <div class="position-relative">
                           <div class="rotate-img">
                             <img
-                              src="https://res.cloudinary.com/focus-faith-family/image/upload/v1597712866/hcke_xniisv.png"
+                              src="<%- news[i].image %>"
                               alt="thumb"
                               class="img-fluid"
                             />
                           </div>
                           <div class="badge-positioned">
-                            <span class="badge badge-danger font-weight-bold"
-                              >Flash news</span
-                            >
+                            <span class="badge badge-danger font-weight-bold">
+                              <%- news[i].category %> 
+                            </span>
                           </div>
                         </div>
                       </div>
                       <div class="col-sm-8  grid-margin">
                         <h2 class="mb-2 font-weight-600">
-                          South Korea’s Moon Jae-in sworn in vowing to address
-                          North
+                          <a class="font-weight-600 mb-2 text-dark" href="/article?slug=<%- news[i].news_id %>">
+                            <%- news[i].title %>
+                          </a>
                         </h2>
                         <div class="fs-13 mb-2">
-                          <span class="mr-2">Photo </span>10 Minutes ago
+                          <span class="mr-2">10 Minutes ago</span>
                         </div>
                         <p class="mb-0">
-                          Lorem Ipsum has been the industry's standard dummy
-                          text ever since the 1500s, when an
+                          <%- news[i].body.slice(0, 150) %> ...
                         </p>
                       </div>
-                    </div> -->
-
-                    <!-- <div class="row">
-                      <div class="col-sm-4 grid-margin">
-                        <div class="position-relative">
-                          <div class="rotate-img">
-                            <img
-                              src="assets/images/dashboard/home_5.jpg"
-                              alt="thumb"
-                              class="img-fluid"
-                            />
-                          </div>
-                          <div class="badge-positioned">
-                            <span class="badge badge-danger font-weight-bold"
-                              >Flash news</span
-                            >
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-sm-8  grid-margin">
-                        <h2 class="mb-2 font-weight-600">
-                          No charges over 2017 Conservative battle bus cases
-                        </h2>
-                        <div class="fs-13 mb-2">
-                          <span class="mr-2">Photo </span>10 Minutes ago
-                        </div>
-                        <p class="mb-0">
-                          Lorem Ipsum has been the industry's standard dummy
-                          text ever since the 1500s, when an
-                        </p>
-                      </div>
-                    </div> -->
-
-                    <!-- <div class="row">
-                      <div class="col-sm-4">
-                        <div class="position-relative">
-                          <div class="rotate-img">
-                            <img
-                              src="assets/images/dashboard/home_6.jpg"
-                              alt="thumb"
-                              class="img-fluid"
-                            />
-                          </div>
-                          <div class="badge-positioned">
-                            <span class="badge badge-danger font-weight-bold"
-                              >Flash news</span
-                            >
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-sm-8">
-                        <h2 class="mb-2 font-weight-600">
-                          Kaine: Trump Jr. may have committed treason
-                        </h2>
-                        <div class="fs-13 mb-2">
-                          <span class="mr-2">Photo </span>10 Minutes ago
-                        </div>
-                        <p class="mb-0">
-                          Lorem Ipsum has been the industry's standard dummy
-                          text ever since the 1500s, when an
-                        </p>
-                      </div>
-                    </div> -->
-                  
+                    </div>
+                    <% } %>
+                    <% } else { %>
+                    <h1 class="font-weight-600 mb-4">
+                      No data found
+                    </h1>
+                    <% } %>
                   </div>
                 </div>
               </div>
@@ -720,72 +664,6 @@
     <!-- Custom js for this page-->
     <script src="./assets/js/demo.js"></script>
     <script>
-        const getAllArticles = async () => {
-          const response = await fetch('http://localhost:3000/api/news');
-          const allArticles = await response.json();
-          console.log('eeeee', allArticles.data);
-          const cardBody = document.querySelector('#card-body');
-          allArticles.data.map(article => {
-            const row = document.createElement('div')
-            row.classList.add('row');
-            // image elements
-            const articleImgGroup = document.createElement('div');
-            articleImgGroup.classList.add('col-sm-4', 'grid-margin');
-            const articleImgGroupPosition = document.createElement('div');
-            articleImgGroupPosition.classList.add('position-relative');
-            const articleImgDesign = document.createElement('div')
-            articleImgDesign.classList.add('rotate-img');
-            const articleImg = document.createElement('img');
-            articleImg.classList.add('img-fluid'); 
-            const badgePosition = document.createElement('div')
-            badgePosition.classList.add('badge-positioned');
-            const badge = document.createElement('span');
-            badge.innerHTML = article.category;
-            badge.classList.add('badge', 'badge-danger', 'font-weight-bold');
-            console.log('article', articleImg);
-            articleImg.src = article.image;
-            articleImgDesign.appendChild(articleImg);
-            articleImgGroupPosition.appendChild(articleImgDesign);
-            articleImgGroup.appendChild(articleImgGroupPosition);
-            // badge
-            badgePosition.appendChild(badge);
-            articleImgGroupPosition.appendChild(badgePosition);
-            row.appendChild(articleImgGroup);
-
-            // article description
-            const articleDescGroup = document.createElement('div');
-            articleDescGroup.classList.add('col-sm-8', 'grid-margin');
-            const articleTitle = document.createElement('h2');
-            articleTitle.classList.add('mb-2', 'font-weight-600')
-
-            //a tag to navigate to single blog
-            const articleAnchor = document.createElement('a');
-            articleAnchor.innerHTML = article.title;
-            articleAnchor.href = `http://localhost:3000/news/?newsId=${article.news_id}`;
-            articleTitle.appendChild(articleAnchor);
-
-            // article description sliced
-            const articleDesc = document.createElement('p');
-            articleDesc.classList.add('mb-0');
-            articleDesc.innerHTML = `${article.body.slice(0, 150)}...`;
-            articleDescGroup.appendChild(articleTitle);
-            articleDescGroup.appendChild(articleDesc);
-            row.appendChild(articleDescGroup);
-            cardBody.appendChild(row);
-
-          });
-          // categories
-          const data = await fetch('http://localhost:3000/api/categories');
-          const allCategories = await data.json();
-          const categoriesGrid = document.querySelector('#categories');
-          allCategories.data.map(category => {
-            const categoryItem = document.createElement('li');
-            const categoryLink = document.createElement('a');
-            categoryLink.innerHTML = category.category_name;
-            categoryItem.appendChild(categoryLink);
-            categoriesGrid.appendChild(categoryItem);
-          })
-        }
     </script>
     <script src="./assets/js/jquery.easeScroll.js"></script>
     <!-- End custom js for this page-->
