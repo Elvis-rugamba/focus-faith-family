@@ -10880,4 +10880,14 @@ footer .footer-logo {
   outline: 0;
 }
 
+.player-bar{
+  z-index: 9999;
+  position: fixed;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  text-align: center;
+  background: #aab2bd;
+}
+
 /*# sourceMappingURL=maps/style.css.map */

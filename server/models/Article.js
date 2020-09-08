@@ -1,5 +1,17 @@
 const db = require("../config/connect");
 
+const upload = async (req, res) => {
+  try {
+    const [, ...rest] = req.file.path.replace(/\\/g, "/").split("/");
+    const filePath = rest.join("/");
+    const url = `${req.protocol}://${req.get("host")}/${filePath}`;
+
+    return res.status(201).json({ url });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
 const createArticle = async (req, res) => {
   const { title, subtitle, body, author, category, image, bodyhtml } = req.body;
   console.log("here", req.body);
@@ -48,6 +60,20 @@ const getNewsByCategory = async (category) => {
   const article = await db.query("SELECT * FROM news WHERE category=$1 ORDER BY news_id DESC", [
     category,
   ]);
+
+  if (article.rowCount <= 0) {
+    return null;
+  }
+
+  return article.rows;
+};
+
+const searchNews = async (search) => {
+  const article = await db.query("SELECT * FROM news WHERE title ILIKE $1 OR body ILIKE $1 ORDER BY news_id DESC", [
+    `%${search}%`,
+  ]);
+
+  console.log(article);
 
   if (article.rowCount <= 0) {
     return null;
@@ -131,11 +157,13 @@ const getArticle = async (req, res) => {
 };
 
 module.exports = {
+  upload,
   createArticle,
   getNews,
   getSingleArticle,
   getRecentNews,
   getNewsByCategory,
+  searchNews,
   editArticle,
   getAllArticles,
   getArticle,
