@@ -43,9 +43,9 @@
                     class="img-fluid"
                   />
                   <div class="banner-content">
-                    <div class="badge badge-danger fs-12 font-weight-bold mb-3">
-                      <%- news[0].category %>
-                    </div>
+                      <a href="/news?category=<%- news[0].category %>">
+                        <span class="badge badge-danger fs-12 font-weight-bold mb-3"><%- news[0].category %></span>
+                      </a>
                     <h1 class="mb-2">
                       <%- news[0].title %>
                     </h1>
@@ -161,11 +161,9 @@
                               class="img-fluid"
                             />
                           </div>
-                          <div class="badge-positioned">
-                            <span class="badge badge-danger font-weight-bold">
-                              <%- news[i].category %> 
-                            </span>
-                          </div>
+                          <a class="badge-positioned" href="/news?category=<%- news[i].category %>">
+                            <span class="badge badge-danger font-weight-bold"><%- news[i].category %></span>
+                          </a>
                         </div>
                       </div>
                       <div class="col-sm-8  grid-margin">

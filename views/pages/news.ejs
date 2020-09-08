@@ -23,9 +23,35 @@
       <!-- partial:../partials/_navbar.html -->
       <%- include('../partials/_navbar') %>
       <!-- partial:partials/_banner -->
-      <%- include('../partials/_banner') %>s
+      <%- include('../partials/_banner') %>
       <div class="content-wrapper">
         <div class="container">
+          <div class="col-sm-12">
+            <div class="row breadcrumb">
+              <% if (categories && categories.length > 0) { %>
+              <% for( let i = 0; i < categories.length; i++ ) { %>
+              <div class="breadcrumb-item">
+                <a href="/news?category=<%- categories[i].category_name %>">
+                  <%- categories[i].category_name %>
+                </a>
+              </div>
+              <% } %>
+              <% } else { %>
+              <div class="breadcrumb-item">
+                No data found
+              </div>
+              <% } %>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-6 offset-md-6">
+            <form class="md-form input-group mb-3" method="GET" action="/news">
+              <input type="text" name="search" class="form-control" placeholder="Search..." aria-label="Search..."
+                aria-describedby="MaterialButton-addon2">
+              <div class="input-group-append">
+                <button class="btn btn-sm btn-primary m-0" type="submit" id="MaterialButton-addon2"><i class="mdi mdi-magnify"></i></button>
+              </div>
+            </form>
+          </div>
           <div class="col-sm-12">
             <div class="card" data-aos="fade-up">
               <div class="card-body">
@@ -48,9 +74,9 @@
                               <img src="<%- news[i].image %>" alt="banner" class="img-fluid" />
                             </a>
                           </div>
-                          <div class="badge-positioned">
+                          <a class="badge-positioned" href="/news?category=<%- news[i].category %>">
                             <span class="badge badge-danger font-weight-bold"><%- news[i].category %></span>
-                          </div>
+                          </a>
                         </div>
                       </div>
                       <div class="col-sm-8 grid-margin">
@@ -63,7 +89,8 @@
                           <%- news[i].body.slice(0, 150) %> ...
                         </p>
                         <p class="fs-13 text-muted mb-0">
-                          <span class="mr-2"></span>10 Minutes ago
+                          <span class="mr-2"></span>
+                          <%= timeDifference(news[i].created_at) %>
                         </p>
                       </div>
                     </div>
@@ -91,7 +118,8 @@
                                 </a>
                               </h5>
                               <p class="fs-13 text-muted mb-0">
-                                <span class="mr-2"><%- recentNews[i].category %></span>10 Minutes ago
+                                <span class="mr-2"><%- recentNews[i].category %></span>
+                                <%= timeDifference(recentNews[i].created_at) %>
                               </p>
                             </div>
                             <div class="col-sm-4">

@@ -2,7 +2,7 @@ const db = require("../config/connect");
 
 const createCategory = async (req, res) => {
   // get from body
-  const { categoryName } = req.body;
+  const { categoryName, frenchName, rwandanName } = req.body;
   // check if the category exists already
   const isCategory = await db.query(
     "SELECT * FROM categories WHERE category_name=$1",
@@ -14,8 +14,8 @@ const createCategory = async (req, res) => {
       .json({ status: 409, message: "Category already created" });
   // create category
   const newCategory = await db.query(
-    "INSERT INTO categories(category_name) VALUES($1)",
-    [categoryName]
+    "INSERT INTO categories(category_name, french_name, rwandan_name) VALUES($1, $2, $3) RETURNING*",
+    [categoryName, frenchName, rwandanName]
   );
   return res.status(201).json({ status: 201, data: newCategory.rows[0] });
 };

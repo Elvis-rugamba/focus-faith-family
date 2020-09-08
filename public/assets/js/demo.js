@@ -11,14 +11,17 @@ $(function() {
   };
   // Get the header
   var header = $(".navbar-bottom");
+  var logo = $('.brand')
   var body = $("body");
   function scrollHeader() {
     // adding sticky class
     if (window.pageYOffset > 130) {
       $(header).addClass("sticky");
+      $(logo).addClass('d-none')
     } else {
       // removing sticky class
       $(header).removeClass("sticky");
+      $(logo).removeClass('d-none')
     }
   }
 

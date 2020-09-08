@@ -35,17 +35,18 @@ const createUser = async (req, res) => {
 
 const signinUser = async (req, res) => {
   const { email, password } = req.body;
-  // console.log('------', req.body);
+
   try {
     const emailFound = await db.query("SELECT * FROM users WHERE email=$1", [
       email,
     ]);
-    if (!emailFound)
+    
+    if (emailFound.rowCount === 0)
       return res
         .status(404)
         .json({ message: "This account is not created yet" });
 
-    console.log("password", emailFound.rows[0].password);
+    console.log("password", emailFound, password);
     const isPassword = bcrypt.compareSync(
       password,
       emailFound.rows[0].password

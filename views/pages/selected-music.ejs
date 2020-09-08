@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Focus Faith Family</title>
+  <!-- plugin css for this page -->
+  <link rel="stylesheet" href="assets/vendors/mdi/css/materialdesignicons.min.css" />
+  <link rel="stylesheet" href="assets/vendors/aos/dist/aos.css/aos.css" />
+  <!-- End plugin css for this page -->
+  <link rel="shortcut icon" href="assets/images/favicon.png" />
+  <!-- inject:css -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <!-- endinject -->
+</head>
+
+<body>
+  <div class="container-scroller">
+    <div class="main-panel">
+      <!-- partial:../partials/_navbar.html -->
+      <%- include('../partials/_navbar') %>
+      <!-- partial:partials/_banner -->
+      <%- include('../partials/_banner') %>
+      <!-- partial -->
+      <div class="content-wrapper">
+        <div class="container">
+          <div class="col-sm-12">
+            <div class="card" data-aos="fade-up">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <h1 class="font-weight-600 mb-4">
+                      <%- music.name %> - <%- music.artist %>
+                    </h1>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-8">
+                    <div class="row">
+                      <div class="col-sm-12 grid-margin">
+                        <div class="position-relative">
+                          <img src="<%- music.cover %>" alt="banner" class="img-fluid" />
+                        </div>
+                      </div>
+                      <div class="col-sm-8 grid-margin">
+                        <h2 class="font-weight-600 mb-2">
+                          <%- music.artist %>
+                        </h2>
+                        <p class="fs-15">
+                          <%- music.body %>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-4">
+                    <h2 class="mb-4 text-primary font-weight-600">
+                      Latest musics
+                    </h2>
+                    <% if (recentMusics && recentMusics.length > 0) { %>
+                    <% for( let i = 0; i < recentMusics.length; i++ ) { %>
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <div class="border-bottom pb-4 pt-4">
+                          <div class="row">
+                            <div class="col-sm-8">
+                              <h5 class="font-weight-600 mb-1">
+                                <a class="font-weight-600 text-dark" href="/song?slug=<%- recentMusics[i].news_id %>">
+                                  <%- recentMusics[i].name %>
+                                </a>
+                              </h5>
+                              <p class="font-weight-400 mb-1">by
+                                <span class="font-weight-400 text-primary">
+                                  <%- recentMusics[i].artist %>
+                                </span>
+                              </p>
+                              <p class="fs-13 text-muted mb-0">
+                                <span class="mr-2"><%- recentMusics[i].category %></span>
+                                <%= timeDifference(recentMusics[i].created_at) %>
+                              </p>
+                            </div>
+                            <div class="col-sm-4">
+                              <div class="rotate-img">
+                                <a href="/song?slug=<%- recentMusics[i].news_id %>">
+                                  <img src="<%- recentMusics[i].cover %>" alt="banner" class="img-fluid" />
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <% } %>
+                    <% } else { %>
+                    <h2 class="font-weight-600 mb-4">
+                      No data found
+                    </h2>
+                    <% } %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+          <div class="player-bar" id="audio" data-url ="<%- music.url %>">
+            <div class="container">
+              <div class="col-sm-12 pt-4 pb-4">
+              <div class="d-sm-flex align-items-center justify-content-between row">
+                <div class="d-flex align-items-center">
+                  <button class="btn btn-rounded btn-primary waves-effect mr-2" id="playBtn">
+                    <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" id="spinner" style="display: none;"></span>
+                    <span class="sr-only">Loading...</span>
+                    <i class="mdi mdi-play"></i>
+                  </button>
+                  <button class="btn btn-rounded btn-primary waves-effect mr-2" id="pauseBtn" style="display: none;">
+                    <i class="mdi mdi-pause"></i></button>
+                  <button class="btn btn-rounded btn-primary waves-effect" id="stopBtn">
+                    <i class="mdi mdi-stop"></i></button>
+                </div>
+                <div class="d-flex align-items-center">
+                  <p class="text-dark font-weight-400 mr-2" id="timer">0.00</p>
+                    <div class="progress mr-2">
+                    <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0"
+                      aria-valuemax="100" id="progress"></div>
+                  </div>
+                  <p class="text-dark font-weight-400" id="duration">0.00</p>
+                </div>
+                <div class="d-flex align-items-center">
+                  <button class="btn btn-rounded btn-primary waves-effect mr-2" id="volLowBtn">
+                    <i class="mdi mdi-volume-medium"></i></button>
+                  <button class="btn btn-rounded btn-primary waves-effect" id="volHighBtn">
+                    <i class="mdi mdi-volume-high"></i></button>
+                </div>
+              </div>
+            </div>
+            </div>
+          </div>
+          <!-- main-panel ends -->
+          <!-- container-scroller ends -->
+
+          <!-- partial:../partials/_footer.html -->
+          <%- include('../partials/_footer') %>
+          <!-- partial -->
+        </div>
+      </div>
+      <!-- inject:js -->
+      <script src="assets/vendors/js/vendor.bundle.base.js"></script>
+      <!-- endinject -->
+      <!-- plugin js for this page -->
+
+      <script src="assets/vendors/aos/dist/aos.js/aos.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"
+        integrity="sha512-ALoawPS0JxHQ+8dGL7htZIlVNRaE/SN9gHD4G8pJJTi9H4BQ/3PjdvhggSGR34g00mvTPFkxQuveQUsJA5664Q=="
+        crossorigin="anonymous"></script>
+      <!-- End plugin js for this page -->
+      <!-- Custom js for this page-->
+      <script src="assets/js/demo.js"></script>
+      <script src="assets/js/player.js"></script>
+      <script src="assets/js/jquery.easeScroll.js"></script>
+      <!-- End custom js for this page-->
+</body>
+
+</html>
