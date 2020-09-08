@@ -31,7 +31,7 @@
               <% if (categories && categories.length > 0) { %>
               <% for( let i = 0; i < categories.length; i++ ) { %>
               <div class="breadcrumb-item">
-                <a href="/news?category=<%- categories[i].category_name %>">
+                <a href="/tv?category=<%- categories[i].category_name %>">
                   <%- categories[i].category_name %>
                 </a>
               </div>
@@ -44,7 +44,7 @@
             </div>
           </div>
           <div class="col-sm-12 col-md-6 offset-md-6">
-            <form class="md-form input-group mb-3" method="GET" action="/news">
+            <form class="md-form input-group mb-3" method="GET" action="/tv">
               <input type="text" name="search" class="form-control" placeholder="Search..." aria-label="Search..."
                 aria-describedby="MaterialButton-addon2">
               <div class="input-group-append">
