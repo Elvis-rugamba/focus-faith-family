@@ -6,7 +6,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Focus Faith Family</title>
+    <title>Abbagospel</title>
     <!-- plugin css for this page -->
     <link rel="stylesheet" href="assets/vendors/mdi/css/materialdesignicons.min.css" />
     <link rel="stylesheet" href="assets/vendors/aos/dist/aos.css/aos.css" />
@@ -39,8 +39,7 @@
                                                     <%- article.title %>
                                                 </h1>
                                                 <div>
-                                                    <img src="<%- article.image %>" alt="banner"
-                                                        class="img-fluid" />
+                                                    <img src="<%- article.image %>" alt="banner" class="img-fluid" />
                                                 </div>
                                             </div>
                                             <div class="col-sm-12">
@@ -48,7 +47,9 @@
                                                     <%- article.subtitle %>
                                                 </h2>
                                                 <%- article.bodyhtml %>
-                                                <small class="text-muted">Article by <%- article.author %></small><br>
+                                                <small
+                                                    class="text-muted"><%= translate('articleByLabel', currentLocale) %>
+                                                    <%- article.author %></small><br>
                                             </div>
                                             <% } else { %>
                                             <h1 class="font-weight-600 mb-4">
@@ -58,7 +59,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-3">
-                                    <!-- <h2 class="mb-4 text-primary font-weight-600">
+                                        <!-- <h2 class="mb-4 text-primary font-weight-600">
                                             Latest news
                                         </h2>
                                         <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
@@ -296,7 +297,7 @@
                                                 </div>
                                             </div>
                                         </div> -->
-                                    <!-- <div class="trending">
+                                        <!-- <div class="trending">
                         <h2 class="mb-4 text-primary font-weight-600">
                           Trending
                         </h2>
@@ -346,34 +347,34 @@
                           </p>
                         </div>
                       </div> -->
-                                    <!-- </div> -->
+                                        <!-- </div> -->
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!-- main-panel ends -->
+                <!-- container-scroller ends -->
+
+                <!-- partial:../partials/_footer.html -->
+                <%- include('../partials/_footer') %>
+                <!-- partial -->
             </div>
-            <!-- main-panel ends -->
-            <!-- container-scroller ends -->
-
-            <!-- partial:../partials/_footer.html -->
-            <%- include('../partials/_footer') %>
-            <!-- partial -->
         </div>
-    </div>
-    <!-- inject:js -->
-    <script src="assets/vendors/js/vendor.bundle.base.js"></script>
-    <!-- endinject -->
-    <!-- plugin js for this page -->
+        <!-- inject:js -->
+        <script src="assets/vendors/js/vendor.bundle.base.js"></script>
+        <!-- endinject -->
+        <!-- plugin js for this page -->
 
-    <script src="assets/vendors/aos/dist/aos.js/aos.js"></script>
-    <!-- End plugin js for this page -->
-    <!-- Custom js for this page-->
-    <script src="assets/js/demo.js"></script>
-    <script src="assets/js/jquery.easeScroll.js"></script>
-    <!-- End custom js for this page-->
-    <script>
-    </script>
+        <script src="assets/vendors/aos/dist/aos.js/aos.js"></script>
+        <!-- End plugin js for this page -->
+        <!-- Custom js for this page-->
+        <script src="assets/js/demo.js"></script>
+        <script src="assets/js/jquery.easeScroll.js"></script>
+        <!-- End custom js for this page-->
+        <script>
+        </script>
 </body>
 
 </html>

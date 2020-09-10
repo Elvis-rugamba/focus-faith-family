@@ -22,19 +22,19 @@
               </a>
             </li>
             <li>
-              <a href="#">
+              <a href="https://twitter.com/GospelUbber?s=08" target="_blank">
                 <i class="mdi mdi-twitter"></i>
               </a>
             </li>
             <li>
-              <a href="#">
+              <a href="https://www.instagram.com/p/CEvu1XzBTU2/?igshid=asjdsot0lyb4" target="_blank">
                 <i class="mdi mdi-instagram"></i>
               </a>
             </li>
           </ul>
         </div>
         <div class="col-sm-4">
-          <h3 class="font-weight-bold mb-3">RECENT POSTS</h3>
+          <h3 class="font-weight-bold mb-3"><%= translate('recentPostsLabel', currentLocale) %> </h3>
           <% if (recentNews && recentNews.length > 0) { %>
           <% for( let i = 0; i < recentNews.length; i++ ) { %>
           <div class="row">
@@ -108,41 +108,41 @@
           <% } %>
         </div>
         <div class="col-sm-3">
-          <h3 class="font-weight-bold mb-3">LINKS</h3>
+          <h3 class="font-weight-bold mb-3"><%= translate('linksLabel', currentLocale) %> </h3>
           <div class="footer-border-bottom pb-2">
             <div class="d-flex justify-content-between align-items-center">
               <h5 class="mb-0 font-weight-600">
-                <a href="/">News</a>
+                <a href="/news?locale=<%- currentLocale %>"><%= translate('newsLabel', currentLocale) %> </a>
               </h5>
             </div>
           </div>
           <div class="footer-border-bottom pb-2 pt-2">
             <div class="d-flex justify-content-between align-items-center">
-              <h5 class="mb-0 font-weight-600 text-white"><a href="/tv">TV Show</a></h5>
+              <h5 class="mb-0 font-weight-600 text-white"><a href="/tv?locale=<%- currentLocale %>"><%= translate('tvLabel', currentLocale) %> </a></h5>
 
             </div>
           </div>
           <div class="footer-border-bottom pb-2 pt-2">
             <div class="d-flex justify-content-between align-items-center">
-              <h5 class="mb-0 font-weight-600"><a href="/radio">Radio</a></h5>
+              <h5 class="mb-0 font-weight-600"><a href="/radio?locale=<%- currentLocale %>"><%= translate('radioLabel', currentLocale) %> </a></h5>
 
             </div>
           </div>
           <div class="footer-border-bottom pb-2 pt-2">
             <div class="d-flex justify-content-between align-items-center">
-              <h5 class="mb-0 font-weight-600"><a href="/music">Music</a></h5>
+              <h5 class="mb-0 font-weight-600"><a href="/music?locale=<%- currentLocale %>"><%= translate('musicLabel', currentLocale) %> </a></h5>
 
             </div>
           </div>
           <div class="footer-border-bottom pb-2 pt-2">
             <div class="d-flex justify-content-between align-items-center">
-              <h5 class="mb-0 font-weight-600"><a href="/about">About</a></h5>
+              <h5 class="mb-0 font-weight-600"><a href="/about?locale=<%- currentLocale %>"><%= translate('aboutLabel', currentLocale) %> </a></h5>
 
             </div>
           </div>
           <div class="footer-border-bottom pb-2 pt-2">
             <div class="d-flex justify-content-between align-items-center">
-              <h5 class="mb-0 font-weight-600"><a href="/contact">Contact</a></h5>
+              <h5 class="mb-0 font-weight-600"><a href="/contact?locale=<%- currentLocale %>"><%= translate('contactLabel', currentLocale) %> </a></h5>
 
             </div>
           </div>
@@ -156,7 +156,7 @@
         <div class="col-sm-12">
           <div class="d-sm-flex justify-content-between align-items-center">
             <div class="fs-14 font-weight-600">
-              © 2020 <a href="#" target="_blank" class="text-white"> Abba Gospel</a>. All rights reserved.
+              © 2020 <a href="#" target="_blank" class="text-white"> Abba Gospel</a>. <%= translate('copyrightLabel', currentLocale) %> 
             </div>
           </div>
         </div>

@@ -6,7 +6,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>Focus Faith Family</title>
+  <title>Abbagospel</title>
   <!-- plugin css for this page -->
   <link rel="stylesheet" href="assets/vendors/mdi/css/materialdesignicons.min.css" />
   <link rel="stylesheet" href="assets/vendors/aos/dist/aos.css/aos.css" />
@@ -31,8 +31,16 @@
               <% if (categories && categories.length > 0) { %>
               <% for( let i = 0; i < categories.length; i++ ) { %>
               <div class="breadcrumb-item">
-                <a href="/news?category=<%- categories[i].category_name %>">
+                <a href="/news?locale=<%- currentLocale %>&category=<%- categories[i].category_name %>">
+                  <% if (currentLocale === 'en-US') { %>
                   <%- categories[i].category_name %>
+                  <% } else if (currentLocale === 'fr-FR') { %>
+                  <%- categories[i].french_name %>
+                  <% } else if (currentLocale === 'ki-RW') { %>
+                  <%- categories[i].rwandan_name %>
+                  <% } else { %>
+                  <%-  categories[i].category_name %>
+                  <% } %>
                 </a>
               </div>
               <% } %>
@@ -44,11 +52,12 @@
             </div>
           </div>
           <div class="col-sm-12 col-md-6 offset-md-6">
-            <form class="md-form input-group mb-3" method="GET" action="/news">
+            <form class="md-form input-group mb-3" method="GET" action="/news?locale=<%- currentLocale %>">
               <input type="text" name="search" class="form-control" placeholder="Search..." aria-label="Search..."
                 aria-describedby="MaterialButton-addon2">
               <div class="input-group-append">
-                <button class="btn btn-sm btn-primary m-0" type="submit" id="MaterialButton-addon2"><i class="mdi mdi-magnify"></i></button>
+                <button class="btn btn-sm btn-primary m-0" type="submit" id="MaterialButton-addon2"><i
+                    class="mdi mdi-magnify"></i></button>
               </div>
             </form>
           </div>
@@ -58,7 +67,7 @@
                 <div class="row">
                   <div class="col-sm-12">
                     <h1 class="font-weight-600 mb-4">
-                      NEWS
+                      <%= translate('newsLabel', currentLocale) %>
                     </h1>
                   </div>
                 </div>
@@ -70,18 +79,21 @@
                       <div class="col-sm-4 grid-margin">
                         <div class="position-relative">
                           <div class="rotate-img">
-                            <a class="font-weight-600 mb-2" href="/article?slug=<%- news[i].news_id %>">
+                            <a class="font-weight-600 mb-2"
+                              href="/article?locale=<%- currentLocale %>&slug=<%- news[i].news_id %>">
                               <img src="<%- news[i].image %>" alt="banner" class="img-fluid" />
                             </a>
                           </div>
-                          <a class="badge-positioned" href="/news?category=<%- news[i].category %>">
+                          <a class="badge-positioned"
+                            href="/news?locale=<%- currentLocale %>&category=<%- news[i].category %>">
                             <span class="badge badge-danger font-weight-bold"><%- news[i].category %></span>
                           </a>
                         </div>
                       </div>
                       <div class="col-sm-8 grid-margin">
                         <h2 class="font-weight-600 mb-2">
-                          <a class="font-weight-600 mb-2" href="/article?slug=<%- news[i].news_id %>">
+                          <a class="font-weight-600 mb-2"
+                            href="/article?locale=<%- currentLocale %>&slug=<%- news[i].news_id %>">
                             <%- news[i].title %>
                           </a>
                         </h2>
@@ -90,7 +102,7 @@
                         </p>
                         <p class="fs-13 text-muted mb-0">
                           <span class="mr-2"></span>
-                          <%= timeDifference(news[i].created_at) %>
+                          <%= timeDifference(news[i].created_at, currentLocale) %>
                         </p>
                       </div>
                     </div>
@@ -103,7 +115,7 @@
                   </div>
                   <div class="col-lg-4">
                     <h2 class="mb-4 text-primary font-weight-600">
-                      Recent
+                      <%= translate('recentPostsLabel', currentLocale) %>
                     </h2>
                     <% if (recentNews && recentNews.length > 0) { %>
                     <% for( let i = 0; i < recentNews.length; i++ ) { %>
@@ -113,18 +125,19 @@
                           <div class="row">
                             <div class="col-sm-8">
                               <h5 class="font-weight-600 mb-1">
-                                <a class="font-weight-600 text-dark" href="/article?slug=<%- recentNews[i].news_id %>">
+                                <a class="font-weight-600 text-dark"
+                                  href="/article?locale=<%- currentLocale %>&slug=<%- recentNews[i].news_id %>">
                                   <%- recentNews[i].title %>
                                 </a>
                               </h5>
                               <p class="fs-13 text-muted mb-0">
                                 <span class="mr-2"><%- recentNews[i].category %></span>
-                                <%= timeDifference(recentNews[i].created_at) %>
+                                <%= timeDifference(recentNews[i].created_at, currentLocale) %>
                               </p>
                             </div>
                             <div class="col-sm-4">
                               <div class="rotate-img">
-                                <a href="/article?slug=<%- recentNews[i].news_id %>">
+                                <a href="/article?locale=<%- currentLocale %>&slug=<%- recentNews[i].news_id %>">
                                   <img src="<%- recentNews[i].image %>" alt="banner" class="img-fluid" />
                                 </a>
                               </div>

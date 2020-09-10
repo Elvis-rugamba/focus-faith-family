@@ -1,4 +1,5 @@
-module.exports = (timestamp) => {
+const { translate } = require("../i18n/i18n");
+module.exports = (timestamp, currentLocale) => {
   const msPerMinute = 60 * 1000;
   const msPerHour = msPerMinute * 60;
   const msPerDay = msPerHour * 24;
@@ -10,16 +11,16 @@ module.exports = (timestamp) => {
   const elapsed = current - timestamp;
 
   if (elapsed < msPerMinute) {
-    return Math.floor(elapsed / 1000) + " secs ago";
+    return Math.floor(elapsed / 1000) + translate('secsLabel', currentLocale);
   } else if (elapsed < msPerHour) {
-    return Math.floor(elapsed / msPerMinute) + " mins ago";
+    return Math.floor(elapsed / msPerMinute) +  " " + translate('minsLabel', currentLocale);
   } else if (elapsed < msPerDay) {
-    return Math.floor(elapsed / msPerHour) + " hours ago";
+    return Math.floor(elapsed / msPerHour) + " " + translate('hoursLabel', currentLocale);
   } else if (elapsed < msPerMonth) {
-    return "approximately " + Math.floor(elapsed / msPerDay) + " days ago";
+    return Math.floor(elapsed / msPerDay) + " " + translate('daysLabel', currentLocale);
   } else if (elapsed < msPerYear) {
-    return "approximately " + Math.floor(elapsed / msPerMonth) + " months ago";
+    return Math.floor(elapsed / msPerMonth) + " " + translate('monthsLabel', currentLocale);
   } else {
-    return "approximately " + Math.floor(elapsed / msPerYear) + " years ago";
+    return Math.floor(elapsed / msPerYear) + " " + translate('yearsLabel', currentLocale);
   }
 }

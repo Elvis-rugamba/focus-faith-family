@@ -5,6 +5,7 @@ const timeDifference = require("../utils/timeDifference");
 
 const getMusic = async (req, res) => {
   try {
+    const currentLocale = req.query.locale || "en-US";
     const { category, search } = req.query;
     let musics = [];
 
@@ -21,12 +22,12 @@ const getMusic = async (req, res) => {
     const categories = await musicCategory.getMusicsCategories();
     const recentNews = await article.getRecentNews();
 
+    res.locals.currentLocale = currentLocale;
     res.render("pages/music", {
       musics,
       recentMusics,
       categories,
       recentNews,
-      timeDifference,
     });
   } catch (error) {
     throw error;
@@ -35,15 +36,17 @@ const getMusic = async (req, res) => {
 
 const getSingleMusic = async (req, res) => {
   try {
+    const currentLocale = req.query.locale || "en-US";
     const { slug } = req.query;
     const singleMusic = await music.getSingleMusic(slug);
     const recentMusics = await music.getRecentMusics();
     const recentNews = await article.getRecentNews();
+
+    res.locals.currentLocale = currentLocale;
     res.render("pages/selected-music", {
       music: singleMusic,
       recentNews,
       recentMusics,
-      timeDifference,
     });
   } catch (error) {
     throw error;

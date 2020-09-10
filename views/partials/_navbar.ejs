@@ -2,7 +2,7 @@
   <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light">
       <div class="navbar-top">
-        <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex justify-content-end align-items-center">
           <!-- <ul class="navbar-top-left-menu">
             <li class="nav-item">
               <a href="/about" class="nav-link">About Us</a>
@@ -11,17 +11,36 @@
               <a href="/contact" class="nav-link">Contact Us</a>
             </li>
           </ul> -->
-          <!-- <ul class="navbar-top-right-menu">
-            <li class="nav-item">
-              <a href="#" class="nav-link"><i class="mdi mdi-magnify"></i></a>
+          <ul class="social-media">
+            <li>
+              <a href="#">
+                <i class="mdi mdi-facebook"></i>
+              </a>
             </li>
-            <li class="nav-item">
+            <li>
+              <a href="#">
+                <i class="mdi mdi-youtube"></i>
+              </a>
+            </li>
+            <li>
+              <a href="https://twitter.com/GospelUbber?s=08" target="_blank">
+                <i class="mdi mdi-twitter"></i>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com/p/CEvu1XzBTU2/?igshid=asjdsot0lyb4" target="_blank">
+                <i class="mdi mdi-instagram"></i>
+              </a>
+            </li>
+          </ul>
+          <ul class="navbar-top-right-menu">
+            <!-- <li class="nav-item">
               <a href="#" class="nav-link">Login</a>
             </li>
             <li class="nav-item">
               <a href="#" class="nav-link">Sign in</a>
-            </li>
-          </ul> -->
+            </li> -->
+          </ul>
         </div>
       </div>
       <div class="navbar-bottom">
@@ -37,46 +56,66 @@
               <span class="navbar-toggler-icon"></span>
             </button>
             <div class="navbar-collapse justify-content-center collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav d-lg-flex justify-content-between align-items-center">
+              <ul class="navbar-nav d-lg-flex justify-content-between align-items-start">
                 <li>
                   <button class="navbar-close">
                     <i class="mdi mdi-close"></i>
                   </button>
                 </li>
-                <li class="nav-item active">
-                  <a class="nav-link" href="/">HOME</a>
-                </li>
-                <li class="nav-item active">
-                  <a class="nav-link" href="/news">NEWS</a>
+                <li class="nav-item">
+                  <a class="nav-link" href="/?locale=<%- currentLocale %>"><%= translate('homeLabel', currentLocale) %> </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="tv">TV SHOWS</a>
+                  <a class="nav-link" href="/news?locale=<%- currentLocale %>"><%= translate('newsLabel', currentLocale) %> </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="radio">RADIO</a>
+                  <a class="nav-link" href="/tv?locale=<%- currentLocale %>"><%= translate('tvLabel', currentLocale) %> </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="music">MUSIC</a>
+                  <a class="nav-link" href="/radio?locale=<%- currentLocale %>"><%= translate('radioLabel', currentLocale) %> </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="about">ABOUT US</a>
+                  <a class="nav-link" href="/music?locale=<%- currentLocale %>"><%= translate('musicLabel', currentLocale) %> </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="contact">CONTACT US</a>
+                  <a class="nav-link" href="/about?locale=<%- currentLocale %>"><%= translate('aboutLabel', currentLocale) %> </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/contact?locale=<%- currentLocale %>"><%= translate('contactLabel', currentLocale) %> </a>
+                </li>
+              </ul>
+              <ul class="language-dropdown justify-content-between align-items-center">
+                <!-- <li class="nav-item">
+                          <a href="#" class="nav-link">En</a>
+                        </li>
+                        <li class="nav-item">
+                          <a href="#" class="nav-link">Fr</a>
+                        </li>
+                        <li class="nav-item">
+                          <a href="#" class="nav-link">Ki</a>
+                        </li> -->
+    
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">Language</a>
+                  <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item d-flex align-items-center" href="/?locale=en-US">
+                      <span class="flag-icon">
+                        <img src="assets/images/united-kingdom.png" alt="flag" class="img-fluid" />
+                      </span> &nbsp English
+                    </a>
+                    <a class="dropdown-item d-flex align-items-center" href="/?locale=fr-FR"> <span class="flag-icon">
+                        <img src="assets/images/france.png" alt="flag" class="img-fluid" />
+                      </span> &nbsp Francais</a>
+                    <a class="dropdown-item d-flex align-items-center" href="/?locale=ki-RW"><span class="flag-icon">
+                        <img src="assets/images/rwanda.png" alt="flag" class="img-fluid" />
+                      </span> &nbsp Kinyarwanda/kirundi</a>
+                  </div>
                 </li>
               </ul>
             </div>
           </div>
-          <ul class="social-media">
-            <!-- <li class="nav-item">
-                      <a href="#" class="nav-link">En</a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="#" class="nav-link">Fr</a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="#" class="nav-link">Ki</a>
-                    </li> -->
+          <!-- <ul class="social-media">
             <li>
               <a href="#">
                 <i class="mdi mdi-facebook"></i>
@@ -88,16 +127,16 @@
               </a>
             </li>
             <li>
-              <a href="#">
+              <a href="https://twitter.com/GospelUbber?s=08" target="_blank">
                 <i class="mdi mdi-twitter"></i>
               </a>
             </li>
             <li>
-              <a href="#">
+              <a href="https://www.instagram.com/p/CEvu1XzBTU2/?igshid=asjdsot0lyb4" target="_blank">
                 <i class="mdi mdi-instagram"></i>
               </a>
             </li>
-          </ul>
+          </ul> -->
         </div>
       </div>
     </nav>

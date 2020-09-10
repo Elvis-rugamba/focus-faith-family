@@ -6,7 +6,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>World Time</title>
+  <title>Abbagospel</title>
   <!-- plugin css for this page -->
   <link rel="stylesheet" href="assets/vendors/mdi/css/materialdesignicons.min.css" />
   <link rel="stylesheet" href="assets/vendors/aos/dist/aos.css/aos.css" />
@@ -35,7 +35,15 @@
               <% for( let i = 0; i < categories.length; i++ ) { %>
               <div class="breadcrumb-item">
                 <a href="/music?category=<%- categories[i].category_name %>">
-                  <%- categories[i].category_name %>
+                  <% if (currentLocale === 'en-US') { %>
+                    <%- categories[i].category_name %>
+                    <% } else if (currentLocale === 'fr-FR') { %>
+                    <%- categories[i].french_name %>
+                    <% } else if (currentLocale === 'ki-RW') { %>
+                    <%- categories[i].rwandan_name %>
+                    <% } else { %>
+                    <%-  categories[i].category_name %>
+                    <% } %>
                 </a>
               </div>
               <% } %>
@@ -47,7 +55,7 @@
             </div>
           </div>
           <div class="col-sm-12 col-md-6 offset-md-6">
-            <form class="md-form input-group mb-3" method="GET" action="/music">
+            <form class="md-form input-group mb-3" method="GET" action="/music?locale=<%- currentLocale %>">
               <input type="text" name="search" class="form-control" placeholder="Search..." aria-label="Search..."
                 aria-describedby="MaterialButton-addon2">
               <div class="input-group-append">
@@ -63,7 +71,7 @@
                   <div class="row">
                     <div class="col-lg-8">
                       <h1 class="font-weight-600 mb-4">
-                        MUSIC
+                        <%= translate('musicLabel', currentLocale) %>
                       </h1>
                       <div class="row">
                         <% if (musics && musics.length > 0) { %>
@@ -76,7 +84,7 @@
                             <div class="badge-positioned w-90">
                               <div class="d-flex justify-content-between align-items-center">
                                 <!-- <span class="badge badge-danger font-weight-bold"><%- musics[i].category %></span> -->
-                                <div class="video-icon wave-effect" style="cursor: pointer;" onclick="location.href = '/song?slug=<%- musics[i].id %>';">
+                                <div class="video-icon wave-effect" style="cursor: pointer;" onclick="location.href = '/song?locale=<%- currentLocale %>&slug=<%- musics[i].id %>';">
                                   <i class="mdi mdi-play"></i>
                                 </div>
                               </div>
@@ -119,7 +127,7 @@
                           </h3>
                           <p class="fs-13 text-muted mb-0">
                             <span class="mr-2"><%- recentMusics[i].category %></span>
-                            <%= timeDifference(recentMusics[i].created_at) %>
+                            <%= timeDifference(recentMusics[i].created_at, currentLocale) %>
                           </p>
                         </div>
                       </div>

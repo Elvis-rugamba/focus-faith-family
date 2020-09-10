@@ -95,6 +95,8 @@ Player.prototype = {
     self.sound.stop();
 
     // Show the play button.
+    playBtn.style.display = "block";
+    pauseBtn.style.display = "none";
   },
 
   /**
