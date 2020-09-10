@@ -16,10 +16,10 @@ module.exports = (timestamp) => {
   } else if (elapsed < msPerDay) {
     return Math.floor(elapsed / msPerHour) + " hours ago";
   } else if (elapsed < msPerMonth) {
-    return "approximately " + Math.floor(elapsed / msPerDay) + " days ago";
+    return Math.floor(elapsed / msPerDay) + " days ago";
   } else if (elapsed < msPerYear) {
-    return "approximately " + Math.floor(elapsed / msPerMonth) + " months ago";
+    return Math.floor(elapsed / msPerMonth) + " months ago";
   } else {
-    return "approximately " + Math.floor(elapsed / msPerYear) + " years ago";
+    return Math.floor(elapsed / msPerYear) + " years ago";
   }
 }

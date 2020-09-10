@@ -10426,12 +10426,14 @@ header .navbar-bottom .navbar-toggler {
 @media (max-width: 999px) and (max-width: 768px) {
   .navbar-collapse {
     width: 290px;
+    display: block;
   }
 }
 
 @media (max-width: 999px) and (max-width: 567px) {
   .navbar-collapse {
     width: 290px;
+    display: block;
   }
 }
 
@@ -10888,6 +10890,34 @@ footer .footer-logo {
   bottom: 0;
   text-align: center;
   background: #aab2bd;
+}
+
+.flag-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.language-dropdown {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  padding-left: 22px;
+}
+
+.language-dropdown li {
+  padding: 0 4px;
+}
+
+.language-dropdown li a {
+  padding: 2px 4px;
+  background: #ffffff;
+  border-radius: 4px;
+  color: #000000;
+  -webkit-transition: all 0.5s ease-out;
+  -moz-transition: all 0.5s ease-out;
+  -o-transition: all 0.5s ease-out;
+  transition: all 0.5s ease-out;
 }
 
 /*# sourceMappingURL=maps/style.css.map */
