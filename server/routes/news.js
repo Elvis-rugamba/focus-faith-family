@@ -5,12 +5,12 @@ const timeDifference = require("../utils/timeDifference");
 const getNews = async (req, res) => {
   let news = [];
   try {
+    const currentLocale = req.query.locale || "en-US";
     const { category, search } = req.query;
 
     if (category) {
       news = await article.getNewsByCategory(category);
     } else if (search) {
-      console.log(search);
       news = await article.searchNews(search);
       console.log(news);
     } else {
@@ -20,9 +20,8 @@ const getNews = async (req, res) => {
     const recentNews = await article.getRecentNews();
     const categories = await cat.getnewsCategories();
 
-    console.log(news);
-
-    res.render("pages/news", { news, recentNews, categories, timeDifference });
+    res.locals.currentLocale = currentLocale;
+    res.render("pages/news", { news, recentNews, categories, });
   } catch (error) {
     throw error;
   }
@@ -30,13 +29,16 @@ const getNews = async (req, res) => {
 
 const getSingleArticle = async (req, res) => {
   try {
+    console.log(res.query);
+    const currentLocale = req.query.locale || "en-US";
     const { slug } = req.query;
     const newsArticle = await article.getSingleArticle(slug);
     const recentNews = await article.getRecentNews();
+
+    res.locals.currentLocale = currentLocale;
     res.render("pages/selected-post", {
       article: newsArticle,
       recentNews,
-      timeDifference,
     });
   } catch (error) {
     throw error;

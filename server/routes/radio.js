@@ -6,6 +6,7 @@ const timeDifference = require("../utils/timeDifference");
 
 const getRadio = async (req, res) => {
   try {
+    const currentLocale = req.query.locale || "en-US";
     const { category, search } = req.query;
     let radios = [];
 
@@ -20,7 +21,8 @@ const getRadio = async (req, res) => {
     const categories = await radioCategory.getRadioCategories();
     const recentNews = await article.getRecentNews();
 
-    res.render("pages/radio", { radios, recentRadios, recentNews, categories, timeDifference });
+    res.locals.currentLocale = currentLocale;
+    res.render("pages/radio", { radios, recentRadios, recentNews, categories });
   } catch (error) {
     throw error;
   }

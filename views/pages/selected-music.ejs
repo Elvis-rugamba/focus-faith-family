@@ -67,7 +67,7 @@
                           <div class="row">
                             <div class="col-sm-8">
                               <h5 class="font-weight-600 mb-1">
-                                <a class="font-weight-600 text-dark" href="/song?slug=<%- recentMusics[i].news_id %>">
+                                <a class="font-weight-600 text-dark" href="/song?locale=<%- currentLocale %>&slug=<%- recentMusics[i].news_id %>">
                                   <%- recentMusics[i].name %>
                                 </a>
                               </h5>
@@ -78,12 +78,12 @@
                               </p>
                               <p class="fs-13 text-muted mb-0">
                                 <span class="mr-2"><%- recentMusics[i].category %></span>
-                                <%= timeDifference(recentMusics[i].created_at) %>
+                                <%= timeDifference(recentMusics[i].created_at, currentLocale) %>
                               </p>
                             </div>
                             <div class="col-sm-4">
                               <div class="rotate-img">
-                                <a href="/song?slug=<%- recentMusics[i].news_id %>">
+                                <a href="/song?locale=<%- currentLocale %>&slug=<%- recentMusics[i].news_id %>">
                                   <img src="<%- recentMusics[i].cover %>" alt="banner" class="img-fluid" />
                                 </a>
                               </div>
@@ -111,12 +111,12 @@
               <div class="d-sm-flex align-items-center justify-content-between row">
                 <div class="d-flex align-items-center">
                   <button class="btn btn-rounded btn-primary waves-effect mr-2" id="playBtn">
-                    <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" id="spinner" style="display: none;"></span>
-                    <span class="sr-only">Loading...</span>
                     <i class="mdi mdi-play"></i>
                   </button>
                   <button class="btn btn-rounded btn-primary waves-effect mr-2" id="pauseBtn" style="display: none;">
                     <i class="mdi mdi-pause"></i></button>
+                    <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" id="spinner" style="display: none;"></span>
+                    <span class="sr-only">Loading...</span>
                   <button class="btn btn-rounded btn-primary waves-effect" id="stopBtn">
                     <i class="mdi mdi-stop"></i></button>
                 </div>

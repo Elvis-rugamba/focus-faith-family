@@ -5,6 +5,7 @@ const timeDifference = require("../utils/timeDifference");
 
 const getTv = async (req, res) => {
   try {
+    const currentLocale = req.query.locale || "en-US";
     const { category, search } = req.query;
     let tvShows = [];
 
@@ -18,7 +19,8 @@ const getTv = async (req, res) => {
     const recentNews = await article.getRecentNews();
     const categories = await tvCategory.getTvCategories();
 
-    res.render("pages/tvShow", { tvShows, recentNews, categories, timeDifference });
+    res.locals.currentLocale = currentLocale;
+    res.render("pages/tvShow", { tvShows, recentNews, categories });
   } catch (error) {
     throw error;
   }
@@ -26,11 +28,13 @@ const getTv = async (req, res) => {
 
 const getSingleTv = async (req, res) => {
   try {
+    const currentLocale = req.query.locale || "en-US";
     const {slug} = req.query;
 
     const tvShow = await tv.getSingleTv(slug);
     const recentNews = await article.getRecentNews();
 
+    res.locals.currentLocale = currentLocale;
     res.render("pages/selected-tvShow", { tvShow, recentNews, timeDifference });
   } catch (error) {
     throw error;

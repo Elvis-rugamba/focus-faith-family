@@ -1,223 +1,225 @@
 <!DOCTYPE html>
 <html lang="zxx">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Abbagospel</title>
-    <!-- plugin css for this page -->
-    <link
-      rel="stylesheet"
-      href="assets/vendors/mdi/css/materialdesignicons.min.css"
-    />
-    <link rel="stylesheet" href="assets/vendors/aos/dist/aos.css/aos.css" />
-    <!-- End plugin css for this page -->
-    <link rel="shortcut icon" href="assets/images/favicon.png" />
-    <!-- inject:css -->
-    <link rel="stylesheet" href="assets/css/style.css">
-    <!-- endinject -->
-  </head>
 
-  <body>
-    <div class="container-scroller">
-      <div class="main-panel">
-        <!-- partial:../partials/_navbar.html -->
-        <%- include('../partials/_navbar') %>
-        <!-- partial:partials/_banner -->
-        <%- include('../partials/_banner') %>
-        <!-- partial -->
-        <div class="content-wrapper">
-          <div class="container">
-            <div class="col-sm-12">
-              <div class="row breadcrumb">
-                <% if (categories && categories.length > 0) { %>
-                <% for( let i = 0; i < categories.length; i++ ) { %>
-                <div class="breadcrumb-item">
-                  <a href="/radio?category=<%- categories[i].category_name %>">
-                    <%- categories[i].category_name %>
-                  </a>
-                </div>
-                <% } %>
-                <% } else { %>
-                <div class="breadcrumb-item">
-                  No data found
-                </div>
-                <% } %>
+<head>
+  <!-- Required meta tags -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Abbagospel</title>
+  <!-- plugin css for this page -->
+  <link rel="stylesheet" href="assets/vendors/mdi/css/materialdesignicons.min.css" />
+  <link rel="stylesheet" href="assets/vendors/aos/dist/aos.css/aos.css" />
+  <!-- End plugin css for this page -->
+  <link rel="shortcut icon" href="assets/images/favicon.png" />
+  <!-- inject:css -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <!-- endinject -->
+</head>
+
+<body>
+  <div class="container-scroller">
+    <div class="main-panel">
+      <!-- partial:../partials/_navbar.html -->
+      <%- include('../partials/_navbar') %>
+      <!-- partial:partials/_banner -->
+      <%- include('../partials/_banner') %>
+      <!-- partial -->
+      <div class="content-wrapper">
+        <div class="container">
+          <div class="col-sm-12">
+            <div class="row breadcrumb">
+              <% if (categories && categories.length > 0) { %>
+              <% for( let i = 0; i < categories.length; i++ ) { %>
+              <div class="breadcrumb-item">
+                <a href="/radio?locale=<%- currentLocale %>&category=<%- categories[i].category_name %>">
+                  <% if (currentLocale === 'en-US') { %>
+                  <%- categories[i].category_name %>
+                  <% } else if (currentLocale === 'fr-FR') { %>
+                  <%- categories[i].french_name %>
+                  <% } else if (currentLocale === 'ki-RW') { %>
+                  <%- categories[i].rwandan_name %>
+                  <% } else { %>
+                  <%-  categories[i].category_name %>
+                  <% } %>
+                </a>
               </div>
+              <% } %>
+              <% } else { %>
+              <div class="breadcrumb-item">
+                No data found
+              </div>
+              <% } %>
             </div>
-            <div class="col-sm-12 col-md-6 offset-md-6">
-              <form class="md-form input-group mb-3" method="GET" action="/radio">
-                <input type="text" name="search" class="form-control" placeholder="Search..." aria-label="Search..."
-                  aria-describedby="MaterialButton-addon2">
-                <div class="input-group-append">
-                  <button class="btn btn-sm btn-primary m-0" type="submit" id="MaterialButton-addon2"><i class="mdi mdi-magnify"></i></button>
+          </div>
+          <div class="col-sm-12 col-md-6 offset-md-6">
+            <form class="md-form input-group mb-3" method="GET" action="/radio?locale=<%- currentLocale %>">
+              <input type="text" name="search" class="form-control" placeholder="Search..." aria-label="Search..."
+                aria-describedby="MaterialButton-addon2">
+              <div class="input-group-append">
+                <button class="btn btn-sm btn-primary m-0" type="submit" id="MaterialButton-addon2"><i
+                    class="mdi mdi-magnify"></i></button>
+              </div>
+            </form>
+          </div>
+          <div class="col-sm-12">
+            <div class="card" data-aos="fade-up">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <h1 class="font-weight-600 mb-4">
+                      Abba Gospel Radio
+                    </h1>
+                  </div>
                 </div>
-              </form>
-            </div>
-            <div class="col-sm-12">
-              <div class="card" data-aos="fade-up">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-sm-12">
-                      <h1 class="font-weight-600 mb-4">
-                        Abba Gospel Radio
-                      </h1>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-8">
-                      <div class="row">
-                        <div class="col-sm-12 grid-margin">
-                          <div>
-                            <img
-                              src="assets/images/sports/Sports_6.jpg"
-                              alt="banner"
-                              class="img-fluid"
-                            />
-                          </div>
-                          <br>
-                          <audio controls>
-                          </audio>
-        
-                        </div>
-                        <div class="col-sm-8 grid-margin">
-                          <h2 class="font-weight-600 mb-2">
-                            Sypnosis
-                          </h2>
-                          <p class="fs-15">
-                            Lorem Ipsum has been the industry's standard dummy
-                            text ever since the 1500s.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-4">
-                      <h2 class="mb-4 text-primary font-weight-600">
-                        Latest news
-                      </h2>
-                      <% if (recentNews && recentNews.length > 0) { %>
-                      <% for( let i = 0; i < recentNews.length; i++ ) { %>
-                      <div class="row">
-                        <div class="col-sm-12">
-                          <div class="border-bottom pb-4 pt-4">
-                            <div class="row">
-                              <div class="col-sm-8">
-                                <h5 class="font-weight-600 mb-1">
-                                  <a class="font-weight-600 text-dark" href="/article?slug=<%- recentNews[i].news_id %>">
-                                    <%- recentNews[i].title %>
-                                  </a>
-                                </h5>
-                                <p class="fs-13 text-muted mb-0">
-                                  <span class="mr-2"><%- recentNews[i].category %></span><%= timeDifference(recentNews[i].created_at) %>
-                                </p>
-                              </div>
-                              <div class="col-sm-4">
-                                <div class="rotate-img">
-                                  <a href="/article?slug=<%- recentNews[i].news_id %>">
-                                    <img src="<%- recentNews[i].image %>" alt="banner" class="img-fluid" />
-                                  </a>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <% } %>
-                      <% } else { %>
-                      <h2 class="font-weight-600 mb-4">
-                        No data found
-                      </h2>
-                      <% } %>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-sm-12">
-                      <h2 class="mb-4 font-weight-600">
-                        Past
-                      </h2>
-                    </div>
+                <div class="row">
+                  <div class="col-lg-8">
                     <div class="row">
-                      <% if (radios && radios.length > 0) { %>
-                        <% for( let i = 0; i < radios.length; i++ ) { %>
-                      <div class="col-sm-12 col-md-4 grid-margin">
-                        <div class="position-relative">
-                          <div class="rotate-img">
-                            <img
-                              src="<%- radios[i].cover %>"
-                              alt="thumb"
-                              class="img-fluid"
-                            />
-                          </div>
-                          <div class="badge-positioned w-90">
-                            <div
-                              class="d-flex justify-content-between align-items-center"
-                              id="audio" data-url ="<%- radios[i].url %>">
-                              <div class="video-icon" id="playBtn" style="cursor: pointer;">
-                                <i class="mdi mdi-play"></i>
-                              </div>
-                              <div class="video-icon" id="pauseBtn" style="cursor: pointer; display: none;">
-                                <i class="mdi mdi-pause"></i>
-                              </div>
-                              <div class="video-icon" id="stopBtn" style="cursor: pointer;">
-                                <i class="mdi mdi-stop"></i>
-                              </div>
-                              <div class="video-icon" id="volLowBtn" style="cursor: pointer;">
-                                <i class="mdi mdi-volume-low"></i>
-                              </div>
-                              <div class="video-icon" id="volHighBtn" style="cursor: pointer;">
-                                <i class="mdi mdi-volume-high"></i>
+                      <div class="col-sm-12 grid-margin">
+                        <div>
+                          <img src="assets/images/sports/Sports_6.jpg" alt="banner" class="img-fluid" />
+                        </div>
+                        <br>
+                        <audio controls>
+                        </audio>
+
+                      </div>
+                      <div class="col-sm-8 grid-margin">
+                        <h2 class="font-weight-600 mb-2">
+                          Sypnosis
+                        </h2>
+                        <p class="fs-15">
+                          Lorem Ipsum has been the industry's standard dummy
+                          text ever since the 1500s.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-4">
+                    <h2 class="mb-4 text-primary font-weight-600">
+                      Latest news
+                    </h2>
+                    <% if (recentNews && recentNews.length > 0) { %>
+                    <% for( let i = 0; i < recentNews.length; i++ ) { %>
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <div class="border-bottom pb-4 pt-4">
+                          <div class="row">
+                            <div class="col-sm-8">
+                              <h5 class="font-weight-600 mb-1">
+                                <a class="font-weight-600 text-dark"
+                                  href="/article?locale=<%- currentLocale %>&slug=<%- recentNews[i].news_id %>">
+                                  <%- recentNews[i].title %>
+                                </a>
+                              </h5>
+                              <p class="fs-13 text-muted mb-0">
+                                <span
+                                  class="mr-2"><%- recentNews[i].category %></span><%= timeDifference(recentNews[i].created_at, currentLocale) %>
+                              </p>
+                            </div>
+                            <div class="col-sm-4">
+                              <div class="rotate-img">
+                                <a href="/article?locale=<%- currentLocale %>&slug=<%- recentNews[i].news_id %>">
+                                  <img src="<%- recentNews[i].image %>" alt="banner" class="img-fluid" />
+                                </a>
                               </div>
                             </div>
                           </div>
                         </div>
-                        <div class="col-sm-12 mt-2">
-                          <h5 class="font-weight-600 mb-1">
-                            <%- radios[i].title %>
-                          </h5>
-                          <p class="fs-13 font-weight-400 mb-1">
-                            <%- radios[i].bodyhtml %>
-                          </p>
-                          <p class="fs-13 text-muted mb-0">
-                            <span class="mr-2"><%- radios[i].category %></span><%= timeDifference(radios[i].created_at) %>
-                          </p>
+                      </div>
+                    </div>
+                    <% } %>
+                    <% } else { %>
+                    <h2 class="font-weight-600 mb-4">
+                      No data found
+                    </h2>
+                    <% } %>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <h2 class="mb-4 font-weight-600">
+                      Past
+                    </h2>
+                  </div>
+                  <div class="row">
+                    <% if (radios && radios.length > 0) { %>
+                    <% for( let i = 0; i < radios.length; i++ ) { %>
+                    <div class="col-sm-12 col-md-4 grid-margin">
+                      <div class="position-relative">
+                        <div class="rotate-img">
+                          <img src="<%- radios[i].cover %>" alt="thumb" class="img-fluid" />
+                        </div>
+                        <div class="badge-positioned w-90">
+                          <div class="d-flex justify-content-between align-items-center" id="audio"
+                            data-url="<%- radios[i].url %>">
+                            <div class="video-icon" id="playBtn" style="cursor: pointer;">
+                              <i class="mdi mdi-play"></i>
+                            </div>
+                            <div class="video-icon" id="pauseBtn" style="cursor: pointer; display: none;">
+                              <i class="mdi mdi-pause"></i>
+                            </div>
+                            <div class="video-icon" id="stopBtn" style="cursor: pointer;">
+                              <i class="mdi mdi-stop"></i>
+                            </div>
+                            <div class="video-icon" id="volLowBtn" style="cursor: pointer;">
+                              <i class="mdi mdi-volume-low"></i>
+                            </div>
+                            <div class="video-icon" id="volHighBtn" style="cursor: pointer;">
+                              <i class="mdi mdi-volume-high"></i>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                      <% } %>
-                      <% } else { %>
-                      <h2 class="font-weight-600 mb-4">
-                        No data found
-                      </h2>
-                      <% } %>
+                      <div class="col-sm-12 mt-2">
+                        <h5 class="font-weight-600 mb-1">
+                          <%- radios[i].title %>
+                        </h5>
+                        <p class="fs-13 font-weight-400 mb-1">
+                          <%- radios[i].bodyhtml %>
+                        </p>
+                        <p class="fs-13 text-muted mb-0">
+                          <span
+                            class="mr-2"><%- radios[i].category %></span><%= timeDifference(radios[i].created_at, currentLocale) %>
+                        </p>
+                      </div>
                     </div>
+                    <% } %>
+                    <% } else { %>
+                    <h2 class="font-weight-600 mb-4">
+                      No data found
+                    </h2>
+                    <% } %>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <!-- main-panel ends -->
-        <!-- container-scroller ends -->
-
-        <!-- partial:../partials/_footer.html -->
-        <%- include('../partials/_footer') %>
-        <!-- partial -->
       </div>
-    </div>
-    <!-- inject:js -->
-    <script src="assets/vendors/js/vendor.bundle.base.js"></script>
-    <!-- endinject -->
-    <!-- plugin js for this page -->
+      <!-- main-panel ends -->
+      <!-- container-scroller ends -->
 
-    <script src="assets/vendors/aos/dist/aos.js/aos.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"
-        integrity="sha512-ALoawPS0JxHQ+8dGL7htZIlVNRaE/SN9gHD4G8pJJTi9H4BQ/3PjdvhggSGR34g00mvTPFkxQuveQUsJA5664Q=="
-        crossorigin="anonymous"></script>
-    <!-- End plugin js for this page -->
-    <!-- Custom js for this page-->
-    <script src="assets/js/demo.js"></script>
-    <script src="assets/js/player.js"></script>
-    <script src="assets/js/jquery.easeScroll.js"></script>
-    <!-- End custom js for this page-->
-  </body>
+      <!-- partial:../partials/_footer.html -->
+      <%- include('../partials/_footer') %>
+      <!-- partial -->
+    </div>
+  </div>
+  <!-- inject:js -->
+  <script src="assets/vendors/js/vendor.bundle.base.js"></script>
+  <!-- endinject -->
+  <!-- plugin js for this page -->
+
+  <script src="assets/vendors/aos/dist/aos.js/aos.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"
+    integrity="sha512-ALoawPS0JxHQ+8dGL7htZIlVNRaE/SN9gHD4G8pJJTi9H4BQ/3PjdvhggSGR34g00mvTPFkxQuveQUsJA5664Q=="
+    crossorigin="anonymous"></script>
+  <!-- End plugin js for this page -->
+  <!-- Custom js for this page-->
+  <script src="assets/js/demo.js"></script>
+  <script src="assets/js/player.js"></script>
+  <script src="assets/js/jquery.easeScroll.js"></script>
+  <!-- End custom js for this page-->
+</body>
+
 </html>
