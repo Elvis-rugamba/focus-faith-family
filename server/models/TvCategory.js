@@ -32,7 +32,7 @@ const getCategories = async (req, res) => {
 const getCategoriesByGroup = async (req, res) => {
   try {
     const articles = await db.query(
-      "SELECT COUNT(tv.category) FROM news INNER JOIN tv_categories ON tv.category=tv_categories.category_name GROUP BY tv.category"
+      "SELECT COUNT(tv_shows.category) FROM tv_shows INNER JOIN tv_categories ON tv_shows.category=tv_categories.category_name GROUP BY tv_shows.category"
     );
     return res.status(200).json({ status: 200, data: articles.rows });
   } catch (error) {

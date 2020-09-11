@@ -33,7 +33,7 @@ const getCategories = async (req, res) => {
 const getCategoriesByGroup = async (req, res) => {
   try {
     const articles = await db.query(
-      "SELECT COUNT(musics.category) FROM musics INNER JOIN music_categories ON musics.category=music_categories.category_name GROUP BY music_categories.category"
+      "SELECT COUNT(musics.category) FROM musics INNER JOIN music_categories ON musics.category=music_categories.category_name GROUP BY musics.category"
     );
     return res.status(200).json({ status: 200, data: articles.rows });
   } catch (error) {

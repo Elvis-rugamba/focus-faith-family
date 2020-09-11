@@ -32,7 +32,7 @@ const getCategories = async (req, res) => {
 const getCategoriesByGroup = async (req, res) => {
   try {
     const articles = await db.query(
-      "SELECT COUNT(radio.category) FROM news INNER JOIN radio_categories ON radio.category=radio_categories.category_name GROUP BY news.category"
+      "SELECT COUNT(radio.category) FROM radio INNER JOIN radio_categories ON radio.category=radio_categories.category_name GROUP BY radio.category"
     );
     return res.status(200).json({ status: 200, data: articles.rows });
   } catch (error) {
