@@ -32,6 +32,7 @@ const createTable = async () => {
     subtitle VARCHAR(1000) NOT NULL,
     body VARCHAR(1000000) NOT NULL,
     author VARCHAR(500) NOT NULL,
+    language VARCHAR(500),
     category VARCHAR(100) REFERENCES categories(category_name) NOT NULL,
     image VARCHAR(2000) NOT NULL,
     status VARCHAR(50) DEFAULT 'pending' NOT NULL,
@@ -50,6 +51,7 @@ const createTable = async () => {
     name VARCHAR(500) NOT NULL,
     artist VARCHAR(500) NOT NULL,
     album VARCHAR(500) NOT NULL,
+    language VARCHAR(500),
     category VARCHAR(100) REFERENCES music_categories(category_name) NOT NULL,
     cover VARCHAR(500) NOT NULL,
     url VARCHAR(500) NOT NULL,
@@ -70,6 +72,7 @@ const createTable = async () => {
     bodyhtml VARCHAR(10100000) NOT NULL,
     category VARCHAR(100) REFERENCES tv_categories(category_name) NOT NULL,
     host VARCHAR(500) NOT NULL,
+    language VARCHAR(500),
     cover VARCHAR(500) NOT NULL,
     url VARCHAR(500) NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW() NOT NULL
@@ -88,6 +91,7 @@ const createTable = async () => {
     bodyhtml VARCHAR(10100000) NOT NULL,
     category VARCHAR(100) REFERENCES radio_categories(category_name) NOT NULL,
     cover VARCHAR(500) NOT NULL,
+    language VARCHAR(500),
     url VARCHAR(500) NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW() NOT NULL
   )`;
