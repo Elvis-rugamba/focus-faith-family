@@ -37,7 +37,7 @@ const createTv = async (req, res) => {
 
 const getTvShows = async () => {
   const { rows } = await db.query(
-    "SELECT * FROM tv_shows ORDER BY id DESC LIMIT 10"
+    "SELECT * FROM tv_shows ORDER BY id DESC"
   );
 
   return rows;

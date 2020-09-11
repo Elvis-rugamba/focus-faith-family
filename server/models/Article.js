@@ -28,7 +28,7 @@ const createArticle = async (req, res) => {
 
 const getNews = async () => {
   const { rows } = await db.query(
-    "SELECT * FROM news ORDER BY news_id DESC LIMIT 10"
+    "SELECT * FROM news ORDER BY news_id DESC"
   );
 
   return rows;

@@ -37,7 +37,7 @@ const createRadio = async (req, res) => {
 
 const getRadio = async () => {
   const { rows } = await db.query(
-    "SELECT * FROM radio ORDER BY id DESC LIMIT 10"
+    "SELECT * FROM radio ORDER BY id DESC"
   );
 
   return rows;

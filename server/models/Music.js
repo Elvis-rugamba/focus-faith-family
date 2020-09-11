@@ -37,7 +37,7 @@ const createLibrary = async (req, res) => {
 
 const getMusics = async () => {
   const { rows } = await db.query(
-    "SELECT * FROM musics ORDER BY id DESC LIMIT 10"
+    "SELECT * FROM musics ORDER BY id DESC"
   );
 
   return rows;
