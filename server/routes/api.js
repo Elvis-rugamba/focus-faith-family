@@ -48,6 +48,6 @@ router.post("/tv/categories", verifyToken, tvCategory.createCategory);
 router.get("/tv/categories", tvCategory.getCategories);
 router.get("/tv/categories/group", tvCategory.getCategoriesByGroup);
 router.post("/tv/upload", upload.single('tv'), tv.upload);
-router.post("/tv/cover", upload.single('cover'), tv.upload);
+router.post("/tv/cover", upload.single('image'), tv.upload);
 
 module.exports = router;
