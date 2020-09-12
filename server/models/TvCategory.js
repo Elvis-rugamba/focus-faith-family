@@ -1,14 +1,15 @@
 const db = require("../config/connect");
 
 const createCategory = async (req, res) => {
-  // get from body
+  try {
+    // get from body
   const { categoryName, frenchName, rwandanName } = req.body;
   // check if the category exists already
   const isCategory = await db.query(
     "SELECT * FROM tv_categories WHERE category_name=$1",
     [categoryName]
   );
-  if (isCategory.rowCount < 0)
+  if (isCategory.rowCount > 0)
     return res
       .status(409)
       .json({ status: 409, message: "Category already created" });
@@ -19,6 +20,10 @@ const createCategory = async (req, res) => {
   );
   console.log(newCategory);
   return res.status(201).json({ status: 201, data: newCategory.rows[0] });
+  } catch (error) {
+    return res.status(500).json({ status: 500, message: error.message });
+  }
+  
 };
 
 const getCategories = async (req, res) => {

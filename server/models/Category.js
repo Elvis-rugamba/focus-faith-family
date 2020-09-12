@@ -8,7 +8,7 @@ const createCategory = async (req, res) => {
     "SELECT * FROM categories WHERE category_name=$1",
     [categoryName]
   );
-  if (isCategory.rowCount < 0)
+  if (isCategory.rowCount > 0)
     return res
       .status(409)
       .json({ status: 409, message: "Category already created" });
