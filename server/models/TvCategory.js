@@ -24,7 +24,7 @@ const createCategory = async (req, res) => {
 const getCategories = async (req, res) => {
   try {
     const isArticle = await db.query("SELECT * FROM tv_categories");
-    console.log(isAerticle);
+    console.log(isArticle);
     return res.status(200).json({ status: 200, data: isArticle.rows });
   } catch (error) {
     return res.status(500).json({ status: 500, message: error.message });
