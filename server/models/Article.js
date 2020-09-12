@@ -2,6 +2,7 @@ const db = require("../config/connect");
 
 const upload = async (req, res) => {
   try {
+    console.log(req.file);
     const [, ...rest] = req.file.path.replace(/\\/g, "/").split("/");
     const filePath = rest.join("/");
     const url = `${req.protocol}://${req.get("host")}/${filePath}`;
