@@ -5,7 +5,7 @@ const upload = async (req, res) => {
     console.log(req.file);
     const [, ...rest] = req.file.path.replace(/\\/g, "/").split("/");
     const filePath = rest.join("/");
-    const url = `${req.protocol}://${req.get("host")}/${filePath}`;
+    const url = `https://${req.get("host")}/${filePath}`;
 
     return res.status(201).json({ url });
   } catch (error) {
