@@ -34,7 +34,7 @@ const createArticle = async (req, res) => {
     }
 
     const results = await db.query(
-      `INSERT INTO news(title,subtitle,body,author,category,image,bodyhtml,language) VALUES ($1,$2,$3,$4,$5,$6,$7) RETURNING *`,
+      `INSERT INTO news(title,subtitle,body,author,category,image,bodyhtml,language) VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING *`,
       [title, subtitle, body, author, category, image, bodyhtml, language]
     );
     return res.status(201).json(results.rows);
