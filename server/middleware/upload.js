@@ -45,6 +45,7 @@ const fileFilter = (req, file, cb) => {
       cb(error, false);
     }
   } else if (file.fieldname === "music" || file.fieldname === "radio") {
+    console.log(file.mimetype);
     if (file.mimetype.split("/")[1].match(/(mpeg)/)) {
       cb(null, true);
     } else {
