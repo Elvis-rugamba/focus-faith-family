@@ -103,12 +103,11 @@ const editArticle = async (req, res) => {
   //check if the user exists
   const { user_id } = req.user.payload;
   const { articleId } = req.params;
-  const { title, subtitle, category, body, status } = req.body;
+  const { title, subtitle, category, body, language, bodyhtml, image } = req.body;
   try {
     const { rows } = await db.query("SELECT * FROM users WHERE user_id=$1", [
       user_id,
     ]);
-    console.log("savage", user_id);
     if (rows.length < 0)
       return res.status(404).json({ status: 404, message: "User not found" });
 
@@ -120,22 +119,74 @@ const editArticle = async (req, res) => {
     const isArticle = await db.query("SELECT * FROM news WHERE news_id=$1", [
       articleId,
     ]);
-    if (isArticle.rowCount < 0)
+    if (isArticle.rowCount < 0) {
       res.status(404).json({ status: 404, message: "Article not found" });
+    }
+      if (!title) {
+        return res.status(400).json({ message: "Title is required" });
+      }
+      if (!subtitle) {
+        return res.status(400).json({ message: "Subtitle is required" });
+      }
+      if (!category) {
+        return res.status(400).json({ message: "Category is required" });
+      }
+      if (!language) {
+        return res.status(400).json({ message: "Language is required" });
+      }
+      if (image) {
+        image = image;
+      } else {
+        image = isArticle.image;
+      }
 
     // edit the article
     // change the status of the article to posted
     const updatedArticle = await db.query(
-      `UPDATE news SET title=$1, subtitle=$2, body=$3, category=$4, status='edited' WHERE news_id=$5 RETURNING *`,
-      [title, subtitle, body, category, articleId]
+      `UPDATE news SET title=$1, subtitle=$2, body=$3, category=$4, language=$5, bodyhtml=$6, image=$7, status='edited' WHERE news_id=$5 RETURNING *`,
+      [title, subtitle, body, category, language, bodyhtml, image, articleId]
     );
-    console.log("savage", updatedArticle.rows[0]);
-
-    // if (updatedArticle.rows[0].news_id === articleId && updatedArticle.rows[0].status === 'posted') return res.status(400).json({ status: 400, message: 'The article was not edited successfully' });
 
     return res.status(200).json({
       status: 200,
       message: "Article edited successfully",
+      data: updatedArticle.rows[0],
+    });
+  } catch (error) {
+    return res.status(500).json({ status: 500, message: error.message });
+  }
+};
+
+const deleteArticle = async (req, res) => {
+  //check if the user exists
+  const { user_id } = req.user.payload;
+  const { articleId } = req.params;
+  try {
+    const { rows } = await db.query("SELECT * FROM users WHERE user_id=$1", [
+      user_id,
+    ]);
+    if (rows.length < 0)
+      return res.status(404).json({ status: 404, message: "User not found" });
+
+    // check if the user is an admin or editor
+    if (rows[0].role !== "admin" && rows[0].role !== "editor")
+      return res.status(403).json({ status: 403, message: "Forbidden action" });
+
+    // check if the article exists
+    const isArticle = await db.query("SELECT * FROM news WHERE news_id=$1", [
+      articleId,
+    ]);
+    if (isArticle.rowCount < 0) {
+      res.status(404).json({ status: 404, message: "Article not found" });
+    }
+    const deletedArticle = await db.query(
+      `DELETE FROM news WHERE news_id=$1 RETURNING *`,
+      [articleId]
+    );
+
+    return res.status(200).json({
+      status: 200,
+      message: "Article deleted successfully",
       data: updatedArticle.rows[0],
     });
   } catch (error) {
@@ -182,6 +233,7 @@ module.exports = {
   getNewsByCategory,
   searchNews,
   editArticle,
+  deleteArticle,
   getAllArticles,
   getArticle,
 };
