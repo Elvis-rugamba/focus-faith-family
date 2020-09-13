@@ -197,7 +197,7 @@ const deleteArticle = async (req, res) => {
 const getAllArticles = async (req, res) => {
   //get all articles
   try {
-    const articles = await db.query("SELECT * FROM news");
+    const articles = await db.query("SELECT * FROM news ORDER BY news_id DESC");
     return res.status(200).json({ status: 200, data: articles.rows });
   } catch (error) {
     return res.status(500).json({ status: 500, message: error.message });
