@@ -22,6 +22,7 @@ router.post("/new-article", article.createArticle);
 router.post("/new-category", category.createCategory);
 router.post("/new-user", user.createUser);
 router.get("/news/:newsId", article.getArticle);
+router.delete("/news/:articleId", verifyToken, article.deleteArticle);
 router.post("/signin", user.signinUser);
 router.patch("/user/:userId", verifyToken, user.changeRole);
 router.patch("/edit-article/:articleId", verifyToken, article.editArticle);
