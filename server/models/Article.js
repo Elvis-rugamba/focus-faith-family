@@ -139,7 +139,7 @@ const editArticle = async (req, res) => {
     // edit the article
     // change the status of the article to posted
     const updatedArticle = await db.query(
-      `UPDATE news SET title=$1, subtitle=$2, body=$3, category=$4, language=$5, bodyhtml=$6, image=$7, status=$8 WHERE news_id=$8 RETURNING *`,
+      `UPDATE news SET title=$1, subtitle=$2, body=$3, category=$4, language=$5, bodyhtml=$6, image=$7, status=$8 WHERE news_id=$9 RETURNING *`,
       [title, subtitle, body, category, language, bodyhtml, image, status, articleId]
     );
 
