@@ -17,6 +17,25 @@ const createArticle = async (req, res) => {
   const { title, subtitle, body, author, category, image, bodyhtml } = req.body;
   console.log("here", req.body);
   try {
+    if (!title) {
+      return res.status(400).json({ message: "Title is required" });
+    }
+    if (!subtitle) {
+      return res.status(400).json({ message: "Subtitle is required" });
+    }
+    if (!category) {
+      return res.status(400).json({ message: "Category is required" });
+    }
+    if (!image) {
+      return res.status(400).json({ message: "Upload image" });
+    }
+    if (!title || !subtitle || !body || !author || !category || !image || !bodyhtml) {
+      return res.status(400).json({ message: "Upload your song please" });
+    }
+    if (!bodyhtml) {
+      return res.status(400).json({ message: "Write something about your article" });
+    }
+
     const results = await db.query(
       `INSERT INTO news(title,subtitle,body,author,category,image,bodyhtml) VALUES ($1,$2,$3,$4,$5,$6,$7) RETURNING *`,
       [title, subtitle, body, author, category, image, bodyhtml]
