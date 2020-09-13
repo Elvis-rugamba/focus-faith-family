@@ -163,15 +163,7 @@
                         <a class="badge-positioned"
                           href="/news?locale=<%- currentLocale %>&category=<%- news[i].category %>">
                           <span class="badge badge-danger font-weight-bold">
-                            <% if (currentLocale === 'en-US') { %>
-                            <%- categories[i].category_name %>
-                            <% } else if (currentLocale === 'fr-FR') { %>
-                            <%- categories[i].french_name %>
-                            <% } else if (currentLocale === 'ki-RW') { %>
-                            <%- categories[i].rwandan_name %>
-                            <% } else { %>
-                            <%-  categories[i].category_name %>
-                            <% } %>
+                            <%- news[i].category %>
                           </span>
                         </a>
                       </div>
