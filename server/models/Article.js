@@ -104,6 +104,7 @@ const editArticle = async (req, res) => {
   const { user_id } = req.user.payload;
   const { articleId } = req.params;
   const { title, subtitle, category, body, language, bodyhtml, image } = req.body;
+  let status = 'edited'
   try {
     const { rows } = await db.query("SELECT * FROM users WHERE user_id=$1", [
       user_id,
@@ -113,7 +114,7 @@ const editArticle = async (req, res) => {
 
     // check if the user is an admin or editor
     if (rows[0].role !== "admin" && rows[0].role !== "editor")
-      return res.status(403).json({ status: 403, message: "Forbidden action" });
+      status = 'pending';
 
     // check if the article exists
     const isArticle = await db.query("SELECT * FROM news WHERE news_id=$1", [
@@ -134,17 +135,12 @@ const editArticle = async (req, res) => {
       if (!language) {
         return res.status(400).json({ message: "Language is required" });
       }
-      if (image) {
-        image = image;
-      } else {
-        image = isArticle.image;
-      }
 
     // edit the article
     // change the status of the article to posted
     const updatedArticle = await db.query(
-      `UPDATE news SET title=$1, subtitle=$2, body=$3, category=$4, language=$5, bodyhtml=$6, image=$7, status='edited' WHERE news_id=$5 RETURNING *`,
-      [title, subtitle, body, category, language, bodyhtml, image, articleId]
+      `UPDATE news SET title=$1, subtitle=$2, body=$3, category=$4, language=$5, bodyhtml=$6, image=$7, status=$8 WHERE news_id=$8 RETURNING *`,
+      [title, subtitle, body, category, language, bodyhtml, image, status, articleId]
     );
 
     return res.status(200).json({
