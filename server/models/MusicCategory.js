@@ -23,7 +23,7 @@ const createCategory = async (req, res) => {
 
 const getCategories = async (req, res) => {
   try {
-    const isArticle = await db.query("SELECT * FROM music_categories ORDER BY category_name ASC");
+    const isArticle = await db.query("SELECT * FROM music_categories");
     return res.status(200).json({ status: 200, data: isArticle.rows });
   } catch (error) {
     return res.status(500).json({ status: 500, message: error.message });
@@ -33,7 +33,7 @@ const getCategories = async (req, res) => {
 const getCategoriesByGroup = async (req, res) => {
   try {
     const articles = await db.query(
-      "SELECT COUNT(musics.category) FROM musics INNER JOIN music_categories ON musics.category=music_categories.category_name GROUP BY musics.category ORDER BY music_categories.category_name ASC"
+      "SELECT COUNT(musics.category) FROM musics INNER JOIN music_categories ON musics.category=music_categories.category_name GROUP BY musics.category"
     );
     return res.status(200).json({ status: 200, data: articles.rows });
   } catch (error) {
