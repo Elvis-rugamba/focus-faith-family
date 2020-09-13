@@ -187,7 +187,7 @@ const deleteArticle = async (req, res) => {
     return res.status(200).json({
       status: 200,
       message: "Article deleted successfully",
-      data: updatedArticle.rows[0],
+      data: deletedArticle.rows[0],
     });
   } catch (error) {
     return res.status(500).json({ status: 500, message: error.message });
