@@ -60,6 +60,7 @@ const getNews = async (language) => {
     ]
   );
 
+  console.log(rows);
   return rows;
 };
 
