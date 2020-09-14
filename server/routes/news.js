@@ -9,12 +9,12 @@ const getNews = async (req, res) => {
     const { category, search } = req.query;
 
     if (category) {
-      news = await article.getNewsByCategory(category);
+      news = await article.getNewsByCategory(currentLocale, category);
     } else if (search) {
-      news = await article.searchNews(search);
+      news = await article.searchNews(currentLocale, search);
       console.log(news);
     } else {
-      news = await article.getNews();
+      news = await article.getNews(currentLocale);
     }
 
     const recentNews = await article.getRecentNews();
@@ -29,11 +29,10 @@ const getNews = async (req, res) => {
 
 const getSingleArticle = async (req, res) => {
   try {
-    console.log(res.query);
     const currentLocale = req.query.locale || "en-US";
     const { slug } = req.query;
     const newsArticle = await article.getSingleArticle(slug);
-    const recentNews = await article.getRecentNews();
+    const recentNews = await article.getRecentNews(currentLocale);
 
     res.locals.currentLocale = currentLocale;
     res.render("pages/selected-post", {

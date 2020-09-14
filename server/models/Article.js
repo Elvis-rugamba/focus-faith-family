@@ -14,9 +14,19 @@ const upload = async (req, res) => {
 };
 
 const createArticle = async (req, res) => {
+  const { user_id } = req.user.payload;
   const { title, subtitle, body, author, category, image, bodyhtml, language } = req.body;
-  console.log("here", req.body);
+  let status = 'pending';
   try {
+    const { rows } = await db.query("SELECT * FROM users WHERE user_id=$1", [
+      user_id,
+    ]);
+    if (rows.length < 0)
+      return res.status(404).json({ status: 404, message: "User not found" });
+
+    // check if the user is an admin or editor
+    if (rows[0].role == "admin" && rows[0].role == "editor")
+      status = 'edited';
     if (!title) {
       return res.status(400).json({ message: "Title is required" });
     }
@@ -34,8 +44,8 @@ const createArticle = async (req, res) => {
     }
 
     const results = await db.query(
-      `INSERT INTO news(title,subtitle,body,author,category,image,bodyhtml,language) VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING *`,
-      [title, subtitle, body, author, category, image, bodyhtml, language]
+      `INSERT INTO news(title,subtitle,body,author,category,image,bodyhtml,language,status) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9) RETURNING *`,
+      [title, subtitle, body, author, category, image, bodyhtml, language, status]
     );
     return res.status(201).json(results.rows);
   } catch (error) {
@@ -43,20 +53,20 @@ const createArticle = async (req, res) => {
   }
 };
 
-const getNews = async () => {
+const getNews = async (language) => {
   const { rows } = await db.query(
-    "SELECT * FROM news ORDER BY news_id DESC"
+    "SELECT * FROM news WHERE language=$1 AND status=$2 ORDER BY news_id DESC", [
+      language, 'edited'
+    ]
   );
 
   return rows;
 };
 
 const getSingleArticle = async (slug) => {
-  const article = await db.query("SELECT * FROM news WHERE news_id=$1", [
-    slug,
+  const article = await db.query("SELECT * FROM news WHERE news_id=$1 AND status=$2", [
+    slug, 'edited'
   ]);
-
-  console.log(article);
 
   if (article.rowCount <= 0) {
     return null;
@@ -65,17 +75,19 @@ const getSingleArticle = async (slug) => {
   return article.rows[0];
 };
 
-const getRecentNews = async () => {
+const getRecentNews = async (language) => {
   const { rows } = await db.query(
-    "SELECT * FROM news ORDER BY news_id DESC LIMIT 3"
+    "SELECT * FROM news WHERE language=$1 AND status=$2 ORDER BY news_id DESC LIMIT 3", [
+      language, 'edited'
+    ]
   );
 
   return rows;
 };
 
-const getNewsByCategory = async (category) => {
-  const article = await db.query("SELECT * FROM news WHERE category=$1 ORDER BY news_id DESC", [
-    category,
+const getNewsByCategory = async (category, language) => {
+  const article = await db.query("SELECT * FROM news WHERE category=$1 AND language=$2 AND status=$3 ORDER BY news_id DESC", [
+    category, language, 'edited'
   ]);
 
   if (article.rowCount <= 0) {
@@ -85,12 +97,10 @@ const getNewsByCategory = async (category) => {
   return article.rows;
 };
 
-const searchNews = async (search) => {
-  const article = await db.query("SELECT * FROM news WHERE title ILIKE $1 OR body ILIKE $1 ORDER BY news_id DESC", [
-    `%${search}%`,
+const searchNews = async (search, language) => {
+  const article = await db.query("SELECT * FROM news WHERE title ILIKE $1 OR body ILIKE AND language=$2 AND status=$3 $1 ORDER BY news_id DESC", [
+    `%${search}%`, language, 'edited'
   ]);
-
-  console.log(article);
 
   if (article.rowCount <= 0) {
     return null;

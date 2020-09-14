@@ -19,7 +19,7 @@ router.get("/news", article.getAllArticles);
 router.post("/news/upload", upload.single('image'), article.upload);
 router.get("/categories", category.getCategories);
 router.get("/group-categories", category.getCategoriesByGroup);
-router.post("/new-article", article.createArticle);
+router.post("/new-article", verifyToken, article.createArticle);
 router.post("/new-category", category.createCategory);
 router.post("/new-user", user.createUser);
 router.get("/news/:newsId", article.getArticle);
