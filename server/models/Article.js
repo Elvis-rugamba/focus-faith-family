@@ -54,13 +54,13 @@ const createArticle = async (req, res) => {
 };
 
 const getNews = async (language) => {
+
+  console.log(language);
   const { rows } = await db.query(
     "SELECT * FROM news WHERE language=$1 AND status=$2 ORDER BY news_id DESC", [
       language, 'edited'
     ]
   );
-
-  console.log(rows);
   return rows;
 };
 
