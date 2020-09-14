@@ -8,6 +8,7 @@ const tv = require("../models/Tv");
 const tvCategory = require("../models/TvCategory");
 const radio = require("../models/Radio");
 const radioCategory = require("../models/RadioCategory");
+const verse = require('../models/Verse');
 const { verifyToken } = require("../middleware/verifyToken");
 const upload = require('../middleware/upload');
 
@@ -50,5 +51,10 @@ router.get("/tv/categories", tvCategory.getCategories);
 router.get("/tv/categories/group", tvCategory.getCategoriesByGroup);
 router.post("/tv/upload", upload.single('tv'), tv.upload);
 router.post("/tv/cover", upload.single('image'), tv.upload);
+router.post("/verses", verse.createVerse);
+router.get("/verses", verse.getAllVerses);
+router.get("/verses/:verseId", verse.getSingleVerse);
+router.patch("/verses/:verseId", verse.editVerse);
+router.delete("/verses/:verseId", verse.deleteVerse);
 
 module.exports = router;

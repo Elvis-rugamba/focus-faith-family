@@ -96,6 +96,40 @@ const createTable = async () => {
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW() NOT NULL
   )`;
 
+  const versersTable = `CREATE TABLE IF NOT EXISTS verses(
+    id SERIAL NOT NULL PRIMARY KEY,
+    body VARCHAR(10100000) NOT NULL,
+    french VARCHAR(10100000) NOT NULL,
+    rwandan VARCHAR(10100000) NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW() NOT NULL
+  )`;
+
+  const commentsTable = `CREATE TABLE IF NOT EXISTS comments(
+    id SERIAL NOT NULL PRIMARY KEY,
+    name VARCHAR(500) NOT NULL,
+    email VARCHAR(500) NOT NULL,
+    comment VARCHAR(10100000) NOT NULL,
+    status VARCHAR(50) DEFAULT 'unread' NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW() NOT NULL
+  )`;
+
+  const aboutTable = `CREATE TABLE IF NOT EXISTS about(
+    id SERIAL NOT NULL PRIMARY KEY,
+    body VARCHAR(10100000) NOT NULL,
+    mission VARCHAR(10100000) NOT NULL,
+    vission VARCHAR(10100000) NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW() NOT NULL
+  )`;
+
+  const contactsTable = `CREATE TABLE IF NOT EXISTS contacts(
+    id SERIAL NOT NULL PRIMARY KEY,
+    name VARCHAR(500) NOT NULL,
+    email VARCHAR(500) NOT NULL,
+    message VARCHAR(10100000) NOT NULL,
+    status VARCHAR(50) DEFAULT 'unread' NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW() NOT NULL
+  )`;
+
   // const dummy = `INSERT INTO users(firstname, lastname, email, password, role, profileImage, phone) VALUES('Abba','Gospel', 'admin@abbagospel.online','$2b$11$AKHsa/XHWkyRJ70KEl2AaOTvKWSRYTT7IHTz2cVU9Mtq/oARJr9tO', 'admin', '', '0789279774')`;
   
   await pool.query(usersTable);
@@ -107,6 +141,10 @@ const createTable = async () => {
   await pool.query(tvTable);
   await pool.query(radioCategoriesTable);
   await pool.query(radioTable);
+  await pool.query(versersTable);
+  await pool.query(commentsTable);
+  await pool.query(aboutTable);
+  await pool.query(contactsTable);
   // await pool.query(dummy);
 };
 
