@@ -16,7 +16,7 @@ const getTv = async (req, res) => {
     } else {
       tvShows = await tv.getTvShows();
     }
-    const recentNews = await article.getRecentNews();
+    const recentNews = await article.getRecentNews(currentLocale);
     const categories = await tvCategory.getTvCategories();
 
     res.locals.currentLocale = currentLocale;
@@ -32,7 +32,7 @@ const getSingleTv = async (req, res) => {
     const {slug} = req.query;
 
     const tvShow = await tv.getSingleTv(slug);
-    const recentNews = await article.getRecentNews();
+    const recentNews = await article.getRecentNews(currentLocale);
 
     res.locals.currentLocale = currentLocale;
     res.render("pages/selected-tvShow", { tvShow, recentNews, timeDifference });

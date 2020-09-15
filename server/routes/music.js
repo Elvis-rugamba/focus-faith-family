@@ -20,7 +20,7 @@ const getMusic = async (req, res) => {
     }
     const recentMusics = await music.getRecentMusics();
     const categories = await musicCategory.getMusicsCategories();
-    const recentNews = await article.getRecentNews();
+    const recentNews = await article.getRecentNews(currentLocale);
 
     res.locals.currentLocale = currentLocale;
     res.render("pages/music", {
@@ -40,7 +40,7 @@ const getSingleMusic = async (req, res) => {
     const { slug } = req.query;
     const singleMusic = await music.getSingleMusic(slug);
     const recentMusics = await music.getRecentMusics();
-    const recentNews = await article.getRecentNews();
+    const recentNews = await article.getRecentNews(currentLocale);
 
     res.locals.currentLocale = currentLocale;
     res.render("pages/selected-music", {

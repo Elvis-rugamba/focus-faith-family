@@ -1,7 +1,5 @@
 const article = require("../models/Article");
 const category = require("../models/Category");
-const timeDifference = require("../utils/timeDifference");
-const { translate } = require("../i18n/i18n");
 
 const getHome = async (req, res) => {
   try {

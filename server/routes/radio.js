@@ -19,7 +19,7 @@ const getRadio = async (req, res) => {
     }
     const recentRadios = await radio.getRecentRadio();
     const categories = await radioCategory.getRadioCategories();
-    const recentNews = await article.getRecentNews();
+    const recentNews = await article.getRecentNews(currentLocale);
 
     res.locals.currentLocale = currentLocale;
     res.render("pages/radio", { radios, recentRadios, recentNews, categories });
