@@ -67,7 +67,6 @@ const postComment = async (req, res) => {
     const verseOfTheDay = await verse.getVerse();
     const { comments, errors } = await comment.postComment(name, email, commnt, slug);
 
-    console.log(comments, errors);
     res.locals.currentLocale = currentLocale;
     res.render("pages/selected-post", {
       article: newsArticle,
