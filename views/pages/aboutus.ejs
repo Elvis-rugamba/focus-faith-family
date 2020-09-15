@@ -1,58 +1,55 @@
 <!DOCTYPE html>
 <html lang="zxx">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Abbagospel</title>
-    <!-- plugin css for this page -->
-    <link
-      rel="stylesheet"
-      href="assets/vendors/mdi/css/materialdesignicons.min.css"
-    />
-    <link rel="stylesheet" href="assets/vendors/aos/dist/aos.css/aos.css" />
-    <!-- End plugin css for this page -->
-    <link rel="shortcut icon" href="assets/images/favicon.png" />
-    <!-- inject:css -->
-    <link rel="stylesheet" href="assets/css/style.css">
-    <!-- endinject -->
-  </head>
 
-  <body>
-    <div class="container-scroller">
-      <!-- partial:../partials/_navbar.html -->
-      <%- include('../partials/_navbar') %>
-      <!-- partial -->
-      <!-- partial:partials/_banner -->
-      <%- include('../partials/_banner') %>
-      <!-- partial -->
-      <div class="content-wrapper">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-12">
-              <div class="card" data-aos="fade-up">
-                <div class="card-body">
-                  <div class="aboutus-wrapper">
-                    <h1 class="mt-5">
-                      <%= translate('aboutLabel', currentLocale) %>
-                    </h1>
-                    <p class="font-weight-600 fs-15 mb-5 mt-4 text-center">
-                      <%= translate('aboutContent', currentLocale) %>
-                    </p>
-                  </div>
+<head>
+  <!-- Required meta tags -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Abbagospel</title>
+  <!-- plugin css for this page -->
+  <link rel="stylesheet" href="assets/vendors/mdi/css/materialdesignicons.min.css" />
+  <link rel="stylesheet" href="assets/vendors/aos/dist/aos.css/aos.css" />
+  <!-- End plugin css for this page -->
+  <link rel="shortcut icon" href="assets/images/favicon.png" />
+  <!-- inject:css -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <!-- endinject -->
+</head>
+
+<body>
+  <div class="container-scroller">
+    <!-- partial:../partials/_navbar.html -->
+    <%- include('../partials/_navbar') %>
+    <!-- partial -->
+    <!-- partial:partials/_banner -->
+    <%- include('../partials/_banner') %>
+    <!-- partial -->
+    <div class="content-wrapper">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="card" data-aos="fade-up">
+              <div class="card-body">
+                <div class="aboutus-wrapper">
+                  <h1 class="mt-5">
+                    <%= translate('aboutLabel', currentLocale) %>
+                  </h1>
+                  <p class="font-weight-600 fs-15 mb-5 mt-4 text-center">
+                    <%= translate('aboutContent', currentLocale) %>
+                  </p>
                   <div class="row">
                     <div class="col-sm-12 col-md-6">
-                        <h2 class="mt-5 text-center">
-                          <%= translate('ourMissionLabel', currentLocale) %>
+                      <h2 class="mt-5 text-center">
+                        <%= translate('ourMissionLabel', currentLocale) %>
                       </h2>
                       <p class="font-weight-600 fs-15 mb-5 mt-4 text-center">
                         <%= translate('missionContent', currentLocale) %>
                       </p>
                     </div>
                     <div class="col-sm-12 col-md-6">
-                        <h2 class="mt-5 text-center">
-                          <%= translate('ourVissionLabel', currentLocale) %>
+                      <h2 class="mt-5 text-center">
+                        <%= translate('ourVissionLabel', currentLocale) %>
                       </h2>
                       <p class="font-weight-600 fs-15 mb-5 mt-4 text-center">
                         <%= translate('vissionContent', currentLocale) %>
@@ -66,21 +63,23 @@
         </div>
       </div>
     </div>
-    <!-- container-scroller ends -->
-    <!-- partial:../partials/_footer.html -->
-    <%- include('../partials/_footer') %>
-    <!-- partial -->
-    <!-- inject:js -->
-    <script src="assets/vendors/js/vendor.bundle.base.js"></script>
-    <!-- endinject -->
-    <!-- plugin js for this page -->
+  </div>
+  <!-- container-scroller ends -->
+  <!-- partial:../partials/_footer.html -->
+  <%- include('../partials/_footer') %>
+  <!-- partial -->
+  <!-- inject:js -->
+  <script src="assets/vendors/js/vendor.bundle.base.js"></script>
+  <!-- endinject -->
+  <!-- plugin js for this page -->
 
-    <script src="assets/vendors/aos/dist/aos.js/aos.js"></script>
-    <!-- End plugin js for this page -->
-    <!-- Custom js for this page-->
-    <script src="assets/js/demo.js"></script>
-    <script src="assets/js/jquery.easeScroll.js"></script>
-    <script src="assets/js/jquery.easeScroll.js"></script>
-    <!-- End custom js for this page-->
-  </body>
+  <script src="assets/vendors/aos/dist/aos.js/aos.js"></script>
+  <!-- End plugin js for this page -->
+  <!-- Custom js for this page-->
+  <script src="assets/js/demo.js"></script>
+  <script src="assets/js/jquery.easeScroll.js"></script>
+  <script src="assets/js/jquery.easeScroll.js"></script>
+  <!-- End custom js for this page-->
+</body>
+
 </html>
