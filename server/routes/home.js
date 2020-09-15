@@ -3,7 +3,7 @@ const category = require("../models/Category");
 
 const getHome = async (req, res) => {
   try {
-    const currentLocale = req.query.locale || "en-US";
+    const currentLocale = req.query.locale || "en-GB";
     const news = await article.getNews(currentLocale);
     const recentNews = await article.getRecentNews(currentLocale);
     const categories = await category.getnewsCategories();

@@ -5,7 +5,7 @@ const timeDifference = require("../utils/timeDifference");
 
 const getTv = async (req, res) => {
   try {
-    const currentLocale = req.query.locale || "en-US";
+    const currentLocale = req.query.locale || "en-GB";
     const { category, search } = req.query;
     let tvShows = [];
 
@@ -28,7 +28,7 @@ const getTv = async (req, res) => {
 
 const getSingleTv = async (req, res) => {
   try {
-    const currentLocale = req.query.locale || "en-US";
+    const currentLocale = req.query.locale || "en-GB";
     const {slug} = req.query;
 
     const tvShow = await tv.getSingleTv(slug);

@@ -31,7 +31,7 @@ app.use(
   catchErrors(async function (request, response, next) {
     response.locals.baseUrl = `${request.protocol}://${request.headers.host}`;
     // Get enabled locales from Contentful
-    response.locals.locales = ["en-US", "fr-FR", "ki-RW"];
+    response.locals.locales = ["en-GB", "fr-FR", "ki-RW"];
     response.locals.currentLocale = response.locals.locales[0];
 
     // Initialize translations and include them on templates

@@ -1,12 +1,10 @@
 const radio = require("../models/Radio");
 const radioCategory = require('../models/RadioCategory');
 const article = require("../models/Article");
-const category = require('../models/Category');
-const timeDifference = require("../utils/timeDifference");
 
 const getRadio = async (req, res) => {
   try {
-    const currentLocale = req.query.locale || "en-US";
+    const currentLocale = req.query.locale || "en-GB";
     const { category, search } = req.query;
     let radios = [];
 

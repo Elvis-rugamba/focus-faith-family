@@ -4,7 +4,7 @@ const cat = require("../models/Category");
 const getNews = async (req, res) => {
   let news = [];
   try {
-    const currentLocale = req.query.locale || "en-US";
+    const currentLocale = req.query.locale || "en-GB";
     const { category, search } = req.query;
 
     if (category) {
@@ -28,7 +28,7 @@ const getNews = async (req, res) => {
 
 const getSingleArticle = async (req, res) => {
   try {
-    const currentLocale = req.query.locale || "en-US";
+    const currentLocale = req.query.locale || "en-GB";
     const { slug } = req.query;
     const newsArticle = await article.getSingleArticle(slug);
     const recentNews = await article.getRecentNews(currentLocale);
