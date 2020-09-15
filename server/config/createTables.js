@@ -109,7 +109,7 @@ const createTable = async () => {
     name VARCHAR(500) NOT NULL,
     email VARCHAR(500) NOT NULL,
     comment VARCHAR(10100000) NOT NULL,
-    news_id VARCHAR(100) REFERENCES news(news_id) NOT NULL,
+    news_id INT REFERENCES news(news_id) NOT NULL,
     status VARCHAR(50) DEFAULT 'pending' NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW() NOT NULL
   )`;
