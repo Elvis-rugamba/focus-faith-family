@@ -56,5 +56,9 @@ router.get("/verses", verse.getAllVerses);
 router.get("/verses/:verseId", verse.getSingleVerse);
 router.patch("/verses/:verseId", verse.editVerse);
 router.delete("/verses/:verseId", verse.deleteVerse);
+router.post("/comments", verse.createVerse);
+router.get("/comments", verse.getAllVerses);
+router.get("/comments/:commentId", verse.getSingleVerse);
+router.delete("/comments/:commentId", verse.deleteVerse);
 
 module.exports = router;

@@ -1,6 +1,7 @@
 const article = require("../models/Article");
-const verse = require('../models/Verse');
+const verse = require("../models/Verse");
 const cat = require("../models/Category");
+// const comment = require("../models/Comment");
 
 const getNews = async (req, res) => {
   let news = [];
@@ -22,7 +23,12 @@ const getNews = async (req, res) => {
     const verseOfTheDay = await verse.getVerse();
 
     res.locals.currentLocale = currentLocale;
-    res.render("pages/news", { news, recentNews, categories, verse: verseOfTheDay });
+    res.render("pages/news", {
+      news,
+      recentNews,
+      categories,
+      verse: verseOfTheDay,
+    });
   } catch (error) {
     throw error;
   }
@@ -35,12 +41,14 @@ const getSingleArticle = async (req, res) => {
     const newsArticle = await article.getSingleArticle(slug);
     const recentNews = await article.getRecentNews(currentLocale);
     const verseOfTheDay = await verse.getVerse();
+    // const comments = comment.getComments(slug);
 
     res.locals.currentLocale = currentLocale;
     res.render("pages/selected-post", {
       article: newsArticle,
       recentNews,
-      verse: verseOfTheDay
+      verse: verseOfTheDay,
+      // comments,
     });
   } catch (error) {
     throw error;
