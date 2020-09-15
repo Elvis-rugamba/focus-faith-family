@@ -13,7 +13,7 @@ function initializeTranslations () {
   }
 
   // Default fallbock locale is english
-  setFallbackLocale('en-US')
+  setFallbackLocale('en-GB')
 
   translations = {}
 
@@ -48,7 +48,7 @@ function setFallbackLocale (locale) {
  *
  * @returns string
  */
-function translate (symbol, locale = 'en-US') {
+function translate (symbol, locale = 'en-GB') {
   const localeDict = translations[locale]
   let translatedValue
 
@@ -74,7 +74,7 @@ function translate (symbol, locale = 'en-US') {
  *
  * @returns boolean
  */
-function translationAvaliable (symbol, locale = 'en-US') {
+function translationAvaliable (symbol, locale = 'en-GB') {
   return !!(translations[locale] || translations[fallbackLocale] || {})[symbol]
 }
 
