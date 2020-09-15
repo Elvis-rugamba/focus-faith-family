@@ -1,6 +1,5 @@
 const article = require("../models/Article");
 const cat = require("../models/Category");
-const timeDifference = require("../utils/timeDifference");
 
 const getNews = async (req, res) => {
   let news = [];
@@ -9,9 +8,9 @@ const getNews = async (req, res) => {
     const { category, search } = req.query;
 
     if (category) {
-      news = await article.getNewsByCategory(currentLocale, category);
+      news = await article.getNewsByCategory(category, currentLocale);
     } else if (search) {
-      news = await article.searchNews(currentLocale, search);
+      news = await article.searchNews(search, currentLocale);
       console.log(news);
     } else {
       news = await article.getNews(currentLocale);
