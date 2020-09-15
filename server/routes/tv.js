@@ -1,7 +1,7 @@
 const tv = require("../models/Tv");
 const article = require("../models/Article");
 const tvCategory = require("../models/TvCategory");
-const timeDifference = require("../utils/timeDifference");
+const verse = require('../models/Verse');
 
 const getTv = async (req, res) => {
   try {
@@ -18,9 +18,10 @@ const getTv = async (req, res) => {
     }
     const recentNews = await article.getRecentNews(currentLocale);
     const categories = await tvCategory.getTvCategories();
+    const verseOfTheDay = await verse.getVerse();
 
     res.locals.currentLocale = currentLocale;
-    res.render("pages/tvShow", { tvShows, recentNews, categories });
+    res.render("pages/tvShow", { tvShows, recentNews, categories, verse: verseOfTheDay });
   } catch (error) {
     throw error;
   }
@@ -33,9 +34,10 @@ const getSingleTv = async (req, res) => {
 
     const tvShow = await tv.getSingleTv(slug);
     const recentNews = await article.getRecentNews(currentLocale);
+    const verseOfTheDay = await verse.getVerse();
 
     res.locals.currentLocale = currentLocale;
-    res.render("pages/selected-tvShow", { tvShow, recentNews, timeDifference });
+    res.render("pages/selected-tvShow", { tvShow, recentNews, verse: verseOfTheDay });
   } catch (error) {
     throw error;
   }
