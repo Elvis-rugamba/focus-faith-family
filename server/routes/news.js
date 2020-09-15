@@ -17,7 +17,7 @@ const getNews = async (req, res) => {
       news = await article.getNews(currentLocale);
     }
 
-    const recentNews = await article.getRecentNews();
+    const recentNews = await article.getRecentNews(currentLocale);
     const categories = await cat.getnewsCategories();
 
     res.locals.currentLocale = currentLocale;
