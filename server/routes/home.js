@@ -6,8 +6,8 @@ const { translate } = require("../i18n/i18n");
 const getHome = async (req, res) => {
   try {
     const currentLocale = req.query.locale || "en-US";
-    const news = await article.getNews();
-    const recentNews = await article.getRecentNews();
+    const news = await article.getNews(currentLocale);
+    const recentNews = await article.getRecentNews(currentLocale);
     const categories = await category.getnewsCategories();
 
     res.locals.currentLocale = currentLocale;
