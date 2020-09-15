@@ -99,7 +99,7 @@ const getNewsByCategory = async (category, language) => {
 };
 
 const searchNews = async (search, language) => {
-  const article = await db.query("SELECT * FROM news WHERE title ILIKE $1 OR body ILIKE $1 AND language=$2 AND status=$3 ORDER BY news_id DESC", [
+  const article = await db.query("SELECT * FROM news WHERE (title ILIKE $1 OR body ILIKE $1) AND language=$2 AND status=$3 ORDER BY news_id DESC", [
     `%${search}%`, language, 'edited'
   ]);
 
