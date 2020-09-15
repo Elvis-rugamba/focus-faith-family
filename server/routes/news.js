@@ -13,7 +13,6 @@ const getNews = async (req, res) => {
       news = await article.getNewsByCategory(category, currentLocale);
     } else if (search) {
       news = await article.searchNews(search, currentLocale);
-      console.log(news);
     } else {
       news = await article.getNews(currentLocale);
     }
