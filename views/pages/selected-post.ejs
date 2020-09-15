@@ -58,13 +58,13 @@
                                             <% } %>
                                         </div>
                                     </div>
-                                    <div class="col-sm-12 col-lg-6">
+                                    <div class="col-sm-12 col-lg-6 mt-5">
                                         <div class="card-title">
                                             <%= translate('relatedNewsLabel', currentLocale) %>
                                         </div>
                                         <div class="row">
                                             <div class="col-sm-12">
-                                                <div class="border-bottom pb-3">
+                                                <div class="border-bottom pb-3 pt-3">
                                                     <div class="row">
                                                         <div class="col-sm-5 pr-2">
                                                             <div class="rotate-img">
@@ -88,86 +88,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <div class="border-bottom pb-3 pt-3">
-                                                    <div class="row">
-                                                        <div class="col-sm-5 pr-2">
-                                                            <div class="rotate-img">
-                                                                <img src="assets/images/dashboard/home_20.jpg"
-                                                                    alt="thumb" class="img-fluid w-100" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-sm-7 pl-2">
-                                                            <p class="fs-16 font-weight-600 mb-0">
-                                                                Online shopping ..
-                                                            </p>
-                                                            <p class="fs-13 text-muted mb-0">
-                                                                <span class="mr-2">Photo </span>10
-                                                                Minutes ago
-                                                            </p>
-                                                            <p class="mb-0 fs-13">
-                                                                Lorem Ipsum has been
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <div class="border-bottom pb-3 pt-3">
-                                                    <div class="row">
-                                                        <div class="col-sm-5 pr-2">
-                                                            <div class="rotate-img">
-                                                                <img src="assets/images/dashboard/home_21.jpg"
-                                                                    alt="thumb" class="img-fluid w-100" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-sm-7 pl-2">
-                                                            <p class="fs-16 font-weight-600 mb-0">
-                                                                Online shopping ..
-                                                            </p>
-                                                            <p class="fs-13 text-muted mb-0">
-                                                                <span class="mr-2">Photo </span>10
-                                                                Minutes ago
-                                                            </p>
-                                                            <p class="mb-0 fs-13">
-                                                                Lorem Ipsum has been
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <div class="pt-3">
-                                                    <div class="row">
-                                                        <div class="col-sm-5 pr-2">
-                                                            <div class="rotate-img">
-                                                                <img src="assets/images/dashboard/home_22.jpg"
-                                                                    alt="thumb" class="img-fluid w-100" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-sm-7 pl-2">
-                                                            <p class="fs-16 font-weight-600 mb-0">
-                                                                Online shopping ..
-                                                            </p>
-                                                            <p class="fs-13 text-muted mb-0">
-                                                                <span class="mr-2">Photo </span>10
-                                                                Minutes ago
-                                                            </p>
-                                                            <p class="mb-0 fs-13">
-                                                                Lorem Ipsum has been
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
-                                    <div class="col-sm-12 col-lg-6">
+                                    <div class="col-sm-12 col-lg-6 mt-5">
                                         <div class="card-title">
                                             <%= translate('latestNewsLabel', currentLocale) %>
                                         </div>
@@ -175,7 +97,7 @@
                                         <% for( let i = 0; i < recentNews.length; i++ ) { %>
                                         <div class="row">
                                             <div class="col-sm-12">
-                                                <div class="pt-3">
+                                                <div class="border-bottom pb-3 pt-3">
                                                     <div class="row">
                                                         <div class="col-sm-5 pr-2">
                                                             <div class="rotate-img">
@@ -189,7 +111,7 @@
                                                             <p class="fs-16 font-weight-600 mb-0">
                                                                 <a class="font-weight-600 text-dark"
                                                                     href="/article?locale=<%- currentLocale %>&slug=<%- recentNews[i].news_id %>">
-                                                                    <%- recentNews[i].title.slice(0, 100) %> ...
+                                                                    <%- recentNews[i].title.slice(0, 50) %> ...
                                                                 </a>
                                                             </p>
                                                             <p class="fs-13 text-muted mb-0">
@@ -197,7 +119,7 @@
                                                                 <%= timeDifference(recentNews[i].created_at, currentLocale) %>
                                                             </p>
                                                             <p class="mb-0 fs-13">
-                                                                <%- recentNews[i].body.slice(0, 100) %> ...
+                                                                <%- recentNews[i].body.slice(0, 50) %> ...
                                                             </p>
                                                         </div>
                                                     </div>
