@@ -2,6 +2,7 @@ const db = require("../config/connect");
 
 const createCategory = async (req, res) => {
   // get from body
+    console.log(req.body);
   const { categoryName, frenchName, rwandanName } = req.body;
   // check if the category exists already
   const isCategory = await db.query(
