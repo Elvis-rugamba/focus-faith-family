@@ -1,7 +1,7 @@
 const db = require("../config/connect");
 
 const createComment = async (req, res) => {
-  const{newsId} = req.params;
+  const { newsId } = req.params;
   const { name, email, comment } = req.body;
   try {
     if (!newsId) {
@@ -11,11 +11,11 @@ const createComment = async (req, res) => {
       return res.status(400).json({ message: "Your name is required" });
     }
     if (!email) {
-        return res.status(400).json({ message: "Your email is required" });
-      }
-      if (!comment) {
-        return res.status(400).json({ message: "Comment is required" });
-      }
+      return res.status(400).json({ message: "Your email is required" });
+    }
+    if (!comment) {
+      return res.status(400).json({ message: "Comment is required" });
+    }
 
     const results = await db.query(
       `INSERT INTO comments(name, email, comment, news_id) VALUES ($1,$2,$3,$4) RETURNING *`,
@@ -27,20 +27,57 @@ const createComment = async (req, res) => {
   }
 };
 
-const getComments = async (newsId) => {
-    const { rows } = await db.query(
-      "SELECT * FROM comments WHERE news_id=$1 ORDER BY id DESC",
-      [newsId]
+const postComment = async (name, email, comment, newsId) => {
+  let errors = {};
+  try {
+    if (!newsId) {
+      return (errors = {
+        newsId: {
+          message: "News ID is required",
+        },
+      });
+    }
+    if (!name) {
+      errors.name = {
+        message: "Your name is required",
+      };
+    }
+    if (!email) {
+      errors.email = {
+        message: "Your email is required",
+      };
+    }
+    if (!comment) {
+      errors.comment = {
+        message: "Comment is required",
+      };
+    }
+
+    const results = await db.query(
+      `INSERT INTO comments(name, email, comment, news_id) VALUES ($1,$2,$3,$4) RETURNING *`,
+      [name, email, comment, newsId]
     );
-  
-    return rows;
-  };
+    return { comments: results.rows, errors };
+  } catch (error) {
+    throw error;
+  }
+};
+
+const getComments = async (newsId) => {
+  const {
+    rows,
+  } = await db.query(
+    "SELECT * FROM comments WHERE news_id=$1 ORDER BY id DESC",
+    [newsId]
+  );
+
+  return rows;
+};
 
 const deleteComment = async (req, res) => {
   //check if the user exists
   const { commentId } = req.params;
   try {
-
     // check if the article exists
     const isComment = await db.query("SELECT * FROM comments WHERE id=$1", [
       commentId,
@@ -88,8 +125,9 @@ const getSingleComment = async (req, res) => {
 
 module.exports = {
   createComment,
+  postComment,
   getComments,
   getAllComments,
   getSingleComment,
-  deleteComment
+  deleteComment,
 };

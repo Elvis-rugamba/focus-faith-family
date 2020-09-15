@@ -60,10 +60,11 @@ const postComment = async (req, res) => {
     console.log(req.body, req.query);
     const currentLocale = req.query.locale || "en-GB";
     const { slug } = req.query;
+    const { name, email, comment: commnt } = req.body;
     const newsArticle = await article.getSingleArticle(slug);
     const recentNews = await article.getRecentNews(currentLocale);
     const verseOfTheDay = await verse.getVerse();
-    // const comments = comment.getComments(slug);
+    // const { comments, errors } = comment.postComment(name, email, commnt, slug);
 
     res.locals.currentLocale = currentLocale;
     res.render("pages/selected-post", {
@@ -71,6 +72,7 @@ const postComment = async (req, res) => {
       recentNews,
       verse: verseOfTheDay,
       // comments,
+      // errors,
     });
   } catch (error) {
     throw error;
