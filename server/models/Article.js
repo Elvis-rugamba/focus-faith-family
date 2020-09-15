@@ -115,7 +115,7 @@ const getRelatedArticle = async (newsId, language) => {
     if (rows.length < 0) return null;
 
     const results = await db.query(
-      `SELECT * FROM news category=$1 AND language=$2 AND status=$3 ORDER BY news_id DESC LIMIT 3`,
+      `SELECT * FROM news WHERE category=$1 AND language=$2 AND status=$3 ORDER BY news_id DESC LIMIT 3`,
       [rows[0].category, language, 'edited']
     );
     return results.rows;
