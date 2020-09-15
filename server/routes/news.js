@@ -40,6 +40,7 @@ const getSingleArticle = async (req, res) => {
     const { slug } = req.query;
     const newsArticle = await article.getSingleArticle(slug);
     const recentNews = await article.getRecentNews(currentLocale);
+    const relatedArticles = await article.getRelatedArticle(slug, currentLocale);
     const verseOfTheDay = await verse.getVerse();
     const comments = await comment.getComments(slug);
 
@@ -49,6 +50,7 @@ const getSingleArticle = async (req, res) => {
     res.render("pages/selected-post", {
       article: newsArticle,
       recentNews,
+      relatedArticles,
       verse: verseOfTheDay,
       comments,
     });
@@ -64,6 +66,7 @@ const postComment = async (req, res) => {
     const { name, email, comment: commnt } = req.body;
     const newsArticle = await article.getSingleArticle(slug);
     const recentNews = await article.getRecentNews(currentLocale);
+    const relatedArticles = await article.getRelatedArticle(slug, currentLocale);
     const verseOfTheDay = await verse.getVerse();
     const { comments, errors } = await comment.postComment(name, email, commnt, slug);
 
@@ -71,6 +74,7 @@ const postComment = async (req, res) => {
     res.render("pages/selected-post", {
       article: newsArticle,
       recentNews,
+      relatedArticles,
       verse: verseOfTheDay,
       comments,
       errors,

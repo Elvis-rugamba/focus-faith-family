@@ -2,7 +2,6 @@ const db = require("../config/connect");
 
 const upload = async (req, res) => {
   try {
-    console.log(req.file);
     const [, ...rest] = req.file.path.replace(/\\/g, "/").split("/");
     const filePath = rest.join("/");
     const url = `https://${req.get("host")}/${filePath}`;
@@ -54,8 +53,6 @@ const createArticle = async (req, res) => {
 };
 
 const getNews = async (language) => {
-
-  console.log(language);
   const { rows } = await db.query(
     "SELECT * FROM news WHERE language=$1 AND status=$2 ORDER BY news_id DESC", [
       language, 'edited'
@@ -108,6 +105,23 @@ const searchNews = async (search, language) => {
   }
 
   return article.rows;
+};
+
+const getRelatedArticle = async (newsId, language) => {
+  try {
+    const { rows } = await db.query("SELECT * FROM news WHERE news_id=$1", [
+      newsId,
+    ]);
+    if (rows.length < 0) return null;
+
+    const results = await db.query(
+      `SELECT * FROM news category=$1 AND language=$2 AND status=$3 ORDER BY news_id DESC LIMIT 3`,
+      [rows[0].category, language, 'edited']
+    );
+    return results.rows;
+  } catch (error) {
+    throw error;
+  }
 };
 
 const editArticle = async (req, res) => {
@@ -239,6 +253,7 @@ module.exports = {
   getRecentNews,
   getNewsByCategory,
   searchNews,
+  getRelatedArticle,
   editArticle,
   deleteArticle,
   getAllArticles,

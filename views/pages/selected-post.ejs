@@ -62,25 +62,38 @@
                                         <div class="card-title">
                                             <%= translate('relatedNewsLabel', currentLocale) %>
                                         </div>
+                                        <% if (relatedArticles && relatedArticles.length > 0) { %>
+                                        <% for( let i = 0; i < relatedArticles.length; i++ ) { %>
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <div class="border-bottom pb-3 pt-3">
                                                     <div class="row">
                                                         <div class="col-sm-5 pr-2">
                                                             <div class="rotate-img">
-                                                                <img src="assets/images/dashboard/home_19.jpg"
-                                                                    alt="thumb" class="img-fluid w-100" />
+                                                                <a
+                                                                    href="/article?locale=<%- currentLocale %>&slug=<%- relatedArticles[i].news_id %>">
+                                                                    <img src="<%- relatedArticles[i].image %>"
+                                                                        alt="thumb" class="img-fluid w-100" />
+                                                                </a>
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-7 pl-2">
                                                             <p class="fs-16 font-weight-600 mb-0">
-                                                                Online shopping ..
+                                                                <a class="font-weight-600 text-dark"
+                                                                    href="/article?locale=<%- currentLocale %>&slug=<%- relatedArticles[i].news_id %>">
+                                                                    <%- relatedArticles[i].title.slice(0, 150) %> ...
+                                                                </a>
                                                             </p>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        <% } %>
+                                        <% } else { %>
+                                        <h2 class="font-weight-600 mb-4">
+                                        </h2>
+                                        <% } %>
                                     </div>
                                     <div class="col-sm-12 col-lg-6 mt-5">
                                         <div class="card-title">
@@ -94,7 +107,8 @@
                                                     <div class="row">
                                                         <div class="col-sm-5 pr-2">
                                                             <div class="rotate-img">
-                                                                <a href="/article?locale=<%- currentLocale %>&slug=<%- recentNews[i].news_id %>">
+                                                                <a
+                                                                    href="/article?locale=<%- currentLocale %>&slug=<%- recentNews[i].news_id %>">
                                                                     <img src="<%- recentNews[i].image %>" alt="thumb"
                                                                         class="img-fluid w-100" />
                                                                 </a>
