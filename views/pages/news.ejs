@@ -52,7 +52,8 @@
             </div>
           </div>
           <div class="col-sm-12 col-md-6 offset-md-6">
-            <form class="md-form input-group mb-3" method="GET" action="/news?locale=<%- currentLocale %>">
+            <form class="md-form input-group mb-3" method="GET" action="/news">
+              <input type="text" name="locale" value="<%- currentLocale %>" hidden class="form-control" placeholder="Search...">
               <input type="text" name="search" class="form-control" placeholder="Search..." aria-label="Search..."
                 aria-describedby="MaterialButton-addon2">
               <div class="input-group-append">
