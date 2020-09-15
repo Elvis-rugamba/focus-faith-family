@@ -62,7 +62,7 @@ app.use(function (err, request, response, next) {
   response.locals.error.status = err.status || 500
   response.locals.title = 'Error'
 
-  // console.log(err);
+  console.log(err);
   // Render the error page
   response.status(err.status || 500).json({status: err.status || 500, message: err})
   // response.render('error')
