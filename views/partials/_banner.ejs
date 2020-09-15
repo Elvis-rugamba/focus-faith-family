@@ -3,21 +3,20 @@
     <div class="d-lg-flex align-items-center justify-content-between">
       <div class="d-flex align-items-center">
         <span class="badge badge-dark mr-3"><%= translate('verseLabel', currentLocale) %> </span>
-        <% if (verse && verse.length > 0) { %>
-        <% for( let i = 0; i < verse.length; i++ ) { %>
+        <% if (verse) { %>
         <p class="mb-0">
           <% if (currentLocale === 'en-GB') { %>
-          <%- verse[i].body %>
+          <%- verse.body %>
           <% } else if (currentLocale === 'fr-FR') { %>
-          <%- verse[i].french %>
+          <%- verse.french %>
           <% } else if (currentLocale === 'ki-RW') { %>
-          <%- verse[i].rwandan %>
+          <%- verse.rwandan %>
           <% } else { %>
-          <%-  verse[i].body %>
+          <%-  verse.body %>
           <% } %>
         </p>
-        <% } %> <% } else { %>
-        <p class="mb-0">>No verse of the day</p>
+        <% } else { %>
+        <p class="mb-0">No verse of the day</p>
         <% } %>
       </div>
 
