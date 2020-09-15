@@ -304,27 +304,27 @@
                                             </h1>
                                             <div class="row">
                                                 <div class="col-lg-12 mb-5 mb-sm-2">
-                                                    <form>
+                                                    <form method="POST" action="/article?locale=<%- currentLocale %>&slug=<%- article.news_id %>">
                                                         <div class="row">
                                                             <div class="col-sm-12">
                                                                 <div class="form-group">
-                                                                    <textarea class="form-control textarea"
-                                                                        placeholder="Comment *" id="message"></textarea>
+                                                                    <textarea class="form-control textarea" name="comment"
+                                                                        placeholder="Comment *" id="comment" required></textarea>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-sm-6">
                                                                 <div class="form-group">
-                                                                    <input type="text" class="form-control" id="name"
-                                                                        aria-describedby="name" placeholder="Name *" />
+                                                                    <input type="text" class="form-control" id="name" name="name"
+                                                                        aria-describedby="name" placeholder="Name *" required />
                                                                 </div>
                                                             </div>
                                                             <div class="col-sm-6">
                                                                 <div class="form-group">
                                                                     <input type="email" class="form-control" id="email"
-                                                                        aria-describedby="email"
-                                                                        placeholder="Email *" />
+                                                                        name="email" aria-describedby="email"
+                                                                        placeholder="Email *" required />
                                                                 </div>
                                                             </div>
                                                         </div>

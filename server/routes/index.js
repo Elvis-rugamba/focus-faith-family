@@ -13,6 +13,7 @@ const router = Router();
 router.get("/", catchErrors(home.getHome));
 router.get("/news", catchErrors(news.getNews));
 router.get("/article", catchErrors(news.getSingleArticle));
+router.post("/article", catchErrors(news.postComment));
 router.get("/tv", catchErrors(tv.getTv));
 router.get("/radio", catchErrors(radio.getRadio));
 router.get("/music", catchErrors(music.getMusic));

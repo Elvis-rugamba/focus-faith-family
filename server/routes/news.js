@@ -55,7 +55,30 @@ const getSingleArticle = async (req, res) => {
   }
 };
 
+const postComment = async (req, res) => {
+  try {
+    console.log(req.body, req.query);
+    const currentLocale = req.query.locale || "en-GB";
+    const { slug } = req.query;
+    const newsArticle = await article.getSingleArticle(slug);
+    const recentNews = await article.getRecentNews(currentLocale);
+    const verseOfTheDay = await verse.getVerse();
+    // const comments = comment.getComments(slug);
+
+    res.locals.currentLocale = currentLocale;
+    res.render("pages/selected-post", {
+      article: newsArticle,
+      recentNews,
+      verse: verseOfTheDay,
+      // comments,
+    });
+  } catch (error) {
+    throw error;
+  }
+};
+
 module.exports = {
   getNews,
   getSingleArticle,
+  postComment,
 };
