@@ -26,5 +26,6 @@
     "ourVissionLabel": "Notre Vission",
     "pastLabel": "Passe",
     "commentLabel": "COMMENTAIRES",
-    "sendCommentLabel": "Envoyer un commentaire"
+    "sendCommentLabel": "Envoyer un commentaire",
+    "errorMessage404Route": "Introuvable"
 }

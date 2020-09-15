@@ -26,5 +26,6 @@
     "ourVissionLabel": "Ikerekezo cyacu",
     "pastLabel": "Ibiganiro byatambutse",
     "commentLabel": "IBITEKEREZO",
-    "sendCommentLabel": "Ohereza igitekerezo"
+    "sendCommentLabel": "Ohereza igitekerezo",
+    "errorMessage404Route": "Ntibibonetse"
 }

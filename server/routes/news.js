@@ -1,7 +1,7 @@
 const article = require("../models/Article");
 const verse = require("../models/Verse");
 const cat = require("../models/Category");
-// const comment = require("../models/Comment");
+const comment = require("../models/Comment");
 
 const getNews = async (req, res) => {
   let news = [];
