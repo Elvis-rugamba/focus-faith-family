@@ -304,20 +304,23 @@
                                             </h1>
                                             <div class="row">
                                                 <div class="col-lg-12 mb-5 mb-sm-2">
-                                                    <form method="POST" action="/article?locale=<%- currentLocale %>&slug=<%- article.news_id %>">
+                                                    <form method="POST"
+                                                        action="/article?locale=<%- currentLocale %>&slug=<%- article.news_id %>">
                                                         <div class="row">
                                                             <div class="col-sm-12">
                                                                 <div class="form-group">
-                                                                    <textarea class="form-control textarea" name="comment"
-                                                                        placeholder="Comment *" id="comment" required></textarea>
+                                                                    <textarea class="form-control textarea"
+                                                                        name="comment" placeholder="Comment *"
+                                                                        id="comment" required></textarea>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-sm-6">
                                                                 <div class="form-group">
-                                                                    <input type="text" class="form-control" id="name" name="name"
-                                                                        aria-describedby="name" placeholder="Name *" required />
+                                                                    <input type="text" class="form-control" id="name"
+                                                                        name="name" aria-describedby="name"
+                                                                        placeholder="Name *" required />
                                                                 </div>
                                                             </div>
                                                             <div class="col-sm-6">
@@ -332,7 +335,8 @@
                                                         <div class="row">
                                                             <div class="col-sm-12">
                                                                 <div class="form-group">
-                                                                    <input type="submit" value="<%= translate('sendCommentLabel', currentLocale) %>"
+                                                                    <input type="submit"
+                                                                        value="<%= translate('sendCommentLabel', currentLocale) %>"
                                                                         class="btn btn-lg btn-dark font-weight-bold mt-3" />
                                                                 </div>
                                                             </div>
@@ -343,38 +347,30 @@
                                         </div>
                                         <div class="aboutus-wrapper">
                                             <h4 class="mt-5 mb-5">
-                                                <%= translate('commentLabel', currentLocale) %>(<%#= comments.length %>0)
+                                                <%= translate('commentLabel', currentLocale) %>(<%= comments.length %>)
                                             </h4>
+                                            <% if (comments && comments.length > 0) { %>
+                                            <% for( let i = 0; i < news.length; i++ ) { %>
                                             <div class="row border-bottom mb-4 mt-4">
                                                 <div class="col-lg-12 mb-5 mb-sm-2">
                                                     <h5 class="font-weight-600 mb-2">
-                                                        <%#- comments[i].name %>Name
-                                                      </h5>
-                                                      <p class="fs-15">
-                                                        <%#- comments[i].comment %>Comment Comment Comment CommentComment Comment Comment Comment
-                                                        Comment Comment Comment Comment Comment Comment Comment Comment
-                                                        Comment Comment Comment Comment Comment Comment Comment Comment Comment
-                                                      </p>
-                                                      <p class="fs-13 text-muted mb-0">
+                                                        <%- comments[i].name %>
+                                                    </h5>
+                                                    <p class="fs-15">
+                                                        <%- comments[i].comment %>
+                                                    </p>
+                                                    <p class="fs-13 text-muted mb-0">
                                                         <span class="mr-2"></span>
-                                                        <%#= timeDifference(comments[i].created_at, currentLocale) %>10 mins ago
-                                                      </p>
+                                                        <%= timeDifference(comments[i].created_at, currentLocale) %>
+                                                    </p>
                                                 </div>
                                             </div>
-                                            <div class="row border-bottom mb-4 mt-4">
-                                                <div class="col-lg-12 mb-5 mb-sm-2">
-                                                    <h5 class="font-weight-600 mb-2">
-                                                        <%#- comments[i].name %>Name
-                                                      </h5>
-                                                      <p class="fs-15">
-                                                        <%#- comments[i].comment %>Comment
-                                                      </p>
-                                                      <p class="fs-13 text-muted mb-0">
-                                                        <span class="mr-2"></span>
-                                                        <%#= timeDifference(comments[i].created_at, currentLocale) %>10 mins ago
-                                                      </p>
-                                                </div>
-                                            </div>
+                                            <% } %>
+                                            <% } else { %>
+                                            <h5 class="font-weight-600 mb-2">
+
+                                            </h5>
+                                            <% } %>
                                         </div>
                                         <!-- <div class="trending">
                         <h2 class="mb-4 text-primary font-weight-600">
