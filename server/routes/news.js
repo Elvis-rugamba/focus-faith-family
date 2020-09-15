@@ -41,7 +41,7 @@ const getSingleArticle = async (req, res) => {
     const newsArticle = await article.getSingleArticle(slug);
     const recentNews = await article.getRecentNews(currentLocale);
     const verseOfTheDay = await verse.getVerse();
-    const comments = comment.getComments(slug);
+    const comments = await comment.getComments(slug);
 
     console.log(comments);
 
