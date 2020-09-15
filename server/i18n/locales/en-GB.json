@@ -27,5 +27,7 @@
     "pastLabel": "Past",
     "commentLabel": "COMMENTS",
     "sendCommentLabel": "Send comment",
-    "errorMessage404Route": "Not Found"
+    "errorMessage404Route": "Not Found",
+    "relatedNewsLabel": "Related articles",
+    "latestNewsLabel": "Latest articles"
 }

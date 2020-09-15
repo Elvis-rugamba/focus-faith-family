@@ -11,7 +11,7 @@
     "categoryLabel": "Icyiciro",
     "advertismentLabel": "Kwamamaza",
     "viewAllLabel": "Reba zose",
-    "recentPostsLabel": "Iziherutse",
+    "recentPostsLabel": "IZIHERUTSE",
     "linksLabel": "LINKS",
     "copyrightLabel": " All rights reserved.",
     "secsLabel": "amasegonda ashize",
@@ -27,5 +27,7 @@
     "pastLabel": "Ibiganiro byatambutse",
     "commentLabel": "IBITEKEREZO",
     "sendCommentLabel": "Ohereza igitekerezo",
-    "errorMessage404Route": "Ntibibonetse"
+    "errorMessage404Route": "Ntibibonetse",
+    "relatedNewsLabel": "Izindi wasoma",
+    "latestNewsLabel": "Iziherutse"
 }

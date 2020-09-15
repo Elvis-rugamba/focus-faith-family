@@ -27,5 +27,7 @@
     "pastLabel": "Passe",
     "commentLabel": "COMMENTAIRES",
     "sendCommentLabel": "Envoyer un commentaire",
-    "errorMessage404Route": "Introuvable"
+    "errorMessage404Route": "Introuvable",
+    "relatedNewsLabel": "Articles connexes",
+    "latestNewsLabel": "Derniers articles"
 }
