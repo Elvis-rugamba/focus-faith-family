@@ -24,5 +24,7 @@
     "sendMessageLabel": "Send Message",
     "ourMissionLabel": "Our Mission",
     "ourVissionLabel": "Our Vission",
-    "pastLabel": "Past"
+    "pastLabel": "Past",
+    "commentLabel": "COMMENTS",
+    "sendCommentLabel": "Send comment"
 }

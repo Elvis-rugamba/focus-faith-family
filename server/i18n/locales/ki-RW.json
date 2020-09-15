@@ -24,5 +24,7 @@
     "sendMessageLabel": "Ohereza ubutumwa",
     "ourMissionLabel": "Intego yacu",
     "ourVissionLabel": "Ikerekezo cyacu",
-    "pastLabel": "Ibiganiro byatambutse"
+    "pastLabel": "Ibiganiro byatambutse",
+    "commentLabel": "IBITEKEREZO",
+    "sendCommentLabel": "Ohereza igitekerezo"
 }

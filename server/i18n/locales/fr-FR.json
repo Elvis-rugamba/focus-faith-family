@@ -24,5 +24,7 @@
     "sendMessageLabel": "Envoyer un message",
     "ourMissionLabel": "Notre mission",
     "ourVissionLabel": "Notre Vission",
-    "pastLabel": "Passe"
+    "pastLabel": "Passe",
+    "commentLabel": "COMMENTAIRES",
+    "sendCommentLabel": "Envoyer un commentaire"
 }
