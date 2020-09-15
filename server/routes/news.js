@@ -44,8 +44,6 @@ const getSingleArticle = async (req, res) => {
     const verseOfTheDay = await verse.getVerse();
     const comments = await comment.getComments(slug);
 
-    console.log(comments);
-
     res.locals.currentLocale = currentLocale;
     res.render("pages/selected-post", {
       article: newsArticle,
