@@ -21,12 +21,11 @@ const createArticle = async (req, res) => {
     const { rows } = await db.query("SELECT * FROM users WHERE user_id=$1", [
       user_id,
     ]);
-    console.log(rows[0]);
     if (rows.length < 0)
       return res.status(404).json({ status: 404, message: "User not found" });
 
     // check if the user is an admin or editor
-    if (rows[0].role == "admin" && rows[0].role == "editor")
+    if (rows[0].role == "admin" || rows[0].role == "editor")
       status = 'edited';
     if (!title) {
       return res.status(400).json({ message: "Title is required" });
