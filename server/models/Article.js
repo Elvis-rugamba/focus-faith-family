@@ -284,7 +284,7 @@ const getArticle = async (req, res) => {
   }
 };
 
-const getRecentArticles = async () => {
+const getRecentArticles = async (req, res) => {
   try {
     const { rows } = await db.query(
       "SELECT * FROM news ORDER BY news_id DESC LIMIT 3"
@@ -295,7 +295,7 @@ const getRecentArticles = async () => {
   }
 };
 
-const getTotalArticles = async () => {
+const getTotalArticles = async (req, res) => {
   try {
     const { rows } = await db.query("SELECT COUNT(*) FROM news");
     console.log(rows);
@@ -305,7 +305,7 @@ const getTotalArticles = async () => {
   }
 };
 
-const getTotalPendingArticles = async () => {
+const getTotalPendingArticles = async (req, res) => {
   try {
     const { rows } = await db.query("SELECT * FROM news WHERE status=$1", [
       "pending",
