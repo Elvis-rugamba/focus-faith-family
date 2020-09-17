@@ -100,7 +100,7 @@ const getTotalUsers = async (req, res) => {
   //get all users
   try {
     const users = await db.query("SELECT COUNT(*) FROM");
-    return res.status(200).json({ status: 200, data: users.rows });
+    return res.status(200).json({ status: 200, data: users.rows[0].count });
   } catch (error) {
     return res.status(500).json({ status: 500, message: error.message });
   }

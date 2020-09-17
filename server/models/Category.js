@@ -53,7 +53,7 @@ const getTotaCategories = async (req, res) => {
     const categories = await db.query(
       "SELECT COUNT(*) FROM categories"
     );
-    return res.status(200).json({ status: 200, data: categories.rows });
+    return res.status(200).json({ status: 200, data: categories.rows[0].count });
   } catch (error) {
     return res.status(500).json({ status: 500, message: error.message });
   }
