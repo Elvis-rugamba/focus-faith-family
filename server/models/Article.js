@@ -331,9 +331,10 @@ const countArticles = async (articleId) => {
       return results.rows[0];
     }
 
+    const count = isArticle.rows[0].counts + 1;
     const results = await db.query(
-      `UPDATE stats SET counts='counts+1' WHERE news_id=$1 RETURNING *`,
-      [articleId]
+      `UPDATE stats SET counts=$1WHERE news_id=$2 RETURNING *`,
+      [count, articleId]
     );
 
     return results.rows[0];
