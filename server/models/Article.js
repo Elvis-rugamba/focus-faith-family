@@ -238,7 +238,7 @@ const deleteArticle = async (req, res) => {
     const isArticle = await db.query("SELECT * FROM news WHERE news_id=$1", [
       articleId,
     ]);
-    if (isArticle.rowCount < 0) {
+    if (isArticle.rowCount <= 0) {
       res.status(404).json({ status: 404, message: "Article not found" });
     }
     const deletedArticle = await db.query(
@@ -322,9 +322,7 @@ const countArticles = async (articleId) => {
       articleId,
     ]);
 
-    console.log(isArticle);
-
-    if (isArticle.rowCount < 0) {
+    if (isArticle.rowCount <= 0) {
       const results = await db.query(
         `INSERT INTO stats(counts,news_id) VALUES ($1,$2) RETURNING *`,
         [1, articleId]
