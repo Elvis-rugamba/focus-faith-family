@@ -51,7 +51,7 @@ const getnewsCategories = async (req, res) => {
 const getTotaCategories = async (req, res) => {
   try {
     const categories = await db.query(
-      "SELECT COUNT(*) FROM categories GROUP BY category_name"
+      "SELECT COUNT(*) FROM categories"
     );
     return res.status(200).json({ status: 200, data: categories.rows });
   } catch (error) {
