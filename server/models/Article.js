@@ -298,7 +298,6 @@ const getRecentArticles = async (req, res) => {
 const getTotalArticles = async (req, res) => {
   try {
     const { rows } = await db.query("SELECT COUNT(*) FROM news");
-    console.log(rows);
     return res.status(200).json({ status: 200, data: rows[0].count });
   } catch (error) {
     return res.status(500).json({ status: 500, data: error.message });
