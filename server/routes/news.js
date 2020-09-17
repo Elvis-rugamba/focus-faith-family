@@ -42,6 +42,7 @@ const getSingleArticle = async (req, res) => {
     const relatedArticles = await article.getRelatedArticle(slug, currentLocale);
     const verseOfTheDay = await verse.getVerse();
     const comments = await comment.getComments(slug);
+    const views = await article.countArticles(slug);
 
     res.locals.currentLocale = currentLocale;
     res.render("pages/selected-post", {
@@ -50,6 +51,7 @@ const getSingleArticle = async (req, res) => {
       relatedArticles,
       verse: verseOfTheDay,
       comments,
+      views,
     });
   } catch (error) {
     throw error;

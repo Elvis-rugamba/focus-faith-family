@@ -316,6 +316,32 @@ const getTotalPendingArticles = async (req, res) => {
   }
 };
 
+const countArticles = async (articleId) => {
+  try {
+    const isArticle = await db.query("SELECT * FROM news WHERE news_id=$1", [
+      articleId,
+    ]);
+
+    if (isArticle.rowCount < 0) {
+      const results = await db.query(
+        `INSERT INTO stats(counts, news_id) VALUES ($1, $2) RETURNING *`,
+        [1, articleId]
+      );
+
+      return results.rows[0];
+    }
+
+    const results = await db.query(
+      `UPDATE INTO stats SET counts='counts+1' WHERE news_id=$1 RETURNING *`,
+      [articleId]
+    );
+
+    return results.rows[0];
+  } catch (error) {
+    throw error;
+  }
+};
+
 module.exports = {
   upload,
   createArticle,
@@ -332,4 +358,5 @@ module.exports = {
   getRecentArticles,
   getTotalArticles,
   getTotalPendingArticles,
+  countArticles
 };
