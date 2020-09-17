@@ -1,8 +1,6 @@
 const db = require("../config/connect");
 
 const createCategory = async (req, res) => {
-  // get from body
-    console.log(req.body);
   const { categoryName, frenchName, rwandanName } = req.body;
   // check if the category exists already
   const isCategory = await db.query(
@@ -50,9 +48,21 @@ const getnewsCategories = async (req, res) => {
   }
 };
 
+const getTotaCategories = async (req, res) => {
+  try {
+    const categories = await db.query(
+      "SELECT COUNT(*) FROM categories GROUP BY category_name"
+    );
+    return res.status(200).json({ status: 200, data: categories.rows });
+  } catch (error) {
+    return res.status(500).json({ status: 500, message: error.message });
+  }
+};
+
 module.exports = {
   createCategory,
   getCategories,
   getCategoriesByGroup,
-  getnewsCategories
+  getnewsCategories,
+  getTotaCategories
 };

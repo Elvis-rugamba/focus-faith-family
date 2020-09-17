@@ -131,6 +131,13 @@ const createTable = async () => {
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW() NOT NULL
   )`;
 
+  const statsTable = `CREATE TABLE IF NOT EXISTS stats(
+    id SERIAL NOT NULL PRIMARY KEY,
+    counts BIGINT NOT NULL,
+    news_id INT REFERENCES news(news_id) NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW() NOT NULL
+  )`;
+
   // const dummy = `INSERT INTO users(firstname, lastname, email, password, role, profileImage, phone) VALUES('Abba','Gospel', 'admin@abbagospel.online','$2b$11$AKHsa/XHWkyRJ70KEl2AaOTvKWSRYTT7IHTz2cVU9Mtq/oARJr9tO', 'admin', '', '0789279774')`;
   
   await pool.query(usersTable);
@@ -146,6 +153,7 @@ const createTable = async () => {
   await pool.query(commentsTable);
   await pool.query(aboutTable);
   await pool.query(contactsTable);
+  await pool.query(statsTable);
   // await pool.query(dummy);
 };
 

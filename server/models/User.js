@@ -96,9 +96,20 @@ const getAllUsers = async (req, res) => {
   }
 };
 
+const getTotalUsers = async (req, res) => {
+  //get all users
+  try {
+    const users = await db.query("SELECT COUNT(*) FROM users GROUP BY user_id");
+    return res.status(200).json({ status: 200, data: users.rows });
+  } catch (error) {
+    return res.status(500).json({ status: 500, message: error.message });
+  }
+};
+
 module.exports = {
   createUser,
   signinUser,
   changeRole,
   getAllUsers,
+  getTotalUsers,
 };

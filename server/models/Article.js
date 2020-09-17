@@ -232,14 +232,42 @@ const getArticle = async (req, res) => {
     const isArticle = await db.query("SELECT * FROM news WHERE news_id=$1", [
       newsId,
     ]);
-    // check if the article exists
-    console.log("ari", isArticle.rowCount <= 0);
     if (isArticle.rowCount <= 0)
       return res
         .status(404)
         .json({ status: 404, message: "Article not found" });
     // return article
     return res.status(200).json({ status: 200, data: isArticle.rows[0] });
+  } catch (error) {
+    return res.status(500).json({ status: 500, data: error.message });
+  }
+};
+
+const getRecentArticles = async () => {
+  try {
+    const { rows } = await db.query(
+      "SELECT * FROM news ORDER BY news_id DESC LIMIT 3");
+    return res.status(200).json({ status: 200, data: rows});
+  } catch (error) {
+    return res.status(500).json({ status: 500, data: error.message });
+  }
+};
+
+const getTotalArticles = async () => {
+  try {
+    const { rows } = await db.query(
+      "SELECT COUNT(*) FROM news GROUP BY news_id");
+    return res.status(200).json({ status: 200, data: rows});
+  } catch (error) {
+    return res.status(500).json({ status: 500, data: error.message });
+  }
+};
+
+const getTotalPendingArticles = async () => {
+  try {
+    const { rows } = await db.query(
+      "SELECT * FROM news WHERE status=$1 GROUP BY news_id DESC", ['pending']);
+    return res.status(200).json({ status: 200, data: rows});
   } catch (error) {
     return res.status(500).json({ status: 500, data: error.message });
   }
@@ -258,4 +286,7 @@ module.exports = {
   deleteArticle,
   getAllArticles,
   getArticle,
+  getRecentArticles,
+  getTotalArticles,
+  getTotalPendingArticles
 };
