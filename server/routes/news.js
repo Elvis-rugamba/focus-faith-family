@@ -43,6 +43,7 @@ const getSingleArticle = async (req, res) => {
     const verseOfTheDay = await verse.getVerse();
     const comments = await comment.getComments(slug);
     const views = await article.countArticles(slug);
+    console.log(views);
 
     res.locals.currentLocale = currentLocale;
     res.render("pages/selected-post", {

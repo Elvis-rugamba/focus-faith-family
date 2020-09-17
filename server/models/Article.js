@@ -322,22 +322,24 @@ const countArticles = async (articleId) => {
       articleId,
     ]);
 
+    console.log(isArticle);
+
     if (isArticle.rowCount < 0) {
       const results = await db.query(
         `INSERT INTO stats(counts,news_id) VALUES ($1,$2) RETURNING *`,
         [1, articleId]
       );
 
-      return results.rows[0];
+      return results.rows[0].counts;
     }
 
     const count = isArticle.rows[0].counts + 1;
     const results = await db.query(
-      `UPDATE stats SET counts=$1WHERE news_id=$2 RETURNING *`,
+      `UPDATE stats SET counts=$1 WHERE news_id=$2 RETURNING *`,
       [count, articleId]
     );
 
-    return results.rows[0];
+    return results.rows[0].counts;
   } catch (error) {
     throw error;
   }
