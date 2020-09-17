@@ -324,7 +324,7 @@ const countArticles = async (articleId) => {
 
     if (isArticle.rowCount < 0) {
       const results = await db.query(
-        `INSERT INTO stats(counts, news_id) VALUES ($1, $2) RETURNING *`,
+        `INSERT INTO stats(counts,news_id) VALUES ($1,$2) RETURNING *`,
         [1, articleId]
       );
 
