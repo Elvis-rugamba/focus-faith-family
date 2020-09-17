@@ -19,7 +19,6 @@ const createCategory = async (req, res) => {
     "INSERT INTO tv_categories(category_name, french_name, rwandan_name) VALUES($1, $2, $3) RETURNING *",
     [categoryName, frenchName, rwandanName]
   );
-  console.log(newCategory);
   return res.status(201).json({ status: 201, data: newCategory.rows[0] });
   } catch (error) {
     return res.status(500).json({ status: 500, message: error.message });
@@ -30,7 +29,6 @@ const createCategory = async (req, res) => {
 const getCategories = async (req, res) => {
   try {
     const isArticle = await db.query("SELECT * FROM tv_categories");
-    console.log(isArticle);
     return res.status(200).json({ status: 200, data: isArticle.rows });
   } catch (error) {
     return res.status(500).json({ status: 500, message: error.message });

@@ -29,7 +29,7 @@ router.get("/news/stats/total", article.getTotalArticles);
 router.get("/news/stats/total-pending", article.getTotalPendingArticles);
 // router.get("/news/stats/total-views", article.getTotalViews);
 // router.get("/news/stats/most-read", article.getMostRead);
-router.get("/news/recent", article.getRecentArticles);
+router.get("/news/stats/recent", article.getRecentArticles);
 router.post("/signin", user.signinUser);
 router.patch("/user/:userId", verifyToken, user.changeRole);
 router.get("/users/total", verifyToken, user.getTotalUsers);

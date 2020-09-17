@@ -17,7 +17,6 @@ const createCategory = async (req, res) => {
     "INSERT INTO music_categories(category_name, french_name, rwandan_name) VALUES($1, $2, $3) RETURNING*",
     [categoryName, frenchName, rwandanName]
   );
-  console.log(newCategory);
   return res.status(201).json({ status: 201, data: newCategory.rows[0] });
 };
 
