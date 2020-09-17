@@ -318,7 +318,7 @@ const getTotalPendingArticles = async (req, res) => {
 
 const countArticles = async (articleId) => {
   try {
-    const isArticle = await db.query("SELECT * FROM news WHERE news_id=$1", [
+    const isArticle = await db.query("SELECT * FROM stats WHERE news_id=$1", [
       articleId,
     ]);
 
@@ -332,7 +332,7 @@ const countArticles = async (articleId) => {
     }
 
     const results = await db.query(
-      `UPDATE INTO stats SET counts='counts+1' WHERE news_id=$1 RETURNING *`,
+      `UPDATE stats SET counts='counts+1' WHERE news_id=$1 RETURNING *`,
       [articleId]
     );
 
