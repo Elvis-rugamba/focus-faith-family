@@ -287,7 +287,7 @@ const getArticle = async (req, res) => {
 const getRecentArticles = async (req, res) => {
   try {
     const { rows } = await db.query(
-      "SELECT * FROM news ORDER BY news_id DESC LIMIT 3"
+      "SELECT * FROM news ORDER BY news_id DESC LIMIT 5"
     );
     return res.status(200).json({ status: 200, data: rows });
   } catch (error) {
