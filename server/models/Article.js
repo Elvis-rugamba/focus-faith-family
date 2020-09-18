@@ -343,7 +343,7 @@ const countArticles = async (articleId) => {
   }
 };
 
-const getTotalViews = async (articleId) => {
+const getTotalViews = async (req, res) => {
   try {
     const counts = await db.query("SELECT COALESCE(SUM(counts),0) AS counts FROM stats", [
       articleId,
@@ -355,7 +355,7 @@ const getTotalViews = async (articleId) => {
   }
 };
 
-const getMostViewedArticles = async (articleId) => {
+const getMostViewedArticles = async (req, res) => {
   try {
     const mostViewed = await db.query("SELECT * FROM stats JOIN news ON news.news_id=stats.news_id ORDER BY stats.counts DESC LIMIT 5");
     return res.status(200).json({ status: 200, data: mostViewed.rows });
