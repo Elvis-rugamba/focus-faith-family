@@ -20,6 +20,7 @@ router.post("/news/upload", upload.single('image'), article.upload);
 router.get("/categories", category.getCategories);
 router.get("/categories/total", category.getTotaCategories);
 router.get("/group-categories", category.getCategoriesByGroup);
+router.get("/categories/most-read", category.getMostViewedCategories);
 router.post("/new-article", verifyToken, article.createArticle);
 router.post("/new-category", category.createCategory);
 router.post("/new-user", user.createUser);

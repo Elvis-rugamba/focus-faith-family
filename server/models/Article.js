@@ -347,7 +347,7 @@ const getTotalViews = async (req, res) => {
   try {
     const counts = await db.query("SELECT COALESCE(SUM(counts),0) AS counts FROM stats");
 
-    return res.status(200).json({ status: 200, data: counts });
+    return res.status(200).json({ status: 200, data: counts.rows[0].counts });
   } catch (error) {
     return res.status(500).json({ status: 500, data: error.message });
   }
