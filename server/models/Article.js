@@ -345,9 +345,7 @@ const countArticles = async (articleId) => {
 
 const getTotalViews = async (req, res) => {
   try {
-    const counts = await db.query("SELECT COALESCE(SUM(counts),0) AS counts FROM stats", [
-      articleId,
-    ]);
+    const counts = await db.query("SELECT COALESCE(SUM(counts),0) AS counts FROM stats");
 
     return res.status(200).json({ status: 200, data: counts });
   } catch (error) {
