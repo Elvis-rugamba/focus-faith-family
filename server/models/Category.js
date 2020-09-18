@@ -41,10 +41,10 @@ const getCategoriesByGroup = async (req, res) => {
 
 const getTotaCategories = async (req, res) => {
   try {
-    const categories = await db.query(
-      "SELECT COUNT(*) FROM categories"
-    );
-    return res.status(200).json({ status: 200, data: categories.rows[0].count });
+    const categories = await db.query("SELECT COUNT(*) FROM categories");
+    return res
+      .status(200)
+      .json({ status: 200, data: categories.rows[0].count });
   } catch (error) {
     return res.status(500).json({ status: 500, message: error.message });
   }
@@ -55,13 +55,15 @@ const getnewsCategories = async (req, res) => {
     const categories = await db.query("SELECT * FROM categories");
     return categories.rows;
   } catch (error) {
-    throw error
+    throw error;
   }
 };
 
 const getMostViewedCategories = async (req, res) => {
   try {
-    const mostViewed = await db.query("SELECT news.category, * FROM stats JOIN news ON news.news_id=stats.news_id GROUP BY news.category ORDER BY stats.counts DESC LIMIT 5");
+    const mostViewed = await db.query(
+      "SELECT news.title, news.category, news.author, stats.count FROM stats JOIN news ON news.news_id=stats.news_id GROUP BY news.category ORDER BY stats.counts DESC LIMIT 5"
+    );
     return res.status(200).json({ status: 200, data: mostViewed.rows });
   } catch (error) {
     return res.status(500).json({ status: 500, data: error.message });
@@ -74,5 +76,5 @@ module.exports = {
   getCategoriesByGroup,
   getnewsCategories,
   getTotaCategories,
-  getMostViewedCategories
+  getMostViewedCategories,
 };
