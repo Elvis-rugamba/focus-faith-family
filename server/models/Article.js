@@ -343,6 +343,27 @@ const countArticles = async (articleId) => {
   }
 };
 
+const getTotalViews = async (articleId) => {
+  try {
+    const counts = await db.query("SELECT COALESCE(SUM(counts),0) AS counts FROM stats", [
+      articleId,
+    ]);
+
+    return res.status(200).json({ status: 200, data: counts });
+  } catch (error) {
+    return res.status(500).json({ status: 500, data: error.message });
+  }
+};
+
+const getMostViewedArticles = async (articleId) => {
+  try {
+    const mostViewed = await db.query("SELECT * FROM stats JOIN news ON news.news_id=stats.news_id ORDER BY stats.counts DESC LIMIT 5");
+    return res.status(200).json({ status: 200, data: mostViewed.rows });
+  } catch (error) {
+    return res.status(500).json({ status: 500, data: error.message });
+  }
+};
+
 module.exports = {
   upload,
   createArticle,
@@ -359,5 +380,7 @@ module.exports = {
   getRecentArticles,
   getTotalArticles,
   getTotalPendingArticles,
-  countArticles
+  countArticles,
+  getTotalViews,
+  getMostViewedArticles,
 };
