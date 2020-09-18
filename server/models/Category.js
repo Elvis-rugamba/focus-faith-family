@@ -62,7 +62,7 @@ const getnewsCategories = async (req, res) => {
 const getMostViewedCategories = async (req, res) => {
   try {
     const mostViewed = await db.query(
-      "SELECT news.title, news.category, news.author, stats.count FROM stats JOIN news ON news.news_id=stats.news_id GROUP BY news.category ORDER BY stats.counts DESC LIMIT 5"
+      "SELECT news.title, news.category, news.author, stats.count FROM stats JOIN news ON news.news_id=stats.news_id GROUP BY news.category, stats.id ORDER BY stats.counts DESC LIMIT 5"
     );
     return res.status(200).json({ status: 200, data: mostViewed.rows });
   } catch (error) {
