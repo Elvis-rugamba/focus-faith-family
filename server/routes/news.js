@@ -6,7 +6,7 @@ const comment = require("../models/Comment");
 const getNews = async (req, res) => {
   let news = [];
   try {
-    const currentLocale = req.query.locale || "en-GB";
+    const currentLocale = req.query.locale || "ki-RW";
     const { category, search } = req.query;
 
     if (category) {
@@ -35,7 +35,7 @@ const getNews = async (req, res) => {
 
 const getSingleArticle = async (req, res) => {
   try {
-    const currentLocale = req.query.locale || "en-GB";
+    const currentLocale = req.query.locale || "ki-RW";
     const { slug } = req.query;
     const newsArticle = await article.getSingleArticle(slug);
     const recentNews = await article.getRecentNews(currentLocale);
@@ -61,7 +61,7 @@ const getSingleArticle = async (req, res) => {
 
 const postComment = async (req, res) => {
   try {
-    const currentLocale = req.query.locale || "en-GB";
+    const currentLocale = req.query.locale || "ki-RW";
     const { slug } = req.query;
     const { name, email, comment: commnt } = req.body;
     const newsArticle = await article.getSingleArticle(slug);

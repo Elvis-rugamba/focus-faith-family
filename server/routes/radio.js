@@ -5,7 +5,7 @@ const verse = require('../models/Verse');
 
 const getRadio = async (req, res) => {
   try {
-    const currentLocale = req.query.locale || "en-GB";
+    const currentLocale = req.query.locale || "ki-RW";
     const { category, search } = req.query;
     let radios = [];
 

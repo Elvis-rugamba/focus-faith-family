@@ -5,7 +5,7 @@ const verse = require('../models/Verse');
 
 const getTv = async (req, res) => {
   try {
-    const currentLocale = req.query.locale || "en-GB";
+    const currentLocale = req.query.locale || "ki-RW";
     const { category, search } = req.query;
     let tvShows = [];
 
@@ -29,7 +29,7 @@ const getTv = async (req, res) => {
 
 const getSingleTv = async (req, res) => {
   try {
-    const currentLocale = req.query.locale || "en-GB";
+    const currentLocale = req.query.locale || "ki-RW";
     const {slug} = req.query;
 
     const tvShow = await tv.getSingleTv(slug);

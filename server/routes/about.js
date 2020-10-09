@@ -3,7 +3,7 @@ const verse = require('../models/Verse');
 
 const getAbout = async (req, res) => {
   try {
-    const currentLocale = req.query.locale || "en-GB";
+    const currentLocale = req.query.locale || "ki-RW";
     const recentNews = await article.getRecentNews();
     const verseOfTheDay = await verse.getVerse();
 

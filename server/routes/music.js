@@ -5,7 +5,7 @@ const verse = require('../models/Verse');
 
 const getMusic = async (req, res) => {
   try {
-    const currentLocale = req.query.locale || "en-GB";
+    const currentLocale = req.query.locale || "ki-RW";
     const { category, search } = req.query;
     let musics = [];
 
@@ -38,7 +38,7 @@ const getMusic = async (req, res) => {
 
 const getSingleMusic = async (req, res) => {
   try {
-    const currentLocale = req.query.locale || "en-GB";
+    const currentLocale = req.query.locale || "ki-RW";
     const { slug } = req.query;
     const singleMusic = await music.getSingleMusic(slug);
     const recentMusics = await music.getRecentMusics();
