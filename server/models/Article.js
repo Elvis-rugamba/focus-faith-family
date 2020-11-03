@@ -77,11 +77,11 @@ const createArticle = async (req, res) => {
 const getNews = async (language, perPage, offset) => {
   const result = await db.query(
     "SELECT * FROM news WHERE status=$1 AND language=$2 GROUP BY news_id ORDER BY news_id DESC LIMIT $3 OFFSET $4",
-    ["pending", language, perPage, offset]
+    ["edited", language, perPage, offset]
   );
   const { rows } = await db.query(
     "SELECT COUNT(*) FROM news WHERE status=$1",
-    ["pending"]
+    ["edited"]
   );
   return { rows: result.rows, count: rows[0].count };
 };
@@ -89,7 +89,7 @@ const getNews = async (language, perPage, offset) => {
 const getHomeNews = async (language) => {
   const {rows} = await db.query(
     "SELECT * FROM news WHERE status=$1 AND language=$2 ORDER BY news_id DESC LIMIT 15",
-    ["pending", language]
+    ["edited", language]
   );
   return rows;
 };
@@ -97,7 +97,7 @@ const getHomeNews = async (language) => {
 const getMoreHomeNews = async (language) => {
   const {rows} = await db.query(
     "SELECT * FROM news WHERE status=$1 AND language=$2 ORDER BY news_id DESC OFFSET 15 LIMIT 15",
-    ["pending", language]
+    ["edited", language]
   );
   return rows;
 };
