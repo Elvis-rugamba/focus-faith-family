@@ -7338,7 +7338,22 @@ button.bg-dark:focus {
   float: none !important;
 }
 
+.content-wrapper .container {
+  width: 100%;
+  padding-right: 0px !important;
+  padding-left: 0px !important;
+  margin-right: auto;
+  margin-left: auto;
+}
+
 @media (min-width: 576px) {
+  .content-wrapper .container {
+    width: 100%;
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+    margin-right: auto;
+    margin-left: auto;
+  }
   .float-sm-left {
     float: left !important;
   }
@@ -7351,6 +7366,13 @@ button.bg-dark:focus {
 }
 
 @media (min-width: 768px) {
+  .content-wrapper .container {
+    width: 100%;
+    padding-right: 0px;
+    padding-left: 0px;
+    margin-right: auto;
+    margin-left: auto;
+  }
   .float-md-left {
     float: left !important;
   }
@@ -10578,7 +10600,7 @@ header .navbar-bottom .navbar-toggler {
 
 @media (max-width: 999px) {
   .content-wrapper .banner-content {
-    padding: 12px 12px;
+    padding: 0px;
   }
   .content-wrapper .banner-content h1 {
     font-size: 18px;
@@ -10757,6 +10779,9 @@ footer .footer-top .social-media li a {
 }
 
 @media (max-width: 767px) {
+  .card .card-body {
+    padding: 10px;
+  }
   footer .footer-top .social-media li a {
     padding: 4px 4px 2px 4px;
   }
