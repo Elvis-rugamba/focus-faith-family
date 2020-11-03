@@ -304,7 +304,7 @@
                         </div>
                         <div class="col-sm-6">
                           <% if (moreNews && moreNews.splice(0, 8).length > 0) { %>
-                          <% for( let i = 0; i < moreNews.length - moreNews.splice(0, 8).length; i++ ) { %>
+                          <% for( let i = 0; i < 7; i++ ) { %>
                           <% if (moreNews[i] === undefined) { break; %>
                           <% } %>
                           <div class="row">
@@ -379,7 +379,7 @@
                             </div>
                           </div>
                         </div>
-                        <% } %><% } %>
+                        <% } %>
                       </div>
                     </div>
                     <% if (tvShows && tvShows.splice(0, 5).length > 0) { %>
@@ -413,6 +413,7 @@
               </div>
             </div>
           </div>
+          <% } %>
         </div>
       </div>
       <!-- main-panel ends -->
