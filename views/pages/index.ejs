@@ -192,7 +192,7 @@
                 </div>
                 <div class="card-body" id="card-body">
                   <% if (news && news.splice(0, 6).length > 0) { %>
-                  <% for( let i = 0; i < news.splice(0, 6).length; i++ ) { %>
+                  <% for( let i = 0; i < news.length - news.splice(0, 6).length; i++ ) { %>
                   <% if (news[i] === undefined) { break; %>
                   <% } %>
                   <div class="row">
@@ -304,7 +304,7 @@
                         </div>
                         <div class="col-sm-6">
                           <% if (moreNews && moreNews.splice(0, 8) > 0) { %>
-                          <% for( let i = 0; i < moreNews.splice(0, 8).length; i++ ) { %>
+                          <% for( let i = 0; i < moreNews.length - moreNews.splice(0, 8).length; i++ ) { %>
                           <% if (moreNews[i] === undefined) { break; %>
                           <% } %>
                           <div class="row">
