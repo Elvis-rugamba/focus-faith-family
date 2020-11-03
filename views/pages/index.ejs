@@ -38,26 +38,25 @@
         <div class="container">
           <div class="row" data-aos="fade-up">
             <% if (news && news.length > 0) { %>
-            <% for(let i = 0; i < 1; i++ ) { %>
             <div class="col-xl-8 stretch-card grid-margin">
-              <a href="article?locale=<%- currentLocale %>&slug=<%- news[i].news_id %>">
+              <a href="article?locale=<%- currentLocale %>&slug=<%- news[0].news_id %>">
                 <div class="position-relative">
-                  <img src="<%- news[i].image %>" alt="banner" class="img-fluid" />
+                  <img src="<%- news[0].image %>" alt="banner" class="img-fluid" />
                   <div class="banner-content bg-dark-opacity w-100">
-                    <a href="/news?locale=<%- currentLocale %>&category=<%- news[i].category %>">
-                      <span class="badge badge-danger fs-12 font-weight-bold mb-3"><%- news[i].category %></span>
+                    <a href="/news?locale=<%- currentLocale %>&category=<%- news[0].category %>">
+                      <span class="badge badge-danger fs-12 font-weight-bold mb-3"><%- news[0].category %></span>
                     </a>
-                    <h4><a href="article?locale=<%- currentLocale %>&slug=<%- news[i].news_id %>"
-                        class="mb-2 text-white"><%- news[i].title %></a></h4>
+                    <h4><a href="article?locale=<%- currentLocale %>&slug=<%- news[0].news_id %>"
+                        class="mb-2 text-white"><%- news[0].title %></a></h4>
                     <div class="fs-12">
-                      <span class="mr-2"><%= timeDifference(news[i].created_at, currentLocale)
+                      <span class="mr-2"><%= timeDifference(news[o].created_at, currentLocale)
                           %></span>
                     </div>
                   </div>
                 </div>
               </a>
             </div>
-            <% } %> <% } %>
+            <% } %>
             <!-- <div class="col-xl-4 stretch-card grid-margin">
               <div class="card bg-dark text-white">
                 <div class="card-body">
@@ -228,7 +227,7 @@
               </div>
             </div>
           </div>
-          <!-- <div class="row" data-aos="fade-up">
+          <div class="row" data-aos="fade-up">
             <div class="col-sm-12 grid-margin">
               <div class="card">
                 <div class="card-body">
@@ -339,7 +338,7 @@
                 </div>
               </div>
             </div>
-          </div> -->
+          </div>
           <div class="row" data-aos="fade-up">
             <div class="col-sm-12 grid-margin">
               <div class="card">
