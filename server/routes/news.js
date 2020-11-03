@@ -7,14 +7,17 @@ const getNews = async (req, res) => {
   let news = [];
   try {
     const currentLocale = req.query.locale || "ki-RW";
+    const perPage = 20;
+    const page = req.query.pg || 1;
+    const offset = (perPage * page) - perPage;
     const { category, search } = req.query;
 
     if (category) {
-      news = await article.getNewsByCategory(category, currentLocale);
+      news = await article.getNewsByCategory(category, currentLocale, perPage, offset);
     } else if (search) {
-      news = await article.searchNews(search, currentLocale);
+      news = await article.searchNews(search, currentLocale, perPage, offset);
     } else {
-      news = await article.getNews(currentLocale);
+      news = await article.getNews(currentLocale, perPage, offset);
     }
 
     const recentNews = await article.getRecentNews(currentLocale);
@@ -23,10 +26,12 @@ const getNews = async (req, res) => {
 
     res.locals.currentLocale = currentLocale;
     res.render("pages/news", {
-      news,
+      news: news.rows,
       recentNews,
       categories,
       verse: verseOfTheDay,
+      current: page,
+      pages: Math.ceil(news.count / perPage)
     });
   } catch (error) {
     throw error;

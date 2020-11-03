@@ -43,6 +43,14 @@ const getTvShows = async () => {
   return rows;
 };
 
+const getHomeTvShows = async () => {
+  const { rows } = await db.query(
+    "SELECT * FROM tv_shows ORDER BY id DESC LIMIT 10"
+  );
+
+  return rows;
+};
+
 const getSingleTv = async (slug) => {
   const music = await db.query("SELECT * FROM tv_shows WHERE id=$1", [
     slug,
@@ -98,7 +106,6 @@ const editTv = async (req, res) => {
     const { rows } = await db.query("SELECT * FROM users WHERE user_id=$1", [
       user_id,
     ]);
-    console.log("savage", user_id);
     if (rows.length < 0)
       return res.status(404).json({ status: 404, message: "User not found" });
 
@@ -161,6 +168,7 @@ module.exports = {
   upload,
   createTv,
   getTvShows,
+  getHomeTvShows,
   getSingleTv,
   getRecentTvShows,
   getTvByCategory,

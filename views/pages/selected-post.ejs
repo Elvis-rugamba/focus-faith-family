@@ -6,6 +6,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta content="Abbagospel" property="og:title">
+    <meta content="Find news, entertainment, your favorite music and tv shows.
+    Newspaper is your news, entertainment, music fashion website. We
+    provide you with the latest breaking news and videos straight from
+    the entertainment industry." property="og:description">
+    <meta content="https://abbagospel.online/assets/images/favicon.png" property="og:image">
     <title>Abbagospel</title>
     <!-- plugin css for this page -->
     <link rel="stylesheet" href="assets/vendors/mdi/css/materialdesignicons.min.css" />
@@ -15,6 +21,7 @@
     <!-- inject:css -->
     <link rel="stylesheet" href="assets/css/style.css">
     <!-- endinject -->
+    <script src="https://use.fontawesome.com/88ac6048db.js"></script>
 </head>
 
 <body>
@@ -35,13 +42,23 @@
                                         <div class="row">
                                             <% if (article) { %>
                                             <div class="col-sm-12 grid-margin">
-                                                <h1 class="font-weight-600 mb-4">
+                                                <h1 class="font-weight-600 mb-4 title">
                                                     <%- article.title %>
                                                 </h1>
                                                 <div>
                                                     <img src="<%- article.image %>" alt="banner" class="img-fluid" />
                                                 </div>
                                             </div>
+
+                                            <div class="col-sm-12 mb-4 subtitle">
+                                                <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                                                <div class="addthis_inline_share_toolbox_qu8s"></div>
+                                                <small class="text-muted">
+                                                    <i class="mdi mdi-play"></i>
+                                                    <%- article.created_at.toLocaleString() %>
+                                                </small>
+                                            </div>
+
                                             <div class="col-sm-12">
                                                 <h2 class="font-weight-600 mb-2">
                                                     <%- article.subtitle %>
@@ -53,7 +70,7 @@
                                             </div>
                                             <% } else { %>
                                             <h1 class="font-weight-600 mb-4">
-                                                Article not found
+                                                <%= translate('errorMessage404Route', currentLocale) %>
                                             </h1>
                                             <% } %>
                                         </div>
@@ -124,9 +141,6 @@
                                                             <p class="fs-13 text-muted mb-0">
                                                                 <span class="mr-2"><%- recentNews[i].category %> </span>
                                                                 <%= timeDifference(recentNews[i].created_at, currentLocale) %>
-                                                            </p>
-                                                            <p class="mb-0 fs-13">
-                                                                <%- recentNews[i].body.slice(0, 50) %> ...
                                                             </p>
                                                         </div>
                                                     </div>
@@ -520,6 +534,8 @@
             <!-- partial -->
         </div>
     </div>
+    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5f9c7cb5943c3498"></script>
     <!-- inject:js -->
     <script src="assets/vendors/js/vendor.bundle.base.js"></script>
     <!-- endinject -->

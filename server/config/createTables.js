@@ -37,6 +37,7 @@ const createTable = async () => {
     image VARCHAR(2000) NOT NULL,
     status VARCHAR(50) DEFAULT 'pending' NOT NULL,
     bodyhtml VARCHAR(10100000) NOT NULL,
+    slug VARCHAR(1000000),
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW() NOT NULL
   )`;
 

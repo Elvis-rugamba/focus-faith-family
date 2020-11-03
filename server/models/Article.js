@@ -1,4 +1,5 @@
 const db = require("../config/connect");
+const slugs = require('../utils/slugs')
 
 const upload = async (req, res) => {
   try {
@@ -50,8 +51,10 @@ const createArticle = async (req, res) => {
       return res.status(400).json({ message: "Upload image" });
     }
 
+    const slug = slugs(title);
+
     const results = await db.query(
-      `INSERT INTO news(title,subtitle,body,author,category,image,bodyhtml,language,status) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9) RETURNING *`,
+      `INSERT INTO news(title,subtitle,body,author,category,image,bodyhtml,language,slug,status) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) RETURNING *`,
       [
         title,
         subtitle,
@@ -61,6 +64,7 @@ const createArticle = async (req, res) => {
         image,
         bodyhtml,
         language,
+        slug,
         status,
       ]
     );
@@ -70,12 +74,30 @@ const createArticle = async (req, res) => {
   }
 };
 
-const getNews = async (language) => {
-  const {
-    rows,
-  } = await db.query(
-    "SELECT * FROM news WHERE language=$1 AND status=$2 ORDER BY news_id DESC",
-    [language, "edited"]
+const getNews = async (language, perPage, offset) => {
+  const result = await db.query(
+    "SELECT * FROM news WHERE status=$1 AND language=$2 GROUP BY news_id ORDER BY news_id DESC LIMIT $3 OFFSET $4",
+    ["pending", language, perPage, offset]
+  );
+  const { rows } = await db.query(
+    "SELECT COUNT(*) FROM news WHERE status=$1",
+    ["pending"]
+  );
+  return { rows: result.rows, count: rows[0].count };
+};
+
+const getHomeNews = async (language) => {
+  const {rows} = await db.query(
+    "SELECT * FROM news WHERE status=$1 AND language=$2 ORDER BY news_id DESC LIMIT 15",
+    ["pending", language]
+  );
+  return rows;
+};
+
+const getMoreHomeNews = async (language) => {
+  const {rows} = await db.query(
+    "SELECT * FROM news WHERE status=$1 AND language=$2 ORDER BY news_id DESC OFFSET 15 LIMIT 15",
+    ["pending", language]
   );
   return rows;
 };
@@ -104,9 +126,13 @@ const getRecentNews = async (language) => {
   return rows;
 };
 
-const getNewsByCategory = async (category, language) => {
+const getNewsByCategory = async (category, language, perPage, offset) => {
   const article = await db.query(
-    "SELECT * FROM news WHERE category=$1 AND language=$2 AND status=$3 ORDER BY news_id DESC",
+    "SELECT * FROM news WHERE category=$1 AND language=$2 AND status=$3 ORDER BY news_id DESC LIMIT $4 OFFSET $5",
+    [category, language, "edited", perPage, offset]
+  );
+  const { rows } = await db.query(
+    "SELECT COUNT(*) FROM news WHERE category=$1 AND language=$2 AND status=$3",
     [category, language, "edited"]
   );
 
@@ -114,20 +140,24 @@ const getNewsByCategory = async (category, language) => {
     return null;
   }
 
-  return article.rows;
+  return { rows: result.rows, count: rows[0].count };
 };
 
-const searchNews = async (search, language) => {
+const searchNews = async (search, language, perPage, offset) => {
   const article = await db.query(
-    "SELECT * FROM news WHERE (title ILIKE $1 OR body ILIKE $1) AND language=$2 AND status=$3 ORDER BY news_id DESC",
+    "SELECT * FROM news WHERE (title ILIKE $1 OR body ILIKE $1) AND language=$2 AND status=$3 ORDER BY news_id DESC LIMIT $4 OFFSET $5",
     [`%${search}%`, language, "edited"]
+  );
+  const { rows } = await db.query(
+    "SELECT COUNT(*) FROM news WHERE (title ILIKE $1 OR body ILIKE $1) AND language=$2 AND status=$3",
+    [`%${search}%`, language, "edited", perPage, offset]
   );
 
   if (article.rowCount <= 0) {
     return null;
   }
 
-  return article.rows;
+  return { rows: result.rows, count: rows[0].count };
 };
 
 const getRelatedArticle = async (newsId, language) => {
@@ -368,6 +398,8 @@ module.exports = {
   getNews,
   getSingleArticle,
   getRecentNews,
+  getHomeNews,
+  getMoreHomeNews,
   getNewsByCategory,
   searchNews,
   getRelatedArticle,
