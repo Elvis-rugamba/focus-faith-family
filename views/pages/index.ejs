@@ -133,7 +133,7 @@
             </div> -->
             <div class="col-xl-4 stretch-card grid-margin">
               <div class="card">
-                <!--div class="card-body">
+                <div class="card-body">
                   <% if (news &&  news.splice(0, 1).length > 0) { %>
                   <% for(let i = 0; i < 5; i++ ) { %>
                   <% if (news[i] === undefined) { break; %>
@@ -150,7 +150,7 @@
                     </a>
                   </div>
                   <% } %> <% } %>
-                </div>-->
+                </div>
               </div>
             </div>
           </div>
@@ -189,40 +189,6 @@
                     <a href="/news?locale=<%- currentLocale %>"><%= translate('viewAllLabel', currentLocale) %>
                     </a>
                   </div>
-                </div>
-                <div class="card-body" id="card-body">
-                  <% if (news && news.splice(0, 6).length > 0) { %> <% for(
-                    let i = 0; i < news.splice(0, 6).length; i++ ) { %>
-                  <div class="row">
-                    <div class="col-sm-4 grid-margin">
-                      <div class="position-relative">
-                        <div class="rotate-img">
-                          <img src="<%- news[i].image %>" alt="thumb" class="img-fluid" />
-                        </div>
-                        <a class="badge-positioned"
-                          href="/news?locale=<%- currentLocale %>&category=<%- news[i].category %>">
-                          <span class="badge badge-danger font-weight-bold">
-                            <%- news[i].category %>
-                          </span>
-                        </a>
-                      </div>
-                    </div>
-                    <div class="col-sm-8 grid-margin">
-                      <h2 class="mb-2 font-weight-600">
-                        <a class="font-weight-600 mb-2 text-dark"
-                          href="/article?locale=<%- currentLocale %>&slug=<%- news[i].news_id %>">
-                          <%- news[i].title %>
-                        </a>
-                      </h2>
-                      <div class="fs-13 mb-2">
-                        <span class="mr-2"><%= timeDifference(news[i].created_at,
-                            currentLocale) %></span>
-                      </div>
-                    </div>
-                  </div>
-                  <% } %> <% } else { %>
-                  <h1 class="font-weight-600 mb-4"><%= translate('errorMessage404Route', currentLocale) %></h1>
-                  <% } %>
                 </div>
               </div>
             </div>
