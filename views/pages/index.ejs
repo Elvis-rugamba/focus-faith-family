@@ -341,6 +341,7 @@
               </div>
             </div>
           </div>
+          <% if (tvShows && tvShows.length > 0) { %>
           <div class="row" data-aos="fade-up">
             <div class="col-sm-12 grid-margin">
               <div class="card">
@@ -351,7 +352,6 @@
                         <%= translate('tvLabel', currentLocale) %>
                       </div>
                       <div class="row">
-                        <% if (tvShows && tvShows.length > 0) { %>
                         <% for( let i = 0; i < 5; i++ ) { %>
                         <% if (tvShows[i] === undefined) { break; %>
                         <% } %>
