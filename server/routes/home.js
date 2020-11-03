@@ -12,7 +12,7 @@ const getHome = async (req, res) => {
     const categories = await category.getnewsCategories();
     const verseOfTheDay = await verse.getVerse();
     const tvShows = await tv.getHomeTvShows();
-    console.log(news, moreNews);
+    console.log(news.length, moreNews.length);
 
     res.locals.currentLocale = currentLocale;
     res.render("pages/index", { news, moreNews, categories, recentNews, verse: verseOfTheDay, tvShows });
