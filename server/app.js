@@ -31,7 +31,7 @@ app.use(
   catchErrors(async function (request, response, next) {
     response.locals.baseUrl = `${request.protocol}://${request.headers.host}`;
     // Get enabled locales from Contentful
-    response.locals.locales = ["en-US", "fr-FR", "ki-RW"];
+    response.locals.locales = ["ki-RW", "en-GB", "fr-FR"];
     response.locals.currentLocale = response.locals.locales[0];
 
     // Initialize translations and include them on templates
@@ -47,6 +47,27 @@ app.use(
 app.use("/", routes);
 // APIs
 app.use("/api", api);
+
+// Catch 404 and forward to error handler
+app.use(function (request, response, next) {
+  const err = new Error(translate('errorMessage404Route', response.locals.currentLocale))
+  err.status = 404
+  next(err)
+});
+
+// Error handler
+app.use(function (err, request, response, next) {
+  // Set locals, only providing error in development
+  response.locals.error = err
+  response.locals.error.status = err.status || 500
+  response.locals.title = 'Error'
+
+  console.log(err);
+  // Render the error page
+  response.status(err.status || 500).json({status: err.status || 500, message: err})
+  // response.render('error')
+})
+
 app.listen(port, () => {
   console.log(`App running on port ${port}.`);
 });

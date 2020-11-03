@@ -9,7 +9,6 @@ const verifyToken = (req, res, next) => {
   if(!token) return res.status(401).json({status: 401, message: 'You need to signin first'});
   //extract the data from token
   const data = jwt.verify(token, process.env.KEY);
-  console.log('params', data);
   req.user = data;
   next();
 }

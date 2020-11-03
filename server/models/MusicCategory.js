@@ -17,7 +17,6 @@ const createCategory = async (req, res) => {
     "INSERT INTO music_categories(category_name, french_name, rwandan_name) VALUES($1, $2, $3) RETURNING*",
     [categoryName, frenchName, rwandanName]
   );
-  console.log(newCategory);
   return res.status(201).json({ status: 201, data: newCategory.rows[0] });
 };
 
@@ -33,7 +32,7 @@ const getCategories = async (req, res) => {
 const getCategoriesByGroup = async (req, res) => {
   try {
     const articles = await db.query(
-      "SELECT COUNT(musics.category) FROM musics INNER JOIN music_categories ON musics.category=music_categories.category_name GROUP BY music_categories.category"
+      "SELECT COUNT(musics.category) FROM musics INNER JOIN music_categories ON musics.category=music_categories.category_name GROUP BY musics.category"
     );
     return res.status(200).json({ status: 200, data: articles.rows });
   } catch (error) {

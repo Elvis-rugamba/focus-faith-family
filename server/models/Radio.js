@@ -4,7 +4,7 @@ const upload = async (req, res) => {
   try {
     const [, ...rest] = req.file.path.replace(/\\/g, "/").split("/");
     const filePath = rest.join("/");
-    const url = `${req.protocol}://${req.get("host")}/${filePath}`;
+    const url = `https://${req.get("host")}/${filePath}`;
 
     return res.status(201).json({ url });
   } catch (error) {
@@ -37,7 +37,7 @@ const createRadio = async (req, res) => {
 
 const getRadio = async () => {
   const { rows } = await db.query(
-    "SELECT * FROM radio ORDER BY id DESC LIMIT 10"
+    "SELECT * FROM radio ORDER BY id DESC"
   );
 
   return rows;

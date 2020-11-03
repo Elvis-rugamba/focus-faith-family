@@ -4,7 +4,7 @@ const upload = async (req, res) => {
   try {
     const [, ...rest] = req.file.path.replace(/\\/g, "/").split("/");
     const filePath = rest.join("/");
-    const url = `${req.protocol}://${req.get("host")}/${filePath}`;
+    const url = `https://${req.get("host")}/${filePath}`;
 
     return res.status(201).json({ url });
   } catch (error) {
@@ -36,6 +36,14 @@ const createTv = async (req, res) => {
 };
 
 const getTvShows = async () => {
+  const { rows } = await db.query(
+    "SELECT * FROM tv_shows ORDER BY id DESC"
+  );
+
+  return rows;
+};
+
+const getHomeTvShows = async () => {
   const { rows } = await db.query(
     "SELECT * FROM tv_shows ORDER BY id DESC LIMIT 10"
   );
@@ -98,7 +106,6 @@ const editTv = async (req, res) => {
     const { rows } = await db.query("SELECT * FROM users WHERE user_id=$1", [
       user_id,
     ]);
-    console.log("savage", user_id);
     if (rows.length < 0)
       return res.status(404).json({ status: 404, message: "User not found" });
 
@@ -161,6 +168,7 @@ module.exports = {
   upload,
   createTv,
   getTvShows,
+  getHomeTvShows,
   getSingleTv,
   getRecentTvShows,
   getTvByCategory,

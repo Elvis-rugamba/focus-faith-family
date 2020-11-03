@@ -1,14 +1,16 @@
 const db = require("../config/connect");
 
 const createCategory = async (req, res) => {
-  // get from body
+  try {
+    // get from body
+    console.log(req.body);
   const { categoryName, frenchName, rwandanName } = req.body;
   // check if the category exists already
   const isCategory = await db.query(
     "SELECT * FROM tv_categories WHERE category_name=$1",
     [categoryName]
   );
-  if (isCategory.rowCount < 0)
+  if (isCategory.rowCount > 0)
     return res
       .status(409)
       .json({ status: 409, message: "Category already created" });
@@ -18,6 +20,10 @@ const createCategory = async (req, res) => {
     [categoryName, frenchName, rwandanName]
   );
   return res.status(201).json({ status: 201, data: newCategory.rows[0] });
+  } catch (error) {
+    return res.status(500).json({ status: 500, message: error.message });
+  }
+  
 };
 
 const getCategories = async (req, res) => {
@@ -32,7 +38,7 @@ const getCategories = async (req, res) => {
 const getCategoriesByGroup = async (req, res) => {
   try {
     const articles = await db.query(
-      "SELECT COUNT(tv.category) FROM news INNER JOIN tv_categories ON tv.category=tv_categories.category_name GROUP BY tv.category"
+      "SELECT COUNT(tv_shows.category) FROM tv_shows INNER JOIN tv_categories ON tv_shows.category=tv_categories.category_name GROUP BY tv_shows.category"
     );
     return res.status(200).json({ status: 200, data: articles.rows });
   } catch (error) {

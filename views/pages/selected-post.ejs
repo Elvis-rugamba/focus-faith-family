@@ -6,6 +6,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta content="Abbagospel" property="og:title">
+    <meta content="Find news, entertainment, your favorite music and tv shows.
+    Newspaper is your news, entertainment, music fashion website. We
+    provide you with the latest breaking news and videos straight from
+    the entertainment industry." property="og:description">
+    <meta content="https://abbagospel.online/assets/images/favicon.png" property="og:image">
     <title>Abbagospel</title>
     <!-- plugin css for this page -->
     <link rel="stylesheet" href="assets/vendors/mdi/css/materialdesignicons.min.css" />
@@ -15,6 +21,7 @@
     <!-- inject:css -->
     <link rel="stylesheet" href="assets/css/style.css">
     <!-- endinject -->
+    <script src="https://use.fontawesome.com/88ac6048db.js"></script>
 </head>
 
 <body>
@@ -35,13 +42,23 @@
                                         <div class="row">
                                             <% if (article) { %>
                                             <div class="col-sm-12 grid-margin">
-                                                <h1 class="font-weight-600 mb-4">
+                                                <h1 class="font-weight-600 mb-4 title">
                                                     <%- article.title %>
                                                 </h1>
                                                 <div>
                                                     <img src="<%- article.image %>" alt="banner" class="img-fluid" />
                                                 </div>
                                             </div>
+
+                                            <div class="col-sm-12 mb-4 subtitle">
+                                                <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                                                <div class="addthis_inline_share_toolbox_qu8s"></div>
+                                                <small class="text-muted">
+                                                    <i class="mdi mdi-play"></i>
+                                                    <%- article.created_at.toLocaleString() %>
+                                                </small>
+                                            </div>
+
                                             <div class="col-sm-12">
                                                 <h2 class="font-weight-600 mb-2">
                                                     <%- article.subtitle %>
@@ -53,13 +70,90 @@
                                             </div>
                                             <% } else { %>
                                             <h1 class="font-weight-600 mb-4">
-                                                Article not found
+                                                <%= translate('errorMessage404Route', currentLocale) %>
                                             </h1>
                                             <% } %>
                                         </div>
                                     </div>
-                                    <div class="col-lg-3">
-                                        <!-- <h2 class="mb-4 text-primary font-weight-600">
+                                    <div class="col-sm-12 col-lg-6 mt-5">
+                                        <div class="card-title">
+                                            <%= translate('relatedNewsLabel', currentLocale) %>
+                                        </div>
+                                        <% if (relatedArticles && relatedArticles.length > 0) { %>
+                                        <% for( let i = 0; i < relatedArticles.length; i++ ) { %>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="border-bottom pb-3 pt-3">
+                                                    <div class="row">
+                                                        <div class="col-sm-5 pr-2">
+                                                            <div class="rotate-img">
+                                                                <a
+                                                                    href="/article?locale=<%- currentLocale %>&slug=<%- relatedArticles[i].news_id %>">
+                                                                    <img src="<%- relatedArticles[i].image %>"
+                                                                        alt="thumb" class="img-fluid w-100" />
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-7 pl-2">
+                                                            <p class="fs-16 font-weight-600 mb-0">
+                                                                <a class="font-weight-600 text-dark"
+                                                                    href="/article?locale=<%- currentLocale %>&slug=<%- relatedArticles[i].news_id %>">
+                                                                    <%- relatedArticles[i].title.slice(0, 150) %> ...
+                                                                </a>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <% } %>
+                                        <% } else { %>
+                                        <h2 class="font-weight-600 mb-4">
+                                        </h2>
+                                        <% } %>
+                                    </div>
+                                    <div class="col-sm-12 col-lg-6 mt-5">
+                                        <div class="card-title">
+                                            <%= translate('latestNewsLabel', currentLocale) %>
+                                        </div>
+                                        <% if (recentNews && recentNews.length > 0) { %>
+                                        <% for( let i = 0; i < recentNews.length; i++ ) { %>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="border-bottom pb-3 pt-3">
+                                                    <div class="row">
+                                                        <div class="col-sm-5 pr-2">
+                                                            <div class="rotate-img">
+                                                                <a
+                                                                    href="/article?locale=<%- currentLocale %>&slug=<%- recentNews[i].news_id %>">
+                                                                    <img src="<%- recentNews[i].image %>" alt="thumb"
+                                                                        class="img-fluid w-100" />
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-7 pl-2">
+                                                            <p class="fs-16 font-weight-600 mb-0">
+                                                                <a class="font-weight-600 text-dark"
+                                                                    href="/article?locale=<%- currentLocale %>&slug=<%- recentNews[i].news_id %>">
+                                                                    <%- recentNews[i].title.slice(0, 50) %> ...
+                                                                </a>
+                                                            </p>
+                                                            <p class="fs-13 text-muted mb-0">
+                                                                <span class="mr-2"><%- recentNews[i].category %> </span>
+                                                                <%= timeDifference(recentNews[i].created_at, currentLocale) %>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <% } %>
+                                        <% } else { %>
+                                        <h2 class="font-weight-600 mb-4">
+                                        </h2>
+                                        <% } %>
+                                    </div>
+                                    <!-- <h2 class="mb-4 text-primary font-weight-600">
                                             Latest news
                                         </h2>
                                         <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
@@ -297,7 +391,85 @@
                                                 </div>
                                             </div>
                                         </div> -->
-                                        <!-- <div class="trending">
+
+                                    <div class="aboutus-wrapper col-sm-12">
+                                        <h1 class="mt-5 text-center mb-5">
+                                            <%= translate('commentLabel', currentLocale) %>
+                                        </h1>
+                                        <div class="row">
+                                            <div class="col-lg-12 mb-5 mb-sm-2">
+                                                <form method="POST" action="/article"></form>
+                                                <input type="text" id="locale" name="locale"
+                                                    value="<%- currentLocale %>" hidden />
+                                                <input type="number" id="slug" name="slug"
+                                                    value="<%- article.news_id %>" hidden />
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="form-group">
+                                                            <textarea class="form-control textarea" name="comment"
+                                                                placeholder="Comment *" id="comment"
+                                                                required></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" id="name"
+                                                                name="name" aria-describedby="name" placeholder="Name *"
+                                                                required />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <input type="email" class="form-control" id="email"
+                                                                name="email" aria-describedby="email"
+                                                                placeholder="Email *" required />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="form-group">
+                                                            <input type="submit"
+                                                                value="<%= translate('sendCommentLabel', currentLocale) %>"
+                                                                class="btn btn-lg btn-dark font-weight-bold mt-3" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <h4 class="mt-5 mb-5">
+                                            <%= translate('commentLabel', currentLocale) %>(<%= comments.length %>)
+                                        </h4>
+                                        <% if (comments && comments.length > 0) { %>
+                                        <% for( let i = 0; i < comments.length; i++ ) { %>
+                                        <div class="row border-bottom mb-4 mt-4">
+                                            <div class="col-lg-12 mb-5 mb-sm-2">
+                                                <h5 class="font-weight-600 mb-2">
+                                                    <%- comments[i].name %>
+                                                </h5>
+                                                <p class="fs-15">
+                                                    <%- comments[i].comment %>
+                                                </p>
+                                                <p class="fs-13 text-muted mb-0">
+                                                    <span class="mr-2"></span>
+                                                    <%= timeDifference(comments[i].created_at, currentLocale) %>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <% } %>
+                                        <% } else { %>
+                                        <h5 class="font-weight-600 mb-2">
+
+                                        </h5>
+                                        <% } %>
+                                    </div>
+                                    <!-- <div class="trending">
                         <h2 class="mb-4 text-primary font-weight-600">
                           Trending
                         </h2>
@@ -347,34 +519,36 @@
                           </p>
                         </div>
                       </div> -->
-                                        <!-- </div> -->
-                                    </div>
+                                    <!-- </div> -->
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- main-panel ends -->
-                <!-- container-scroller ends -->
-
-                <!-- partial:../partials/_footer.html -->
-                <%- include('../partials/_footer') %>
-                <!-- partial -->
             </div>
-        </div>
-        <!-- inject:js -->
-        <script src="assets/vendors/js/vendor.bundle.base.js"></script>
-        <!-- endinject -->
-        <!-- plugin js for this page -->
+            <!-- main-panel ends -->
+            <!-- container-scroller ends -->
 
-        <script src="assets/vendors/aos/dist/aos.js/aos.js"></script>
-        <!-- End plugin js for this page -->
-        <!-- Custom js for this page-->
-        <script src="assets/js/demo.js"></script>
-        <script src="assets/js/jquery.easeScroll.js"></script>
-        <!-- End custom js for this page-->
-        <script>
-        </script>
+            <!-- partial:../partials/_footer.html -->
+            <%- include('../partials/_footer') %>
+            <!-- partial -->
+        </div>
+    </div>
+    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5f9c7cb5943c3498"></script>
+    <!-- inject:js -->
+    <script src="assets/vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- plugin js for this page -->
+
+    <script src="assets/vendors/aos/dist/aos.js/aos.js"></script>
+    <!-- End plugin js for this page -->
+    <!-- Custom js for this page-->
+    <script src="assets/js/demo.js"></script>
+    <script src="assets/js/jquery.easeScroll.js"></script>
+    <!-- End custom js for this page-->
+    <script>
+    </script>
 </body>
 
 </html>

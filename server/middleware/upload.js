@@ -36,7 +36,7 @@ const fileFilter = (req, file, cb) => {
       error.status = 415;
       cb(error, false);
     }
-  } else if (file.fieldname === "video") {
+  } else if (file.fieldname === "video" || file.fieldname === "tv") {
     if (file.mimetype === "video/mp4" || file.mimetype === "video/ogg") {
       cb(null, true);
     } else {
@@ -45,6 +45,7 @@ const fileFilter = (req, file, cb) => {
       cb(error, false);
     }
   } else if (file.fieldname === "music" || file.fieldname === "radio") {
+    console.log(file.mimetype);
     if (file.mimetype.split("/")[1].match(/(mpeg)/)) {
       cb(null, true);
     } else {

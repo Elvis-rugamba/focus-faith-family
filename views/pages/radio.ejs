@@ -6,6 +6,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <meta content="Abbagospel" property="og:title">
+  <meta content="Find news, entertainment, your favorite music and tv shows.
+  Newspaper is your news, entertainment, music fashion website. We
+  provide you with the latest breaking news and videos straight from
+  the entertainment industry." property="og:description">
+  <meta content="https://abbagospel.online/assets/images/favicon.png" property="og:image">
   <title>Abbagospel</title>
   <!-- plugin css for this page -->
   <link rel="stylesheet" href="assets/vendors/mdi/css/materialdesignicons.min.css" />
@@ -97,7 +103,7 @@
                   </div>
                   <div class="col-lg-4">
                     <h2 class="mb-4 text-primary font-weight-600">
-                      Latest news
+                      <%= translate('recentPostsLabel', currentLocale) %>
                     </h2>
                     <% if (recentNews && recentNews.length > 0) { %>
                     <% for( let i = 0; i < recentNews.length; i++ ) { %>
@@ -139,7 +145,7 @@
                 <div class="row">
                   <div class="col-sm-12">
                     <h2 class="mb-4 font-weight-600">
-                      Past
+                      <%= translate('pastLabel', currentLocale) %>
                     </h2>
                   </div>
                   <div class="row">
