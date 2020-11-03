@@ -190,6 +190,42 @@
                     </a>
                   </div>
                 </div>
+                <div class="card-body" id="card-body">
+                  <% if (news && news.splice(0, 6).length > 0) { %>
+                  <% for( let i = 0; i < news.splice(0, 6).length; i++ ) { %>
+                  <% if (moreNews[i] === undefined) { break; %>
+                  <% } %>
+                  <div class="row">
+                    <div class="col-sm-4 grid-margin">
+                      <div class="position-relative">
+                        <div class="rotate-img">
+                          <img src="<%- news[i].image %>" alt="thumb" class="img-fluid" />
+                        </div>
+                        <a class="badge-positioned"
+                          href="/news?locale=<%- currentLocale %>&category=<%- news[i].category %>">
+                          <span class="badge badge-danger font-weight-bold">
+                            <%- news[i].category %>
+                          </span>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="col-sm-8 grid-margin">
+                      <h2 class="mb-2 font-weight-600">
+                        <a class="font-weight-600 mb-2 text-dark"
+                          href="/article?locale=<%- currentLocale %>&slug=<%- news[i].news_id %>">
+                          <%- news[i].title %>
+                        </a>
+                      </h2>
+                      <div class="fs-13 mb-2">
+                        <span class="mr-2"><%= timeDifference(news[i].created_at,
+                            currentLocale) %></span>
+                      </div>
+                    </div>
+                  </div>
+                  <% } %> <% } else { %>
+                  <h1 class="font-weight-600 mb-4"><%= translate('errorMessage404Route', currentLocale) %></h1>
+                  <% } %>
+                </div>
               </div>
             </div>
           </div>
@@ -346,6 +382,7 @@
                         <% } %><% } %>
                       </div>
                     </div>
+                    <% if (tvShows && tvShows.splice(0, 5).length > 0) { %>
                     <div class="col-lg-4">
                       <div class="d-flex justify-content-between align-items-center">
                         <p class="mb-3">
@@ -354,7 +391,6 @@
                           </a>
                         </p>
                       </div>
-                      <% if (tvShows && tvShows.splice(0, 5).length > 0) { %>
                       <% for( let i = 0; i < tvShows.splice(0, 5).length; i++ ) { %>
                       <div class="d-flex justify-content-between align-items-center border-bottom pb-2">
                         <div class="div-w-80 mr-3">
@@ -369,8 +405,9 @@
                           </a>
                         </h5>
                       </div>
-                      <% } %><% } %>
+                      <% } %>
                     </div>
+                    <% } %>
                   </div>
                 </div>
               </div>
