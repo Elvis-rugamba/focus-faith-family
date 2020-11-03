@@ -192,7 +192,7 @@
                 </div>
                 <div class="card-body" id="card-body">
                   <% if (news && news.splice(0, 6).length > 0) { %>
-                  <% for( let i = 0; i < news.length - news.splice(0, 6).length; i++ ) { %>
+                  <% for( let i = 0; i < 9; i++ ) { %>
                   <% if (news[i] === undefined) { break; %>
                   <% } %>
                   <div class="row">
@@ -257,7 +257,7 @@
                         </div>
                         <% } %>
                         <div class="col-xl-6 col-lg-4 col-sm-6">
-                          <% if (moreNews && moreNews.splice(0, 1) > 0) { %>
+                          <% if (moreNews && moreNews.splice(0, 1).length > 0) { %>
                           <% for( let i = 0; i < 4; i++ ) { %>
                           <% if (moreNews[i] === undefined) { break; %>
                           <% } %>
@@ -282,7 +282,7 @@
                     <div class="col-xl-6">
                       <div class="row">
                         <div class="col-sm-6">
-                          <% if (moreNews && moreNews.splice(0, 4) > 0) { %>
+                          <% if (moreNews && moreNews.splice(0, 4).length > 0) { %>
                           <% for( let i = 0; i < 3; i++ ) { %>
                           <% if (moreNews[i] === undefined) { break; %>
                           <% } %>
@@ -303,7 +303,7 @@
                           <% } %><% } %>
                         </div>
                         <div class="col-sm-6">
-                          <% if (moreNews && moreNews.splice(0, 8) > 0) { %>
+                          <% if (moreNews && moreNews.splice(0, 8).length > 0) { %>
                           <% for( let i = 0; i < moreNews.length - moreNews.splice(0, 8).length; i++ ) { %>
                           <% if (moreNews[i] === undefined) { break; %>
                           <% } %>
