@@ -4140,8 +4140,8 @@ input[type="button"].btn-block {
 }
 
 .navbar-toggler {
-  padding: 0.25rem 0.75rem;
-  font-size: 1.25rem;
+  padding: 1px 5px;
+  font-size: 14px;
   line-height: 1;
   background-color: transparent;
   border: 1px solid transparent;
@@ -10225,7 +10225,7 @@ header .navbar .navbar-brand img {
 
 @media (max-width: 999px) {
   header .navbar .navbar-brand img {
-    width: 170px;
+    width: 100px;
   }
 }
 
@@ -10325,12 +10325,12 @@ header .navbar-top .navbar-top-right-menu .nav-item:last-child .nav-link {
 }
 
 header .navbar-bottom {
-  padding-bottom: 24px;
+  padding-bottom: 16px;
 }
 
 @media (max-width: 999px) {
   header .navbar-bottom {
-    padding-top: 24px;
+    padding: 6px 0 !important;
   }
 }
 

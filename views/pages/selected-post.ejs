@@ -42,9 +42,9 @@
                                         <div class="row">
                                             <% if (article) { %>
                                             <div class="col-sm-12 grid-margin">
-                                                <h1 class="font-weight-600 mb-4 title">
+                                                <h3 class="font-weight-600 mb-4 title">
                                                     <%- article.title %>
-                                                </h1>
+                                                </h3>
                                                 <div>
                                                     <img src="<%- article.image %>" alt="banner" class="img-fluid" />
                                                 </div>
@@ -54,15 +54,15 @@
                                                 <!-- Go to www.addthis.com/dashboard to customize your tools -->
                                                 <div class="addthis_inline_share_toolbox_qu8s"></div>
                                                 <small class="text-muted">
-                                                    <i class="mdi mdi-play"></i>
+                                                    <i class="mdi mdi-clock-outline"></i>
                                                     <%- article.created_at.toLocaleString() %>
                                                 </small>
                                             </div>
 
                                             <div class="col-sm-12">
-                                                <h2 class="font-weight-600 mb-2">
+                                                <h4 class="font-weight-600 mb-2">
                                                     <%- article.subtitle %>
-                                                </h2>
+                                                </h4>
                                                 <%- article.bodyhtml %>
                                                 <small
                                                     class="text-muted"><%= translate('articleByLabel', currentLocale) %>
