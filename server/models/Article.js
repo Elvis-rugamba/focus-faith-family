@@ -140,7 +140,7 @@ const getNewsByCategory = async (category, language, perPage, offset) => {
     return null;
   }
 
-  return { rows: result.rows, count: rows[0].count };
+  return { rows: article.rows, count: rows[0].count };
 };
 
 const searchNews = async (search, language, perPage, offset) => {
@@ -157,7 +157,7 @@ const searchNews = async (search, language, perPage, offset) => {
     return null;
   }
 
-  return { rows: result.rows, count: rows[0].count };
+  return { rows: article.rows, count: rows[0].count };
 };
 
 const getRelatedArticle = async (newsId, language) => {
