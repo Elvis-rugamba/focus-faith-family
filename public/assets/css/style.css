@@ -7366,6 +7366,9 @@ button.bg-dark:focus {
 }
 
 @media (min-width: 768px) {
+  .content-wrapper {
+    padding-top: 0px;
+  }
   .content-wrapper .container {
     width: 100%;
     padding-right: 0px;
@@ -10587,7 +10590,7 @@ header .navbar-bottom .navbar-toggler {
 
 .content-wrapper {
   background: #e6e7e8;
-  padding: 60px 0;
+  padding: 30px 0;
 }
 
 .content-wrapper .banner-content {
