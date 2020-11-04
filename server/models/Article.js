@@ -54,7 +54,7 @@ const createArticle = async (req, res) => {
     const slug = slugs(title);
 
     const results = await db.query(
-      `INSERT INTO news(title,subtitle,body,author,category,image,bodyhtml,language,status) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) RETURNING *`,
+      `INSERT INTO news(title,subtitle,body,author,category,image,bodyhtml,language,status) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9) RETURNING *`,
       [
         title,
         subtitle,
