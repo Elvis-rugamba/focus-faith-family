@@ -97,9 +97,9 @@
                             </div>
                           </div>
                           <div class="col-sm-12 mt-2">
-                            <h2 class="font-weight-600">
+                            <h5 class="text-dark font-weight-600 mb-2">
                               <%- musics[i].name %>
-                            </h2>
+                            </h5>
                             <p class="font-weight-600 mb-1">
                               <%- musics[i].artist %>
                             </p>
@@ -128,9 +128,9 @@
                           </div>
                         </div>
                         <div>
-                          <h3 class="font-weight-600 mb-1">
+                          <h5 class="text-dark font-weight-600 mb-2">
                             <%- recentMusics[i].name %> - <%- recentMusics[i].artist %>
-                          </h3>
+                          </h5>
                           <p class="fs-13 text-muted mb-0">
                             <span class="mr-2"><%- recentMusics[i].category %></span>
                             <%= timeDifference(recentMusics[i].created_at, currentLocale) %>
