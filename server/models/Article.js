@@ -304,7 +304,8 @@ const getAllArticles = async (req, res) => {
 };
 
 const getAppNews = async (req, res) => {
-  const { language, perPage, page } = req.params;
+  console.log(req.body, req.query);
+  const { language, perPage, page } = req.query;
   const offset = perPage * page - perPage;
   try {
     const articles = await db.query(
@@ -313,6 +314,7 @@ const getAppNews = async (req, res) => {
     );
     return res.status(200).json({ status: 200, data: articles.rows });
   } catch (error) {
+    console.log(error);
     return res.status(500).json({ status: 500, error: error.message });
   }
 };
