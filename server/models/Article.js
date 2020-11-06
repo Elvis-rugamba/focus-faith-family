@@ -326,7 +326,7 @@ const getAppSingleArticle = async (req, res) => {
 
     if (isArticle.rowCount <= 0)
       return res.status(404).json({ status: 404, error: "Article not found" });
-      
+
     return res.status(200).json({ status: 200, data: isArticle.rows[0] });
   } catch (error) {
     return res.status(500).json({ status: 500, error });
@@ -377,7 +377,7 @@ const searchAppNews = async (req, res) => {
 
 const getAppRelatedArticles = async (req, res) => {
   const { id } = req.params;
-  const { category, language } = req.params;
+  const { category, language } = req.query;
 
   try {
     const articles = await db.query(
