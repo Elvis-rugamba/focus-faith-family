@@ -304,7 +304,6 @@ const getAllArticles = async (req, res) => {
 };
 
 const getAppNews = async (req, res) => {
-  console.log(req.body, req.query);
   const { language, perPage, page } = req.query;
   const offset = perPage * page - perPage;
   try {
@@ -314,29 +313,29 @@ const getAppNews = async (req, res) => {
     );
     return res.status(200).json({ status: 200, data: articles.rows });
   } catch (error) {
-    console.log(error);
-    return res.status(500).json({ status: 500, error: error.message });
+    return res.status(500).json({ status: 500, error });
   }
 };
 
 const getAppSingleArticle = async (req, res) => {
-  // get from params
   const { id } = req.params;
   try {
     const isArticle = await db.query("SELECT * FROM news WHERE news_id=$1", [
       id,
     ]);
+
     if (isArticle.rowCount <= 0)
       return res.status(404).json({ status: 404, error: "Article not found" });
-    // return article
+      
     return res.status(200).json({ status: 200, data: isArticle.rows[0] });
   } catch (error) {
-    return res.status(500).json({ status: 500, error: error.message });
+    return res.status(500).json({ status: 500, error });
   }
 };
 
 const getAppNewsByCategory = async (req, res) => {
-  const { category, language, perPage, page } = req.params;
+  const { category } = req.params;
+  const { language, perPage, page } = req.query;
   const offset = perPage * page - perPage;
 
   try {
@@ -351,12 +350,12 @@ const getAppNewsByCategory = async (req, res) => {
 
     return res.status(200).json({ status: 200, data: articles.rows });
   } catch (error) {
-    return res.status(500).json({ status: 500, error: error.message });
+    return res.status(500).json({ status: 500, error });
   }
 };
 
 const searchAppNews = async (req, res) => {
-  const { search, language, perPage, page } = req.params;
+  const { search, language, perPage, page } = req.query;
   const offset = perPage * page - perPage;
 
   try {
@@ -371,18 +370,19 @@ const searchAppNews = async (req, res) => {
   
     return res.status(200).json({ status: 200, data: articles.rows });
   } catch (error) {
-    return res.status(500).json({ status: 500, error: error.message });
+    return res.status(500).json({ status: 500, error });
   }
   
 };
 
 const getAppRelatedArticles = async (req, res) => {
-  const { newsId, category, language } = req.params;
+  const { id } = req.params;
+  const { category, language } = req.params;
 
   try {
     const articles = await db.query(
       `SELECT * FROM news WHERE category=$1 AND language=$2 AND status=$3 AND news_id!=$4 ORDER BY news_id DESC LIMIT 5`,
-      [category, language, "edited", newsId]
+      [category, language, "edited", id]
     );
 
     if (articles.rowCount <= 0) {
@@ -391,7 +391,7 @@ const getAppRelatedArticles = async (req, res) => {
   
     return res.status(200).json({ status: 200, data: articles.rows });
   } catch (error) {
-    return res.status(500).json({ status: 500, error: error.message });
+    return res.status(500).json({ status: 500, error });
   }
 };
 
