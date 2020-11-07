@@ -364,12 +364,9 @@ const searchAppNews = async (req, res) => {
       [`%${query}%`, language, "edited"]
     );
   
-    if (articles.rowCount <= 0) {
-      return res.status(404).json({ status: 404, error: 'Not found' });;
-    }
-  
     return res.status(200).json({ status: 200, data: articles.rows });
   } catch (error) {
+    console.log(error);
     return res.status(500).json({ status: 500, error });
   }
   
