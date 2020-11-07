@@ -355,6 +355,7 @@ const getAppNewsByCategory = async (req, res) => {
 };
 
 const searchAppNews = async (req, res) => {
+  console.log(req.query);
   const { query, language, perPage, page } = req.query;
   const offset = perPage * page - perPage;
 
