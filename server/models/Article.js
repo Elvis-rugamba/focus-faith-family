@@ -304,15 +304,27 @@ const getAllArticles = async (req, res) => {
 };
 
 const getAppNews = async (req, res) => {
-  const { language, perPage, page } = req.query;
+  let articles;
+  const { language, perPage, page, search } = req.query;
   const offset = perPage * page - perPage;
   try {
-    const articles = await db.query(
-      "SELECT * FROM news WHERE language=$1 AND status=$2 GROUP BY news_id ORDER BY news_id DESC LIMIT $3 OFFSET $4",
-      [language, "edited", perPage, offset]
-    );
-    return res.status(200).json({ status: 200, data: articles.rows });
+    if (search) {
+      articles = await db.query(
+        "SELECT * FROM news WHERE (title ILIKE $1 OR body ILIKE $1) AND language=$2 AND status=$3 ORDER BY news_id DESC",
+        [`%${search}%`, language, "edited"]
+      );
+
+      return res.status(200).json({ status: 200, data: articles.rows });
+    } else {
+      articles = await db.query(
+        "SELECT * FROM news WHERE language=$1 AND status=$2 GROUP BY news_id ORDER BY news_id DESC LIMIT $3 OFFSET $4",
+        [language, "edited", perPage, offset]
+      );
+
+      return res.status(200).json({ status: 200, data: articles.rows });
+    }
   } catch (error) {
+    console.log(error);
     return res.status(500).json({ status: 500, error });
   }
 };
@@ -345,7 +357,7 @@ const getAppNewsByCategory = async (req, res) => {
     );
 
     if (articles.rowCount <= 0) {
-      return res.status(404).json({ status: 404, error: 'Not found' });;
+      return res.status(404).json({ status: 404, error: "Not found" });
     }
 
     return res.status(200).json({ status: 200, data: articles.rows });
@@ -363,13 +375,12 @@ const searchAppNews = async (req, res) => {
       "SELECT * FROM news WHERE (title ILIKE $1 OR body ILIKE $1) AND language=$2 AND status=$3 ORDER BY news_id DESC",
       [`%${query}%`, language, "edited"]
     );
-  
+
     return res.status(200).json({ status: 200, data: articles.rows });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ status: 500, error });
   }
-  
 };
 
 const getAppRelatedArticles = async (req, res) => {
@@ -383,9 +394,9 @@ const getAppRelatedArticles = async (req, res) => {
     );
 
     if (articles.rowCount <= 0) {
-      return res.status(404).json({ status: 404, error: 'Not found' });;
+      return res.status(404).json({ status: 404, error: "Not found" });
     }
-  
+
     return res.status(200).json({ status: 200, data: articles.rows });
   } catch (error) {
     return res.status(500).json({ status: 500, error });
