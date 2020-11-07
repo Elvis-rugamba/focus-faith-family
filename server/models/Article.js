@@ -355,13 +355,13 @@ const getAppNewsByCategory = async (req, res) => {
 };
 
 const searchAppNews = async (req, res) => {
-  const { search, language, perPage, page } = req.query;
+  const { query, language, perPage, page } = req.query;
   const offset = perPage * page - perPage;
 
   try {
     const articles = await db.query(
       "SELECT * FROM news WHERE (title ILIKE $1 OR body ILIKE $1) AND language=$2 AND status=$3 ORDER BY news_id DESC LIMIT $4 OFFSET $5",
-      [`%${search}%`, language, "edited", perPage, offset]
+      [`%${query}%`, language, "edited", perPage, offset]
     );
   
     if (articles.rowCount <= 0) {
