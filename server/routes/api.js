@@ -71,7 +71,7 @@ router.delete("/comments/:commentId", verse.deleteVerse);
 router.get("/app/news", article.getAppNews);
 router.get("/app/news/:id", article.getAppSingleArticle);
 router.get("/app/news/categories/:category", article.getAppNewsByCategory);
-router.get("/app/news/search", article.getAppRelatedArticles);
+router.get("/app/news/search/:query", article.searchAppNews);
 router.get("/app/news/:id/related", article.getAppRelatedArticles);
 
 module.exports = router;

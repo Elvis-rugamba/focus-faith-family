@@ -355,8 +355,8 @@ const getAppNewsByCategory = async (req, res) => {
 };
 
 const searchAppNews = async (req, res) => {
-  console.log(req.query);
-  const { query, language, perPage, page } = req.query;
+  const { query } = req.params;
+  const { language, perPage, page } = req.query;
   const offset = perPage * page - perPage;
 
   try {
@@ -371,7 +371,6 @@ const searchAppNews = async (req, res) => {
   
     return res.status(200).json({ status: 200, data: articles.rows });
   } catch (error) {
-    console.log(error);
     return res.status(500).json({ status: 500, error });
   }
   
