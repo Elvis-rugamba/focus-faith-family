@@ -53,6 +53,7 @@ router.post("/radio/upload", upload.single('radio'), radio.upload);
 router.post("/radio/cover", upload.single('image'), radio.upload);
 router.post("/tv", verifyToken, tv.createTv);
 router.get("/tv", tv.getAllTvShows);
+router.get("/app/tv", tv.getAppTvShows);
 router.patch("/tv/:id", verifyToken, tv.editTv);
 router.post("/tv/categories", verifyToken, tvCategory.createCategory);
 router.get("/tv/categories", tvCategory.getCategories);

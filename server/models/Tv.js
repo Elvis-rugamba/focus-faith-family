@@ -147,6 +147,15 @@ const getAllTvShows = async (req, res) => {
   }
 };
 
+const getAppTvShows = async (req, res) => {
+  try {
+    const tvShows = await db.query("SELECT * FROM tv_shows ORDER BY id DESC");
+    return res.status(200).json({ status: 200, data: tvShows.rows });
+  } catch (error) {
+    return res.status(500).json({ status: 500, error });
+  }
+};
+
 const getTv = async (req, res) => {
   // get from params
   const { id } = req.params;
@@ -175,5 +184,6 @@ module.exports = {
   searchTv,
   editTv,
   getAllTvShows,
+  getAppTvShows,
   getTv,
 };
