@@ -173,6 +173,22 @@ const getTv = async (req, res) => {
   }
 };
 
+const getAppTv = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const isTv = await db.query("SELECT * FROM tv_shows WHERE id=$1", [
+      id,
+    ]);
+    
+    if (isTv.rowCount <= 0)
+      return res.status(404).json({ status: 404, error: "Tv Show not found" });
+    
+    return res.status(200).json({ status: 200, data: isTv.rows[0] });
+  } catch (error) {
+    return res.status(500).json({ status: 500, error });
+  }
+};
+
 module.exports = {
   upload,
   createTv,
@@ -186,4 +202,5 @@ module.exports = {
   getAllTvShows,
   getAppTvShows,
   getTv,
+  getAppTv
 };
