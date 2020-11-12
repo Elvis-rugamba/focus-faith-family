@@ -53,8 +53,6 @@ router.post("/radio/upload", upload.single('radio'), radio.upload);
 router.post("/radio/cover", upload.single('image'), radio.upload);
 router.post("/tv", verifyToken, tv.createTv);
 router.get("/tv", tv.getAllTvShows);
-router.get("/app/tv", tv.getAppTvShows);
-router.get("/app/tv/:id", tv.getAppTv);
 router.patch("/tv/:id", verifyToken, tv.editTv);
 router.post("/tv/categories", verifyToken, tvCategory.createCategory);
 router.get("/tv/categories", tvCategory.getCategories);
@@ -75,5 +73,9 @@ router.get("/app/news/:id", article.getAppSingleArticle);
 router.get("/app/news/categories/:category", article.getAppNewsByCategory);
 router.get("/app/news/search/:query", article.searchAppNews);
 router.get("/app/news/:id/related", article.getAppRelatedArticles);
+router.get("/app/tv", tv.getAppTvShows);
+router.get("/app/tv/:id", tv.getAppTv);
+router.get("/app/radio", radio.getAppRadios);
+router.get("/app/radio/:id", radio.getAppRadio);
 
 module.exports = router;

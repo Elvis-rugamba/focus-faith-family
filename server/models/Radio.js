@@ -82,8 +82,6 @@ const searchRadio = async (search) => {
     [`%${search}%`]
   );
 
-  console.log(music);
-
   if (music.rowCount <= 0) {
     return null;
   }
@@ -143,15 +141,22 @@ const getAllRadio = async (req, res) => {
   }
 };
 
-const getMusic = async (req, res) => {
+const getAppRadios = async (req, res) => {
+  try {
+    const radio = await db.query("SELECT * FROM radio ORDER BY id DESC");
+    return res.status(200).json({ status: 200, data: radio.rows });
+  } catch (error) {
+    return res.status(500).json({ status: 500, error });
+  }
+};
+
+const getRadio = async (req, res) => {
   // get from params
   const { RadioId } = req.params;
   try {
     const ismusic = await db.query("SELECT * FROM radio WHERE id=$1", [
       RadioId,
     ]);
-    // check if the music exists
-    console.log("ari", ismusic.rowCount <= 0);
     if (ismusic.rowCount <= 0)
       return res.status(404).json({ status: 404, message: "Radio not found" });
     // return music
@@ -161,16 +166,33 @@ const getMusic = async (req, res) => {
   }
 };
 
+const getAppRadio = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const isRadio = await db.query("SELECT * FROM radio WHERE id=$1", [
+      id,
+    ]);
+    
+    if (isTv.rowCount <= 0)
+      return res.status(404).json({ status: 404, error: "Tv Show not found" });
+    
+    return res.status(200).json({ status: 200, data: isRadio.rows[0] });
+  } catch (error) {
+    return res.status(500).json({ status: 500, error });
+  }
+};
+
 module.exports = {
   upload,
   createRadio,
   getRadio,
   getSingleRadio,
-  getMusic,
   getRecentRadio,
   getRadioByCategory,
   searchRadio,
   editRadio,
   getAllRadio,
-  getMusic,
+  getAppRadios,
+  getRadio,
+  getAppRadio
 };
