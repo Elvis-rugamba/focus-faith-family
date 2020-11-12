@@ -35,13 +35,13 @@ const createRadio = async (req, res) => {
   }
 };
 
-const getRadio = async () => {
-  const { rows } = await db.query(
-    "SELECT * FROM radio ORDER BY id DESC"
-  );
+// const getRadio = async () => {
+//   const { rows } = await db.query(
+//     "SELECT * FROM radio ORDER BY id DESC"
+//   );
 
-  return rows;
-};
+//   return rows;
+// };
 
 const getSingleRadio = async (slug) => {
   const music = await db.query("SELECT * FROM radio WHERE id=$1", [
